@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4527062080135507950
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5062167660794152110}
+  - component: {fileID: 8058895177027825836}
+  m_Layer: 0
+  m_Name: SquareRockPacking
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5062167660794152110
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4527062080135507950}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8058895177027825836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4527062080135507950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe373e812c7a59e459a5bf8174c06cca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallsDetectors: []
+  objectPrefabs:
+  - {fileID: 8589814852413823611, guid: 23708c0c1c5723249bbcf3d193af2302, type: 3}
+  - {fileID: 5224241053282833377, guid: b3e64e6d01057e042a639545e0bb156d, type: 3}
+  - {fileID: 207077464890484251, guid: 821438c7a8fbda2438e9ebdfdee47e9c, type: 3}
+  objectNames: []
+  setting: {fileID: 11400000, guid: 71147cb45748af940b5e56c8c3339dd3, type: 2}
