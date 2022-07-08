@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1088308589561412826}
   - component: {fileID: 2629444651587608623}
   - component: {fileID: 2845399215507961292}
+  - component: {fileID: 3937394405418308537}
+  - component: {fileID: 7928977157781090096}
   m_Layer: 10
   m_Name: MCastle_MasonryPillar_01_Square
   m_TagString: Untagged
@@ -74,11 +76,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22264c699bdd49341a852e7683549560, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshRenderers:
-  - {fileID: 3096196333256482342}
-  - {fileID: 7960760459830218569}
-  - {fileID: 4163061390405215954}
-  - {fileID: 7601844753146808005}
+--- !u!54 &3937394405418308537
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101177292438054688}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!65 &7928977157781090096
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101177292438054688}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.75, y: 4.62, z: 1.68}
+  m_Center: {x: 0, y: 2.23, z: 0.05}
 --- !u!1 &1402983133661370729
 GameObject:
   m_ObjectHideFlags: 0
