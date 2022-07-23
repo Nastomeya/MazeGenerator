@@ -1,4 +1,3 @@
-using DataExtensions;
 using System.Collections;
 using UnityEngine;
 
@@ -10,11 +9,11 @@ public class HexagonWall : WallBase, IMazeWall
     public override IEnumerator ClearAllWalls()
     {
         ResetPrillars();
-        SetWallsEnable(0);
+        SetWallsEnable();
         yield return null;
 
     }
-    public void SetWallsEnable(int _wallFormation)
+    public void SetWallsEnable(int _wallFormation = 0)
     {
         var isEnable = _wallFormation == 0 ? false : true;
 

@@ -60,6 +60,17 @@ namespace MathCalculation
             var result = evenSymmetryValue == 0 ? 0 : evenSymmetryValue / 2;
             return result;
         }
+        /// <summary>Get Circumference by the number of side, not 100% right</summary>
+        public static float GetEdgeSize(float _radius, int _numOfSides)
+        {
+            return _radius * TAU / _numOfSides;
+        }
+        public static float GetEdgeSize(float _radius, float _degree)
+        {
+            float powerOfRadius = Mathf.Pow(_radius, 2f);
+            return Mathf.Sqrt(2 * powerOfRadius - (2 * powerOfRadius * Mathf.Cos(Mathf.Deg2Rad * _degree)));
+        }
+        //public static float GetPower
         /// <summary> ie. -3-2-1 0 1 2 3 4 or -4-3-2-1 0 1 2 3 4 </summary>
         public static int Convert2USequenceValue(int value, int totalElement)
         {

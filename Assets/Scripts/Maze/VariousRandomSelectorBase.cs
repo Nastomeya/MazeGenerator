@@ -3,20 +3,24 @@ using UnityEngine;
 
 public class VariousRandomSelectorBase : MonoBehaviour
 {
-    [SerializeField] protected Transform[] objects;
+    [SerializeField] protected List<Wall> wallTypes;
     [SerializeField] private ObjectsSelectorSetting setting;
 
     private List<int> objectIndexes;
-    private void Awake() => InitIndexes();
+    private void Awake()
+    {
+        wallTypes = new List<Wall>(GetComponentsInChildren<Wall>());
+        InitIndexes();
+    }
     private void OnEnable()
     {
         ResetSelector();
         int currIndex = Utils.RandomRange(0, objectIndexes.Count);
-        for (int i = 0; i < objects.Length; i++)
+        for (int i = 0; i < wallTypes.Count; i++)
         {
             if (i == objectIndexes[currIndex])
             {
-                objects[i].gameObject.SetActive(true);
+                wallTypes[i].gameObject.SetActive(true);
                 break;
             }
         }
@@ -29,7 +33,7 @@ public class VariousRandomSelectorBase : MonoBehaviour
         //for (int i = 0; i < objects.Length; i++)
         //objectIndexes.Add(index);
 
-        for (int i = 0; i < (objects.Length + setting.FrequentlyUsedTimes - 1); i++)
+        for (int i = 0; i < (wallTypes.Count + setting.FrequentlyUsedTimes - 1); i++)
         {
             int halfTimes = Mathf.CeilToInt(setting.FrequentlyUsedTimes / 2);
             int index;
@@ -44,10 +48,10 @@ public class VariousRandomSelectorBase : MonoBehaviour
     }
     private void ResetSelector()
     {
-        for (int i = 0; i < objects.Length; i++)
+        for (int i = 0; i < wallTypes.Count; i++)
         {
-            if (objects[i].gameObject.activeSelf)
-                objects[i].gameObject.SetActive(false);
+            if (wallTypes[i].gameObject.activeSelf)
+                wallTypes[i].gameObject.SetActive(false);
         }
     }
 }
