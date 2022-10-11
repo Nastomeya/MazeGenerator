@@ -22,7 +22,6 @@ public class WallPositioner : MonoBehaviour
     }
     private void GetUpdatedData()
     {
-        //        UpdateNumberOfSide();
         eachSideDegree = 360f / numOfSides;
         degree = initialDegree + eachSideDegree;
     }
@@ -30,6 +29,7 @@ public class WallPositioner : MonoBehaviour
 
     public void PlaceWalls()
     {
+        UpdateNumberOfSide();
         GenerateAllWalls();
         if (allWalls.Count > 0)
         {
@@ -65,7 +65,6 @@ public class WallPositioner : MonoBehaviour
     }
     private void GenerateAllWalls()
     {
-        UpdateNumberOfSide();
         if (allWalls.Count < numOfSides)
         {
             int needMoreNum = numOfSides - allWalls.Count;
