@@ -5,7 +5,6 @@ using UnityEditor;
 public class WallPositionerEditor : Editor
 {
     private WallPositioner wallPositioner;
-    private Transform newWall = null;
 
     private void Awake()
     {

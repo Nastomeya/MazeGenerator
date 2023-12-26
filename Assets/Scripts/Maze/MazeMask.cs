@@ -18,7 +18,8 @@ public class MazeMask : MonoBehaviour
     }
     private void OnDisable()
     {
-        RevealObjectController.Instance.OnDisplayOnOff -= SetOnOff;
+        if (RevealObjectController.HasInstance)
+            RevealObjectController.Instance.OnDisplayOnOff -= SetOnOff;
     }
     internal void SetOnOff(bool _isOnOff)
     {

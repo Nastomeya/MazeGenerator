@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace MathCalculation
 {
@@ -71,6 +72,26 @@ namespace MathCalculation
         public static float GetColliderRadius(Transform _transform, Collider _collider)
         {
             return _collider.bounds.extents.x / _transform.lossyScale.x;
+        }
+
+        public static Bounds GetMeanBounds(Transform _rootTrans, bool _IncludeSelf = false)
+        {
+            var allRenderers = new List<MeshRenderer>(_rootTrans.GetComponentsInChildren<MeshRenderer>());
+            if (allRenderers == null || allRenderers.Count == 0)
+                return new Bounds(Vector3.zero, Vector3.one);
+
+            var allBounds = new Bounds(allRenderers[0].transform.position, Vector3.zero);
+            for (int i = 0; i < allRenderers.Count; i++)
+            {
+                if (_IncludeSelf)
+                {
+                    allBounds.Encapsulate(allRenderers[i].bounds);
+                    continue;
+                }
+                if (allRenderers[i].transform != _rootTrans)
+                    allBounds.Encapsulate(allRenderers[i].bounds);
+            }
+            return allBounds;
         }
     }
 }

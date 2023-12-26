@@ -8,9 +8,14 @@ public class WallSizeAdjuster : MonoBehaviour
         //var currCollider = GetComponentInChildren<Collider>();
         //var thickness = AdvanceMath.GetColliderRadius(currCollider.transform, currCollider);
 
-        var edgeSize = BasicMath.GetEdgeSize(_radius, _degree);
-        transform.localScale = transform.localScale.With(x: edgeSize);
+        var division = (360f / _degree);
+        var edge = BasicMath.GetEdgeSize(_radius, _degree);
+        var pillarWidth = _radius * Mathf.Cos(Mathf.Deg2Rad * _degree);
+
+        var width = edge + ((edge + pillarWidth) / division);
+        transform.localScale = transform.localScale.With(x: width);
     }
+
     internal void SetWallWidth(float _radius)
     {
         transform.localScale = transform.localScale.With(x: _radius);
