@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(RevealObjectController))]
 public class SingleTileInDebugMode : MonoBehaviour
 {
     [SerializeField] internal List<Transform> allWallPrefabs;//Don't change it back to readonly
     [SerializeField] private TileShapes tileShapes;
     [SerializeField] private TileWithWalls tileWithWallsPrefab;//Don't change it back to readonly
 
-    private List<IMazeWall> allWalls;
+    private List<IMazeWalls> allWalls;
     private NeighboursBase neighbours;
 
     private void Awake()
@@ -32,19 +33,21 @@ public class SingleTileInDebugMode : MonoBehaviour
     }
     public void SetWallDataFromPrefabs()
     {
-        allWalls = new List<IMazeWall>();
+        allWalls = new List<IMazeWalls>();
         for (int i = 0; i < allWallPrefabs.Count; i++)
         {
-            var currWall = allWallPrefabs[i].GetComponent<IMazeWall>();
+            var currWall = allWallPrefabs[i].GetComponent<IMazeWalls>();
             currWall.SetID(i);
             allWalls.Add(currWall);
         }
     }
-    public List<IMazeWall> GetWallTypes() => allWalls;
+    public List<IMazeWalls> GetWallTypes() => allWalls;
 
     public void ChangeWallFormation(int _currFormation = 0)
     {
-        if (CheckTileExistence())
+        var isWallExist = CheckTileExistence();
+        Debug.Log("isWallExist  " + isWallExist);
+        if (isWallExist)
         {
             if (_currFormation > 0)
                 neighbours.SetWallFormation(_currFormation);

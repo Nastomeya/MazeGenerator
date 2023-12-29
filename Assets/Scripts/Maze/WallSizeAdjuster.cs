@@ -10,8 +10,7 @@ public class WallSizeAdjuster : MonoBehaviour
 
         var division = (360f / _degree);
         var edge = BasicMath.GetEdgeSize(_radius, _degree);
-        var pillarWidth = _radius * Mathf.Cos(Mathf.Deg2Rad * _degree);
-
+        var pillarWidth = _radius * Mathf.Cos(Mathf.Deg2Rad * _degree);       
         var width = edge + ((edge + pillarWidth) / division);
         transform.localScale = transform.localScale.With(x: width);
     }

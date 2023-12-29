@@ -6,13 +6,14 @@ public class WallsDetector : MonoBehaviour
     private List<Renderer> allRenderers;
     private void Awake()
     {
-        allRenderers = new List<Renderer>(GetComponentsInChildren<Renderer>());
+        allRenderers = new List<Renderer>(GetComponentsInChildren<Renderer>(true));
         SetEnable(false);
     }
     private void OnTriggerEnter(Collider other)
     {
         var wall = other.gameObject.GetComponent<Wall>();
-        if (wall != null)
+
+        if (wall != null && wall.PillirJobs != null)
         {
             wall.PillirJobs.Enqueue(() => SetEnable(false));
             SetEnable(true);

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TorchesSelector
   m_EditorClassIdentifier: 
   frequentlyUsedTimes: 6
-  appearedRatePerTile: 1
+  appearedRatePerTile: 3

@@ -31,12 +31,9 @@ public abstract class TileBase : MonoBehaviour
     internal void SetCurrentTileVisited(int trackMarkCounter = -1)
     {
         if (trackMarkCounter >= 0)
-        {
             trackText.SetNumber(trackMarkCounter);
-            trackText.SetTextOnOff(true);
-        }
-        else
-            trackText.SetTextOnOff(false);
+
+        trackText.SetTextOnOff(RevealObjectController.Instance.isTextOnOff);
         trackText.SetMarkerOnOff(true);
         trackText.Init();
         isVisited = true;
@@ -44,8 +41,9 @@ public abstract class TileBase : MonoBehaviour
     }
     internal virtual void ResetTile(bool isIndexOnDisplay = false)
     {
+        var currIndex = isIndexOnDisplay ? index : -1;
         trackText.SetTextOnOff(false);
-        trackText.SetNumber(isIndexOnDisplay ? index : -1);
+        trackText.SetNumber(currIndex);
         trackText.End();
         trackText.SetMarkerOnOff(false);
         neighbours.Reset();

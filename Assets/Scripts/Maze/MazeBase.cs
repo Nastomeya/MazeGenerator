@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[RequireComponent(typeof(RevealObjectController))]
 public abstract class MazeBase : MonoBehaviour
 {
     [SerializeField] protected int width, height;
@@ -19,7 +19,7 @@ public abstract class MazeBase : MonoBehaviour
     protected StraightPathController straightPathController;
     protected bool keepTracking;
     protected bool isShownInIndex = false;
-    protected List<IMazeWall> allWalls;
+    protected List<IMazeWalls> allWalls;
     protected Dictionary<int, bool> currWallTypes;//directly update to List<IMazeWall> allWalls
     protected Vector2 offset;
     protected NeighboursBase currNeighbours;
@@ -37,11 +37,11 @@ public abstract class MazeBase : MonoBehaviour
     public List<Transform> GetAllWallPrefabs() => allWallPrefabs;
     public void SetWallDataFromPrefabs()
     {
-        allWalls = new List<IMazeWall>();
+        allWalls = new List<IMazeWalls>();
         currWallTypes = LoadData(true);
     }
     public void UpdateWallTypes(Dictionary<int, bool> _newWallTypes) => currWallTypes = _newWallTypes;
-    public IMazeWall GetWallFromAll(int _id) => allWalls.Find(x => x.id == _id);
+    public IMazeWalls GetWallFromAll(int _id) => allWalls.Find(x => x.id == _id);
     private void InitTiles()
     {
         tiles = new List<TileWithWalls>();
@@ -120,9 +120,9 @@ public abstract class MazeBase : MonoBehaviour
     }
     private void SetMarkPosition(Vector3 targetPosition) => mark.transform.position = targetPosition.With(y: mark.transform.position.y);
 
-    protected List<IMazeWall> WallsAssignment()
+    protected List<IMazeWalls> WallsAssignment()
     {
-        var currTileWallList = new List<IMazeWall>();
+        var currTileWallList = new List<IMazeWalls>();
         for (int i = 0; i < allWalls.Count; i++)
         {
             var hasFoundValue = currWallTypes.TryGetValue(allWalls[i].id, out bool isEnable);
@@ -209,7 +209,7 @@ public abstract class MazeBase : MonoBehaviour
     protected string GetFilePath() => Application.dataPath + "/mazeWallData";
     private void InitWallData(int id, Transform wallPrefab)
     {
-        var currWall = wallPrefab.GetComponent<IMazeWall>();
+        var currWall = wallPrefab.GetComponent<IMazeWalls>();
         currWall.SetID(id);
         allWalls.Add(currWall);
     }

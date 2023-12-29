@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
-public interface IMazeWall
+public interface IMazeWalls
 {
     public bool InOverlappingMode { get; }//remove this later
     public int id { get; }

@@ -2,18 +2,18 @@
 
 public class WallsController : TileBase
 {
-    internal List<IMazeWall> Walls { get; private set; }
-    internal void InitWallIdentities(List<IMazeWall> _walls)
+    internal List<IMazeWalls> Walls { get; private set; }
+    internal void InitWallIdentities(List<IMazeWalls> _walls)
     {
-        Walls = new List<IMazeWall>();
+        Walls = new List<IMazeWalls>();
         CreateWalls(_walls);
     }
-    protected IMazeWall FindWallWithID(int _id)
+    protected IMazeWalls FindWallWithID(int _id)
     {
-        IMazeWall newFoundWall = Walls.Find(x => x.id == _id);
+        IMazeWalls newFoundWall = Walls.Find(x => x.id == _id);
         return newFoundWall;
     }
-    protected void CreateWalls(List<IMazeWall> enabledWallList)
+    protected void CreateWalls(List<IMazeWalls> enabledWallList)
     {
         for (int i = 0; i < enabledWallList.Count; i++)
         {
@@ -24,17 +24,17 @@ public class WallsController : TileBase
                 wallHasFound.SetWallHolderEnable(maze.GetCurrWallTypes()[enabledWallList[i].id]);
         }
     }
-    protected void AddNewWallType(IMazeWall _newWall)
+    protected void AddNewWallType(IMazeWalls _newWall)
     {
         var clone = CloneWall(_newWall);
         Walls.Add(clone);
     }
-    private IMazeWall CloneWall(IMazeWall _newWall)
+    private IMazeWalls CloneWall(IMazeWalls _newWall)
     {
         var newObject = Instantiate(_newWall.transform);
         newObject.SetParent(transform);
 
-        var newWall = newObject.GetComponent<IMazeWall>();
+        var newWall = newObject.GetComponent<IMazeWalls>();
         newWall.SetID(_newWall.id);
         StartCoroutine(newWall.ClearAllWalls());
         return newWall;

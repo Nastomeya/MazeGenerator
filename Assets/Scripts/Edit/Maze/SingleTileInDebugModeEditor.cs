@@ -7,7 +7,7 @@ using System;
 public class SingleTileInDebugModeEditor : Editor
 {
     private bool[] enableButtons;
-    private List<IMazeWall> wallTypes;
+    private List<IMazeWalls> wallTypes;
     private SingleTileInDebugMode singleTileInDebugMode;
     private string wallFormation;
     private void Awake()
@@ -47,7 +47,7 @@ public class SingleTileInDebugModeEditor : Editor
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            var style = new GUIStyle(GUI.skin.button);
+            var style = new GUIStyle(GUI.skin.button);            
             ProceedingHideAndShowButton(i, style, true);
             ProceedingHideAndShowButton(i, style, false);
             GUILayout.EndHorizontal();
@@ -59,16 +59,27 @@ public class SingleTileInDebugModeEditor : Editor
 
         GUI.backgroundColor = Color.white;
         GUILayout.Label("Next Wall Formation: ");
-        GenerateButton("Enter To Change", () => { singleTileInDebugMode.ChangeWallFormation(); wallFormation = singleTileInDebugMode.GetWallFormation().ToString(); });
+        GenerateButton("Enter To Change", () => ChangeToNextWall());
 
+        ///////////////////////////////////////////////////////////
         GUI.backgroundColor = Color.green;
         wallFormation = EditorGUILayout.TextField("Manually Change: ", wallFormation);
-        GenerateButton("Enter To Change", () => singleTileInDebugMode.ChangeWallFormation(int.Parse(wallFormation)));
+        Action changeWallJob = () =>
+        {
+            singleTileInDebugMode.ChangeWallFormation(int.Parse(wallFormation));
+        };
+        GenerateButton("Enter To Change", changeWallJob);
+    }
+    private void ChangeToNextWall()
+    {
+        Debug.Log("Enter To Change " + wallFormation);
+
+        singleTileInDebugMode.ChangeWallFormation();
+        wallFormation = singleTileInDebugMode.GetWallFormation().ToString();
     }
     private void ProceedingHideAndShowButton(int index, GUIStyle style, bool isHidden)
     {
         string buttonName;
-        Action action;
         bool isWallShown;
 
         if (isHidden)
@@ -95,16 +106,20 @@ public class SingleTileInDebugModeEditor : Editor
             style.normal.textColor = Color.black;
         }
 
-        action = () => { singleTileInDebugMode.EnableTheWall(index, isWallShown); enableButtons[index] = isHidden; };
-        GenerateButton(buttonName, action, style);
+        Action doJob = () =>
+        {
+            singleTileInDebugMode.EnableTheWall(index, isWallShown);
+            enableButtons[index] = isHidden;
+        };
+        GenerateButton(buttonName, doJob, style);
     }
-    private void GenerateButton(string buttonName, Action action, GUIStyle style = null)
+    private void GenerateButton(string buttonName, Action doJob, GUIStyle style = null)
     {
         var isButtonClicked = style == null ? GUILayout.Button(buttonName, GUILayout.Height(50)) : GUILayout.Button(buttonName, style, GUILayout.Height(50));
         if (isButtonClicked)
         {
             CleanConsoleInEditor.ClearLogConsole();
-            action();
+            doJob();
         }
     }
 

@@ -10,16 +10,20 @@ public class MazeMask : MonoBehaviour
     private void OnEnable()
     {
         if (RevealObjectController.Instance != null)
-            RevealObjectController.Instance.OnDisplayOnOff += SetOnOff;
+        {
+            RevealObjectController.Instance.OnMarkDisplayOnOff -= SetOnOff;
+            RevealObjectController.Instance.OnMarkDisplayOnOff += SetOnOff;
+        }
     }
     private void Start()
     {
-        RevealObjectController.Instance.OnDisplayOnOff += SetOnOff;
+        RevealObjectController.Instance.OnMarkDisplayOnOff -= SetOnOff;
+        RevealObjectController.Instance.OnMarkDisplayOnOff += SetOnOff;
     }
     private void OnDisable()
     {
         if (RevealObjectController.HasInstance)
-            RevealObjectController.Instance.OnDisplayOnOff -= SetOnOff;
+            RevealObjectController.Instance.OnMarkDisplayOnOff -= SetOnOff;
     }
     internal void SetOnOff(bool _isOnOff)
     {

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class HexagonWall : WallBase, IMazeWall
+public class HexagonWall : WallBase, IMazeWalls
 {
     public bool InOverlappingMode { get { return false; } }
 

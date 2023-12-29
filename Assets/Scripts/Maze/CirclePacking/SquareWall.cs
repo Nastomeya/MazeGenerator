@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-public class SquareWall : WallBase, IMazeWall
+public class SquareWall : WallBase, IMazeWalls
 {
     public bool InOverlappingMode { get { return false; } }
     [SerializeField] private Transform top, right, bottom, left;
