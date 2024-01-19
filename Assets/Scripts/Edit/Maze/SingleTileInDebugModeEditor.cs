@@ -7,7 +7,7 @@ using System;
 public class SingleTileInDebugModeEditor : Editor
 {
     private bool[] enableButtons;
-    private List<IMazeWalls> wallTypes;
+    private List<IMazeObjects> wallTypes;
     private SingleTileInDebugMode singleTileInDebugMode;
     private string wallFormation;
     private void Awake()
@@ -118,7 +118,7 @@ public class SingleTileInDebugModeEditor : Editor
         var isButtonClicked = style == null ? GUILayout.Button(buttonName, GUILayout.Height(50)) : GUILayout.Button(buttonName, style, GUILayout.Height(50));
         if (isButtonClicked)
         {
-            CleanConsoleInEditor.ClearLogConsole();
+            //CleanConsoleInEditor.ClearLogConsole();
             doJob();
         }
     }

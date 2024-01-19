@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HexagonTorches : WallBase, IMazeWalls
+public class HexagonTorches : WallBase, IMazeObjects
 {
-    public bool InOverlappingMode { get { return true; } }
+    public bool IsOverlappingMode { get { return true; } }
     [SerializeField] private Transform top, topRight, botRight, bottom, botLeft, topLeft;
     [SerializeField] private ObjectsSelectorSetting setting;
 
@@ -26,7 +26,7 @@ public class HexagonTorches : WallBase, IMazeWalls
         AddNewTorchData(4, new TorchData(botLeft, (int)HexagonFormation.botLeft));
         AddNewTorchData(5, new TorchData(topLeft, (int)HexagonFormation.topLeft));
     }
-    public override IEnumerator ClearAllWalls()
+    public override IEnumerator ClearAllObjs()
     {
         lastTorch = new TorchData(null, 0);
         SetWallsEnable(0);

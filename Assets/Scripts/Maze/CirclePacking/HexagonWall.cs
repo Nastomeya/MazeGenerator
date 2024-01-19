@@ -1,12 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
-public class HexagonWall : WallBase, IMazeWalls
+public class HexagonWall : WallBase, IMazeObjects
 {
-    public bool InOverlappingMode { get { return false; } }
+    public bool IsOverlappingMode { get { return false; } }
 
     [SerializeField] private Transform top, topRight, botRight, bottom, botLeft, topLeft;
-    public override IEnumerator ClearAllWalls()
+    public override IEnumerator ClearAllObjs()
     {
         ResetPrillars();
         SetWallsEnable();

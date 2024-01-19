@@ -6,7 +6,7 @@ public class HexagonMaze : MazeBase
     /// <summary>Please check the scale size of original prefab, which should be 0.34f. But it's now 0.68f, so the ratio should be 2</summary>    
     private readonly int tileSizeRatio = 2;//1
 
-    public override string GetFileNameAndPath() => GetFilePath() + "/hexagonMazeWallData.txt";
+    //public override string GetFileNameAndPath() => GetFilePath() + "/hexagonMazeWallData.txt";
     protected override void CreateANewTile(ref int index, int y, int x)
     {
         var newTile = Instantiate(tileWithWallsPrefab);
@@ -14,7 +14,7 @@ public class HexagonMaze : MazeBase
         newTile.SetMaze(this);
 
         currNeighbours = new HexagonNeighbours(index, width, totalTileNum, tiles);
-        newTile.InitWallIdentities(WallsAssignment());
+        newTile.InitObjectsIdentities(MazeObjectSetting.ToListOfMazeObjects());
         newTile.Init(index, currNeighbours);
 
         float yPosition = GetYPosition(index, y);

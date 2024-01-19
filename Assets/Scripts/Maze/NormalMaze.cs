@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class NormalMaze : MazeBase
 {
-    public override string GetFileNameAndPath()
-    {
-        return "No Done Yet!!!!";
-    }
+    //public override string GetFileNameAndPath()
+    //{
+    //    return "No Done Yet!!!!";
+    //}
 
     protected override IEnumerator BacktrackingPath()
     {

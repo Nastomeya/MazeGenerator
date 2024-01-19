@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HexagonCirclePackingWall : CirclePackingBaseForWall, IMazeWalls
+public class HexagonCirclePackingWall : CirclePackingBaseForWall, IMazeObjects
 {
     private readonly HexagonFormation topBottomPair = HexagonFormation.top | HexagonFormation.bottom;
     private readonly HexagonFormation topRightBotLeftPair = HexagonFormation.topRight | HexagonFormation.botLeft;

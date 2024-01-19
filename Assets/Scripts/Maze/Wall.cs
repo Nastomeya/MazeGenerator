@@ -18,6 +18,8 @@ public class Wall : MonoBehaviour, IMazeElement
         {
             doJob();
         }
-        PillirJobs.Clear();
+        if (PillirJobs.Count > 0)
+            PillirJobs.Dequeue();
+        //PillirJobs.Clear();
     }
 }

@@ -11,7 +11,7 @@ public abstract class CirclePackingBaseForWall : WallBase
 
     [SerializeField] protected CirclePackingSetting setting;
 
-    public bool InOverlappingMode { get { return false; } }
+    public bool IsOverlappingMode { get { return false; } }
     internal Quaternion objectRotation;
 
     protected int currentNumOfObject, objectIndex, objectCount = 0;
@@ -26,7 +26,7 @@ public abstract class CirclePackingBaseForWall : WallBase
         objectRotation = Quaternion.identity;
     }
     internal HashSet<ObjectBase> GetPackingObjects() => validObjects;//remove it later!!
-    public override IEnumerator ClearAllWalls()
+    public override IEnumerator ClearAllObjs()
     {
         if (validObjects != null)
         {
@@ -65,7 +65,7 @@ public abstract class CirclePackingBaseForWall : WallBase
     protected void SetEachWallEnable(int _wallFormation)
     {
         if (gameObject.activeSelf)
-            StartCoroutine(ClearAllWalls());
+            StartCoroutine(ClearAllObjs());
 
         SetNumberOfObject(_wallFormation);
 

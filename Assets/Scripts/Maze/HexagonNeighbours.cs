@@ -6,7 +6,7 @@ using UnityEngine;
 public class HexagonNeighbours : NeighboursBase
 {
     private HexagonFormation wallFormation;
-    internal HexagonNeighbours(int _index, int _width, int _numOfTotalTile, List<TileWithWalls> _tiles) : base(_index, _width, _numOfTotalTile, _tiles)
+    internal HexagonNeighbours(int _index, int _width, int _numOfTotalTile, List<TileWithMazeObjectSets> _tiles) : base(_index, _width, _numOfTotalTile, _tiles)
     {
         wallFormation = new HexagonFormation();
         totalFormationValue = GetTotalFormationValue(wallFormation);

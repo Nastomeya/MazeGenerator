@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d360f1a5f41fea4f833fa8db807094c, type: 3}
+  m_Name: SquareObjectSetting
+  m_EditorClassIdentifier: 
+  objectDatas:
+  - mazeObjTrans: {fileID: 6874908056291876395, guid: 22e4af12c00c33f499c120553eb50f79, type: 3}
+    activeSelf: 1
+  - mazeObjTrans: {fileID: 5062167660794152110, guid: 3fd7605a36fbcb44693768199d971b8e, type: 3}
+    activeSelf: 1
+  - mazeObjTrans: {fileID: 3008582213250369310, guid: ea59cff602a06e34d98e2f00fb534135, type: 3}
+    activeSelf: 1

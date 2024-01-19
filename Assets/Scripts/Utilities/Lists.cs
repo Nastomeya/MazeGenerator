@@ -18,7 +18,7 @@ namespace DataExtensions
             }
             return IndexException(index);
         }
-        public static int FindIndex(List<IMazeWalls> allDataInList, IMazeWalls data)
+        public static int FindIndex(List<IMazeObjects> allDataInList, IMazeObjects data)
         {
             int index = allDataInList.FindIndex(x => x.id == data.id);
             //for (int i = 0; i < allDataInList.Count; i++)

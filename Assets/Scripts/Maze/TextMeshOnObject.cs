@@ -6,7 +6,7 @@ public class TextMeshOnObject : MonoBehaviour
     [SerializeField] internal TextMeshPro textMesh;
     private void Start()
     {
-        textMesh.gameObject.SetActive(true);
+        SetTextOnOff(true);
     }
     internal void Init()
     {
@@ -19,6 +19,6 @@ public class TextMeshOnObject : MonoBehaviour
     }
     internal void SetTextOnOff(bool _isOnOff)
     {
-        textMesh.gameObject.SetActive(_isOnOff);
+        textMesh?.gameObject?.SetActive(_isOnOff);
     }
 }

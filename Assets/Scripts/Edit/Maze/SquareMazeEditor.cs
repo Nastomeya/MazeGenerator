@@ -7,7 +7,7 @@ public class SquareMazeEditor : MazeBaseEditor
     protected void Awake()
     {
         maze = (SquareMaze)target;
-        Init();
+        ObjectRawDatas.ToString();
     }
     protected override void OneTileByOneButtons()
     {

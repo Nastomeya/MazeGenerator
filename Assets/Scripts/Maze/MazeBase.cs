@@ -5,47 +5,86 @@ using UnityEngine;
 public abstract class MazeBase : MonoBehaviour
 {
     [SerializeField] protected int width, height;
-    [SerializeField] protected List<Transform> allWallPrefabs;
-    [SerializeField] protected TileWithWalls tileWithWallsPrefab;
+    [SerializeField] private MazeObjectSettings mazeObjectSetting;
+    [SerializeField] protected TileWithMazeObjectSets tileWithWallsPrefab;
+
+    internal MazeObjectSettings MazeObjectSetting => mazeObjectSetting;
+
     public bool IsKeepTracking() => keepTracking;
     public void OnNextTile() => isNotFinished = false;
     public void OnLoopThrough() => loopThrough = true;
     public bool GetLoopThrough() => !loopThrough;
+    public void ResetTiles()
+    {
+        InitTiles();
+        SetupFristTile();
+        BacktrackPath();
+    }
 
-    protected List<TileWithWalls> tiles;
-    protected Stack<TileWithWalls> stack;
-    protected TileWithWalls currentTile;
+    protected List<TileWithMazeObjectSets> tiles;
+    protected Stack<TileWithMazeObjectSets> stack;
+    protected TileWithMazeObjectSets currentTile;
     protected int totalTileNum, trackedTileNumber = 0;
     protected StraightPathController straightPathController;
     protected bool keepTracking;
     protected bool isShownInIndex = false;
-    protected List<IMazeWalls> allWalls;
-    protected Dictionary<int, bool> currWallTypes;//directly update to List<IMazeWall> allWalls
+    //protected List<IMazeObjects> allWalls;//remove this
+    //private Dictionary<int, bool> currWallTypes;//directly update to List<IMazeWall> allWalls
+    //internal Dictionary<int, bool> CurrWallTypes
+    //{
+    //    get
+    //    {
+    //        if (currWallTypes == null)
+    //            currWallTypes = LoadData(true);
+    //        return currWallTypes;
+    //    }
+    //}
     protected Vector2 offset;
     protected NeighboursBase currNeighbours;
 
     private void Start()
     {
-        SetWallDataFromPrefabs();
+        InitialMaze();
+    }
+    internal void InitialMaze()
+    {
+        //SetWallDataFromPrefabs();
+        ResetAll();
         InitTiles();
-
         SetupFristTile();
         BacktrackPath();
     }
-    public Dictionary<int, bool> GetCurrWallTypes() => currWallTypes;
-    public List<TileWithWalls> GetTiles() => tiles;
-    public List<Transform> GetAllWallPrefabs() => allWallPrefabs;
-    public void SetWallDataFromPrefabs()
+    private void ResetAll()
     {
-        allWalls = new List<IMazeWalls>();
-        currWallTypes = LoadData(true);
+        if (tiles == null || tiles.Count == 0)
+            return;
+
+        for (int i = 0; i < tiles.Count; i++)
+        {
+            Destroy(tiles[i].gameObject);
+        }
+        tiles.Clear();
     }
-    public void UpdateWallTypes(Dictionary<int, bool> _newWallTypes) => currWallTypes = _newWallTypes;
-    public IMazeWalls GetWallFromAll(int _id) => allWalls.Find(x => x.id == _id);
+    //public Dictionary<int, bool> GetCurrWallTypes() => currWallTypes;
+    public List<TileWithMazeObjectSets> GetTiles() => tiles;
+    //internal List<Transform> GetAllWallPrefabs() => allObjectDatas.ToListOfMazeObjects();
+    //public void SetWallDataFromPrefabs()
+    //{
+    //    allWalls = new List<IMazeObjects>();
+    //    //currWallTypes?.Clear();
+    //    //CurrWallTypes.ToString();// = LoadData(true);
+    //}
+    //public void UpdateWallTypes(Dictionary<int, bool> _newWallTypes) => currWallTypes = _newWallTypes;
+    public IMazeObjects GetMazeObjectSetlFromSetting(int _id)
+    {
+        if (MazeObjectSetting.ObjectDatas[_id] != null)
+            return MazeObjectSetting.ObjectDatas[_id].MazeObjects;
+        return null;
+    }
     private void InitTiles()
     {
-        tiles = new List<TileWithWalls>();
-        stack = new Stack<TileWithWalls>();
+        tiles = new List<TileWithMazeObjectSets>();
+        stack = new Stack<TileWithMazeObjectSets>();
         totalTileNum = width * height - 1;
         offset = new Vector2((width - 1f) / 2f, (height - 1f) / 2f);
 
@@ -120,20 +159,20 @@ public abstract class MazeBase : MonoBehaviour
     }
     private void SetMarkPosition(Vector3 targetPosition) => mark.transform.position = targetPosition.With(y: mark.transform.position.y);
 
-    protected List<IMazeWalls> WallsAssignment()
-    {
-        var currTileWallList = new List<IMazeWalls>();
-        for (int i = 0; i < allWalls.Count; i++)
-        {
-            var hasFoundValue = currWallTypes.TryGetValue(allWalls[i].id, out bool isEnable);
-            if (hasFoundValue)
-            {
-                if (isEnable)
-                    currTileWallList.Add(allWalls[i]);
-            }
-        }
-        return currTileWallList;
-    }
+    //protected List<IMazeObjects> MazeObjectAssignment()
+    //{
+    //    var currTileWallList = new List<IMazeObjects>();
+
+    //    for (int i = 0; i < mazeObjectSetting.ObjectDatas.Count; i++)
+    //    {
+    //        if (mazeObjectSetting.ObjectDatas[i].ActiveSelf)
+    //        {
+    //            currTileWallList.Add(allWalls[i]);
+    //        }
+
+    //    }
+    //    return MazeObjectSetting.ToListOfMazeObjects();
+    //}
 
     protected void BacktrackPath() => StartCoroutine(BacktrackingPath());//while loop
 
@@ -142,10 +181,10 @@ public abstract class MazeBase : MonoBehaviour
         if (tiles != null)
         {
             for (int i = 0; i < tiles.Count; i++)
-                tiles[i].EanbleWallIfExist(_id, _isEnable);
+                tiles[i].EanbleMazeObjectSetIfExist(_id, _isEnable);
         }
     }
-    protected void SetVisited(TileWithWalls _tile)
+    protected void SetVisited(TileWithMazeObjectSets _tile)
     {
         if (!_tile.isVisited)
         {
@@ -164,33 +203,33 @@ public abstract class MazeBase : MonoBehaviour
         SetupFristTile();
         BacktrackPath();
     }
-    public abstract string GetFileNameAndPath();
-    public Dictionary<int, bool> LoadData(bool setupWallData = false)
-    {
-        var dummyWallsIdentities = Utils.LoadDicFromFile(GetFilePath(), GetFileNameAndPath());
+    //public abstract string GetFileNameAndPath();
+    //public Dictionary<int, bool> LoadData(bool setupWallData = false)
+    //{
+    //    var dummyWallsIdentities = Utils.LoadDicFromFile(GetFilePath(), GetFileNameAndPath());
 
-        if (dummyWallsIdentities == null || dummyWallsIdentities.Count < 1)
-        {
-            dummyWallsIdentities = new Dictionary<int, bool>();
-            for (int i = 0; i < allWallPrefabs.Count; i++)
-            {
-                dummyWallsIdentities.Add(i, false);
-                if (setupWallData)
-                    InitWallData(i, allWallPrefabs[i]);
-            }
+    //    if (dummyWallsIdentities == null || dummyWallsIdentities.Count < 1)
+    //    {
+    //        dummyWallsIdentities = new Dictionary<int, bool>();
+    //        for (int i = 0; i < allObjectDatas.Count; i++)
+    //        {
+    //            dummyWallsIdentities.Add(i, false);
+    //            if (setupWallData)
+    //                InitWallData(i, allObjectDatas[i]);
+    //        }
 
-            Utils.SaveDicToFile(dummyWallsIdentities, GetFileNameAndPath());
-        }
-        else
-        {
-            if (setupWallData)
-            {
-                for (int i = 0; i < allWallPrefabs.Count; i++)
-                    InitWallData(i, allWallPrefabs[i]);
-            }
-        }
-        return dummyWallsIdentities;
-    }
+    //        Utils.SaveDicToFile(dummyWallsIdentities, GetFileNameAndPath());
+    //    }
+    //    else
+    //    {
+    //        if (setupWallData)
+    //        {
+    //            for (int i = 0; i < allObjectDatas.Count; i++)
+    //                InitWallData(i, allObjectDatas[i]);
+    //        }
+    //    }
+    //    return dummyWallsIdentities;
+    //}
     private void SetupFristTile()
     {
         var initialIndex = Utils.RandomRange(0, totalTileNum);
@@ -206,11 +245,11 @@ public abstract class MazeBase : MonoBehaviour
         for (int i = 0; i < tiles.Count; i++)
             tiles[i].ResetTile(isShownInIndex);
     }
-    protected string GetFilePath() => Application.dataPath + "/mazeWallData";
-    private void InitWallData(int id, Transform wallPrefab)
-    {
-        var currWall = wallPrefab.GetComponent<IMazeWalls>();
-        currWall.SetID(id);
-        allWalls.Add(currWall);
-    }
+    //protected string GetFilePath() => Application.dataPath + "/mazeWallData";
+    //private void InitWallData(int id, Transform mazeObjPrefab)
+    //{
+    //    var currWall = mazeObjPrefab.GetComponent<IMazeObjects>();
+    //    currWall.SetID(id);
+    //    allWalls.Add(currWall);
+    //}
 }

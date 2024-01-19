@@ -6,7 +6,7 @@ using UnityEngine;
 public class SquareNeighbours : NeighboursBase
 {
     private SquareFormation wallFormation;
-    internal SquareNeighbours(int _index, int _width, int _numOfTotalTile, List<TileWithWalls> _tiles) : base(_index, _width, _numOfTotalTile, _tiles)
+    internal SquareNeighbours(int _index, int _width, int _numOfTotalTile, List<TileWithMazeObjectSets> _tiles) : base(_index, _width, _numOfTotalTile, _tiles)
     {
         wallFormation = new SquareFormation();
         totalFormationValue = GetTotalFormationValue(wallFormation);

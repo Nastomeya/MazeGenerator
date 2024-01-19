@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SquareMaze : MazeBase
 {
-    public override string GetFileNameAndPath() => GetFilePath() + "/squareMazeWallData.txt";
+    //public override string GetFileNameAndPath() => GetFilePath() + "/squareMazeWallData.txt";
     protected override void CreateANewTile(ref int index, int y, int x)
     {
         var newTile = Instantiate(tileWithWallsPrefab);
@@ -10,7 +10,7 @@ public class SquareMaze : MazeBase
         newTile.SetMaze(this);
 
         currNeighbours = new SquareNeighbours(index, width, totalTileNum, tiles);
-        newTile.InitWallIdentities(WallsAssignment());
+        newTile.InitObjectsIdentities(MazeObjectSetting.ToListOfMazeObjects());
         newTile.Init(index, currNeighbours);
 
         newTile.transform.position = new Vector3(x - offset.x, 0, y - offset.y);

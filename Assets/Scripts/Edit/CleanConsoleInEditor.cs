@@ -1,6 +1,7 @@
 ﻿using UnityEditor;
 using System.Reflection;
 using System;
+using UnityEngine;
 
 public class CleanConsoleInEditor
 {
@@ -20,6 +21,10 @@ public class CleanConsoleInEditor
         }
     }
 
-    public static void ClearLogConsole() => ClearConsoleMethod.Invoke(new object(), null);
+    public static void ClearLogConsole()
+    {
+        ClearConsoleMethod.Invoke(new object(), null);
+        Debug.Log("---------------------  Clear the Log Console  ---------------------");
+    }
     #endregion
 }

@@ -6,15 +6,15 @@ public class SingleTileInDebugMode : MonoBehaviour
 {
     [SerializeField] internal List<Transform> allWallPrefabs;//Don't change it back to readonly
     [SerializeField] private TileShapes tileShapes;
-    [SerializeField] private TileWithWalls tileWithWallsPrefab;//Don't change it back to readonly
+    [SerializeField] private TileWithMazeObjectSets tileWithWallsPrefab;//Don't change it back to readonly
 
-    private List<IMazeWalls> allWalls;
+    private List<IMazeObjects> allWalls;
     private NeighboursBase neighbours;
 
     private void Awake()
     {
         SetWallDataFromPrefabs();
-        tileWithWallsPrefab.InitWallIdentities(allWalls);
+        tileWithWallsPrefab.InitObjectsIdentities(allWalls);
     }
     private void Start() => tileWithWallsPrefab.trackText.Init();
 
@@ -33,15 +33,15 @@ public class SingleTileInDebugMode : MonoBehaviour
     }
     public void SetWallDataFromPrefabs()
     {
-        allWalls = new List<IMazeWalls>();
+        allWalls = new List<IMazeObjects>();
         for (int i = 0; i < allWallPrefabs.Count; i++)
         {
-            var currWall = allWallPrefabs[i].GetComponent<IMazeWalls>();
+            var currWall = allWallPrefabs[i].GetComponent<IMazeObjects>();
             currWall.SetID(i);
             allWalls.Add(currWall);
         }
     }
-    public List<IMazeWalls> GetWallTypes() => allWalls;
+    public List<IMazeObjects> GetWallTypes() => allWalls;
 
     public void ChangeWallFormation(int _currFormation = 0)
     {
@@ -63,8 +63,8 @@ public class SingleTileInDebugMode : MonoBehaviour
             var currWallFormation = neighbours.GetWallFormation();
             int _wallFormation = (!_isEnable) ? 0 : currWallFormation;
 
-            tileWithWallsPrefab.Walls[_wallIndex].SetWallHolderEnable(_isEnable);
-            tileWithWallsPrefab.Walls[_wallIndex].SetWallsEnable(_wallFormation);
+            tileWithWallsPrefab.MazeObjects[_wallIndex].SetWallHolderEnable(_isEnable);
+            tileWithWallsPrefab.MazeObjects[_wallIndex].SetWallsEnable(_wallFormation);
         }
     }
     private void EnableTheWall(int _wallIndex)
@@ -72,18 +72,18 @@ public class SingleTileInDebugMode : MonoBehaviour
         if (CheckTileExistence())
         {
             int currWallFormation = neighbours.GetWallFormation();
-            var _isEnable = tileWithWallsPrefab.Walls[_wallIndex].transform.gameObject.activeSelf;
+            var _isEnable = tileWithWallsPrefab.MazeObjects[_wallIndex].transform.gameObject.activeSelf;
             if (_isEnable)
-                tileWithWallsPrefab.Walls[_wallIndex].SetWallsEnable(currWallFormation);
+                tileWithWallsPrefab.MazeObjects[_wallIndex].SetWallsEnable(currWallFormation);
         }
     }
     private void EnableTheWalls()
     {
-        if (tileWithWallsPrefab.Walls != null)
-            for (int i = 0; i < tileWithWallsPrefab.Walls.Count; i++)
+        if (tileWithWallsPrefab.MazeObjects != null)
+            for (int i = 0; i < tileWithWallsPrefab.MazeObjects.Count; i++)
                 EnableTheWall(i);
     }
-    private bool CheckTileExistence() => tileWithWallsPrefab.Walls != null && tileWithWallsPrefab.Walls.Count > 0;
+    private bool CheckTileExistence() => tileWithWallsPrefab.MazeObjects != null && tileWithWallsPrefab.MazeObjects.Count > 0;
 }
 public enum TileShapes
 {

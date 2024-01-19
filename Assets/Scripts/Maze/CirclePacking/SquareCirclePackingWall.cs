@@ -1,7 +1,7 @@
 ﻿using DataExtensions;
 using UnityEngine;
 
-public class SquareCirclePackingWall : CirclePackingBaseForWall, IMazeWalls
+public class SquareCirclePackingWall : CirclePackingBaseForWall, IMazeObjects
 {
     private readonly SquareFormation topBottomPair = SquareFormation.top | SquareFormation.bottom;
     private readonly SquareFormation rightLeftPair = SquareFormation.right | SquareFormation.left;

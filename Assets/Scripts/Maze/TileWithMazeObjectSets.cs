@@ -1,15 +1,15 @@
 using DataExtensions;
 using UnityEngine;
 
-public class TileWithWalls : WallsController
+public class TileWithMazeObjectSets : MazeObjsController
 {
     internal int currWallFormation;
     internal int overlappingFormation;
     private int removeWallFormation;
     private int visitedCount = 0;
-    public void EanbleWallIfExist(int _id, bool _isEnable)
+    public void EanbleMazeObjectSetIfExist(int _id, bool _isEnable)
     {
-        int wallIndex;
+        int objectSetIndex;
         var wallHasFound = FindWallWithID(_id);
         if (wallHasFound == null)
         {
@@ -17,33 +17,33 @@ public class TileWithWalls : WallsController
                 return;
             else
             {
-                wallHasFound = maze.GetWallFromAll(_id);//if not found, get it from all;                
-                AddNewWallType(wallHasFound);
+                wallHasFound = maze.GetMazeObjectSetlFromSetting(_id);//if not found, get it from all;                
+                AddNewMazeObjectType(wallHasFound);
 
-                wallIndex = Lists.FindIndex(Walls, wallHasFound);
-                Walls[wallIndex].transform.localPosition = Vector3.zero;
+                objectSetIndex = Lists.FindIndex(MazeObjects, wallHasFound);
+                MazeObjects[objectSetIndex].transform.localPosition = Vector3.zero;
             }
         }
         else
-            wallIndex = Lists.FindIndex(Walls, wallHasFound);
+            objectSetIndex = Lists.FindIndex(MazeObjects, wallHasFound);
 
         var needToBeShown = ShownOnlyBeenVisitedOrFormationBeenSet(_isEnable);
 
         int _wallFormation = (!needToBeShown) ? 0 : currWallFormation;
-        Walls[wallIndex].SetWallHolderEnable(needToBeShown);
-        Walls[wallIndex].SetWallsEnable(_wallFormation);
+        MazeObjects[objectSetIndex].SetWallHolderEnable(needToBeShown);
+        MazeObjects[objectSetIndex].SetWallsEnable(_wallFormation);
     }
     internal void RemoveCurrWallFromList() => neighbours.RemoveCurrWall();
-    internal void BacktrackRemovalWallFormation(TileWithWalls nextTile)
+    internal void BacktrackRemovalWallFormation(TileWithMazeObjectSets nextTile)
     {
         var _neighbourWall = neighbours.ByWhichNeighbour(transform, nextTile.transform);
         UpdateRemovalWallFormation(nextTile, _neighbourWall);
     }
-    internal int UpdateRemovalWallFormation(TileWithWalls nextTile, int _nextWallFormationID = -1)
+    internal int UpdateRemovalWallFormation(TileWithMazeObjectSets nextTile, int _nextWallFormationID = -1)
     {
         _nextWallFormationID = (_nextWallFormationID >= 0) ? _nextWallFormationID : nextWallFormationID;
         removeWallFormation = _nextWallFormationID;
-        CreateWalls(Walls);
+        CreateObjects(MazeObjects);
         UpdateWallFormation(nextTile);
         return _nextWallFormationID;
     }
@@ -53,14 +53,14 @@ public class TileWithWalls : WallsController
         overlappingFormation = neighbours.totalFormationValue;
         removeWallFormation = 0;
         visitedCount = 0;
-        foreach (var wallType in Walls)
+        foreach (var wallType in MazeObjects)
         {
             if (wallType.transform.gameObject.activeSelf)
-                StartCoroutine(wallType.ClearAllWalls());
+                StartCoroutine(wallType.ClearAllObjs());
         }
         base.ResetTile(isNumDisplayed);
     }
-    private void UpdateWallFormation(TileWithWalls next)//safe at moment
+    private void UpdateWallFormation(TileWithMazeObjectSets next)//safe at moment
     {
         //Debug.Log("--------------------------------------------------------------- <color=yellow>Start <b>v</b>  " + index + "</color>");
         //next

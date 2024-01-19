@@ -1,10 +1,10 @@
 using System.Collections;
 using UnityEngine;
-public class SquareWall : WallBase, IMazeWalls
+public class SquareWall : WallBase, IMazeObjects
 {
-    public bool InOverlappingMode { get { return false; } }
+    public bool IsOverlappingMode { get { return false; } }
     [SerializeField] private Transform top, right, bottom, left;
-    public override IEnumerator ClearAllWalls()
+    public override IEnumerator ClearAllObjs()
     {
         ResetPrillars();
         SetWallsEnable(0);

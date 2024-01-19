@@ -6,21 +6,30 @@ public class HexagonMazeEditor : MazeBaseEditor
 {
     protected void Awake()
     {
+        if (!Application.isPlaying)
+            return;
+
         maze = (HexagonMaze)target;
-        Init();
+        ObjectRawDatas.ToString();
     }
     protected override void OneTileByOneButtons()
     {
-        if (!((HexagonMaze)maze).IsKeepTracking())
-        {
-            GUI.backgroundColor = Color.yellow;
-            if (GUILayout.Button("Next Tile", GUILayout.Height(50)))
-                ((HexagonMaze)maze).OnNextTile();//remove prefab
+        if (maze is not HexagonMaze hexagon)
+            return;
+        if (hexagon.IsKeepTracking())
+            return;
 
-            GUI.backgroundColor = Color.red;
-            GUI.enabled = ((HexagonMaze)maze).GetLoopThrough();
-            if (GUILayout.Button("Loop Through All Tiles", GUILayout.Height(50)))
-                ((HexagonMaze)maze).OnLoopThrough();
-        }
+        GUI.backgroundColor = Color.yellow;
+        if (GUILayout.Button("Next Tile", GUILayout.Height(50)))
+            hexagon.OnNextTile();//remove prefab
+
+        GUI.backgroundColor = Color.red;
+        GUI.enabled = hexagon.GetLoopThrough();
+        if (GUILayout.Button("Loop Through All Tiles", GUILayout.Height(50)))
+            hexagon.OnLoopThrough();
+
+        GUI.backgroundColor = Color.cyan;
+        if (GUILayout.Button("Reset", GUILayout.Height(50)))
+            hexagon.InitialMaze();
     }
 }

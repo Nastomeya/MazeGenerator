@@ -7,11 +7,11 @@ public abstract class NeighboursBase
     internal int totalFormationValue;
 
     protected readonly int index, width, numOfTotalTile;
-    protected readonly List<TileWithWalls> tiles;
+    protected readonly List<TileWithMazeObjectSets> tiles;
     protected List<int> avaliableWalls;
     protected int wallIndex;
 
-    public NeighboursBase(int _index, int _width, int _numOfTotalTile, List<TileWithWalls> _tiles)
+    public NeighboursBase(int _index, int _width, int _numOfTotalTile, List<TileWithMazeObjectSets> _tiles)
     {
         index = _index;
         width = _width;

@@ -136,7 +136,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4724f11fb70f63247bae6679c9f2078b, type: 3}
+  m_Script: {fileID: 11500000, guid: af5d674141e7e0543ae6fbf3385aa95a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &129443857 stripped
@@ -176,10 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 4
   height: 4
-  allWallPrefabs:
-  - {fileID: 6874908056291876395, guid: 22e4af12c00c33f499c120553eb50f79, type: 3}
-  - {fileID: 3008582213250369310, guid: ea59cff602a06e34d98e2f00fb534135, type: 3}
-  - {fileID: 5062167660794152110, guid: 3fd7605a36fbcb44693768199d971b8e, type: 3}
+  mazeObjectSetting: {fileID: 11400000, guid: 2209f54e86091924ea907aa9297936ce, type: 2}
   tileWithWallsPrefab: {fileID: 6968859332848823870, guid: 4d16d698d18b4ef46939f8fd8ccb3952, type: 3}
   mark: {fileID: 89498881}
 --- !u!4 &343456132
@@ -888,7 +885,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4724f11fb70f63247bae6679c9f2078b, type: 3}
+  m_Script: {fileID: 11500000, guid: af5d674141e7e0543ae6fbf3385aa95a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1194176371 stripped
@@ -1209,11 +1206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 8
   height: 8
-  allWallPrefabs:
-  - {fileID: 6874908056291876395, guid: 57519a0afe628f342887ab7788ca0fb5, type: 3}
-  - {fileID: 9068584126950742277, guid: e511677fafe0f7642ae33fcbf664c72a, type: 3}
-  - {fileID: 5062167660794152110, guid: 0de5a76ef374b494d97c31e981e7ae8e, type: 3}
-  - {fileID: 5062167660794152110, guid: d1eeef8cb5f974448a752cd01dde7bf7, type: 3}
+  mazeObjectSetting: {fileID: 11400000, guid: 1f69b69870d1b2e47bf03f38d9d2b98c, type: 2}
   tileWithWallsPrefab: {fileID: 6968859332848823870, guid: a58e98f59ecff6a46afee69950dc3b02, type: 3}
   mark: {fileID: 8626794103573436460}
 --- !u!4 &1667427704
