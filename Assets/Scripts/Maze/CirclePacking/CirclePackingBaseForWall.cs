@@ -49,7 +49,7 @@ public abstract class CirclePackingBaseForWall : WallBase
     }
     protected abstract void SetNumberOfObject(int _wallFormation);
     protected abstract Vector3 GetRandomPosition(int _wallFormation);
-    public virtual void SetWallsEnable(int _wallFormation)
+    public virtual void SetEnable(int _wallFormation)
     {
         if (validObjects != null)
         {

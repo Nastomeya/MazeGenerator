@@ -3,93 +3,93 @@ using UnityEngine;
 
 public class TileWithMazeObjectSets : MazeObjsController
 {
-    internal int currWallFormation;
+    internal int currObjectFormation;
     internal int overlappingFormation;
-    private int removeWallFormation;
+    private int removedObjFormation;
     private int visitedCount = 0;
     public void EanbleMazeObjectSetIfExist(int _id, bool _isEnable)
     {
         int objectSetIndex;
-        var wallHasFound = FindWallWithID(_id);
-        if (wallHasFound == null)
+        var objHasBeenFound = FindMazeObjectWithID(_id);
+        if (objHasBeenFound == null)
         {
             if (!_isEnable)
                 return;
             else
             {
-                wallHasFound = maze.GetMazeObjectSetlFromSetting(_id);//if not found, get it from all;                
-                AddNewMazeObjectType(wallHasFound);
+                objHasBeenFound = maze.GetMazeObjectSetlFromSetting(_id);//if not found, get it from all;                
+                AddNewMazeObjectType(objHasBeenFound);
 
-                objectSetIndex = Lists.FindIndex(MazeObjects, wallHasFound);
+                objectSetIndex = Lists.FindIndex(MazeObjects, objHasBeenFound);
                 MazeObjects[objectSetIndex].transform.localPosition = Vector3.zero;
             }
         }
         else
-            objectSetIndex = Lists.FindIndex(MazeObjects, wallHasFound);
+            objectSetIndex = Lists.FindIndex(MazeObjects, objHasBeenFound);
 
         var needToBeShown = ShownOnlyBeenVisitedOrFormationBeenSet(_isEnable);
 
-        int _wallFormation = (!needToBeShown) ? 0 : currWallFormation;
-        MazeObjects[objectSetIndex].SetWallHolderEnable(needToBeShown);
-        MazeObjects[objectSetIndex].SetWallsEnable(_wallFormation);
+        int _objFormation = (!needToBeShown) ? 0 : currObjectFormation;
+        MazeObjects[objectSetIndex].SetHolderEnable(needToBeShown);
+        MazeObjects[objectSetIndex].SetEnable(_objFormation);
     }
-    internal void RemoveCurrWallFromList() => neighbours.RemoveCurrWall();
-    internal void BacktrackRemovalWallFormation(TileWithMazeObjectSets nextTile)
+    internal void RemoveCurrObjectFromList() => neighbours.RemoveCurrMazeObject();
+    internal void BacktrackRemovalObjFormation(TileWithMazeObjectSets nextTile)
     {
-        var _neighbourWall = neighbours.ByWhichNeighbour(transform, nextTile.transform);
-        UpdateRemovalWallFormation(nextTile, _neighbourWall);
+        var _neighbourObj = neighbours.ByWhichNeighbour(transform, nextTile.transform);
+        UpdateRemovalObjectFormation(nextTile, _neighbourObj);
     }
-    internal int UpdateRemovalWallFormation(TileWithMazeObjectSets nextTile, int _nextWallFormationID = -1)
+    internal int UpdateRemovalObjectFormation(TileWithMazeObjectSets nextTile, int _nextObjFormationID = -1)
     {
-        _nextWallFormationID = (_nextWallFormationID >= 0) ? _nextWallFormationID : nextWallFormationID;
-        removeWallFormation = _nextWallFormationID;
+        _nextObjFormationID = (_nextObjFormationID >= 0) ? _nextObjFormationID : nextObjFormationID;
+        removedObjFormation = _nextObjFormationID;
         CreateObjects(MazeObjects);
-        UpdateWallFormation(nextTile);
-        return _nextWallFormationID;
+        UpdateObjectFormation(nextTile);
+        return _nextObjFormationID;
     }
     internal override void ResetTile(bool isNumDisplayed = false)
     {
-        currWallFormation = neighbours.totalFormationValue;
+        currObjectFormation = neighbours.totalFormationValue;
         overlappingFormation = neighbours.totalFormationValue;
-        removeWallFormation = 0;
+        removedObjFormation = 0;
         visitedCount = 0;
-        foreach (var wallType in MazeObjects)
+        foreach (var objectType in MazeObjects)
         {
-            if (wallType.transform.gameObject.activeSelf)
-                StartCoroutine(wallType.ClearAllObjs());
+            if (objectType.transform.gameObject.activeSelf)
+                StartCoroutine(objectType.ClearAllObjs());
         }
         base.ResetTile(isNumDisplayed);
     }
-    private void UpdateWallFormation(TileWithMazeObjectSets next)//safe at moment
+    private void UpdateObjectFormation(TileWithMazeObjectSets next)//safe at moment
     {
         //Debug.Log("--------------------------------------------------------------- <color=yellow>Start <b>v</b>  " + index + "</color>");
         //next
         if (!next.isVisited)
         {
-            var nextRemoveWallFormation = neighbours.GetNextRemovalWallValue(removeWallFormation);
-            next.currWallFormation = Bitwise.Remove(next.currWallFormation, nextRemoveWallFormation);
-            next.overlappingFormation = Bitwise.Remove(next.currWallFormation, nextRemoveWallFormation);
+            var nextRemoveObjFormation = neighbours.GetNextRemovalObjectValue(removedObjFormation);
+            next.currObjectFormation = Bitwise.Remove(next.currObjectFormation, nextRemoveObjFormation);
+            next.overlappingFormation = Bitwise.Remove(next.currObjectFormation, nextRemoveObjFormation);
         }
 
         //curr
-        var lastWallFormation = currWallFormation;
-        currWallFormation = neighbours.OverlappingWallsReduction(currWallFormation);
+        var lastObjFormation = currObjectFormation;
+        currObjectFormation = neighbours.OverlappingObjectsReduction(currObjectFormation);
 
         if (!next.isVisited)
         {
-            currWallFormation = Bitwise.Remove(currWallFormation, removeWallFormation);
-            overlappingFormation = Bitwise.Remove(overlappingFormation, removeWallFormation);
+            currObjectFormation = Bitwise.Remove(currObjectFormation, removedObjFormation);
+            overlappingFormation = Bitwise.Remove(overlappingFormation, removedObjFormation);
             //Debug.Log(" Has Not Been Visited:  <color=orange> ********************************************************************</color>");
         }
 
-        //Debug.Log(visitedCount + " <color=yellow>lastWallFormation:  " + lastWallFormation + "</color>  currWallFormation: " + currWallFormation + "   <color=orange>   " + Bitwise.GetCombinationNames(new HexagonFormation(), currWallFormation) + "</color>    overlappingFormaption: " + overlappingFormation + " <color=green>" + Bitwise.GetCombinationNames(new HexagonFormation(), overlappingFormation) + "</color>");
-        if (!currWallFormation.Equals(lastWallFormation) || visitedCount < 1)//1st time visited
-            ChangeWallFormation(currWallFormation, overlappingFormation);
+        //Debug.Log(visitedCount + " <color=yellow>lastObjectFormation:  " + lastObjFormation + "</color>  currObjectFormation: " + currObjectFormation + "   <color=orange>   " + Bitwise.GetCombinationNames(new HexagonFormation(), currObjectFormation) + "</color>    overlappingFormaption: " + overlappingFormation + " <color=green>" + Bitwise.GetCombinationNames(new HexagonFormation(), overlappingFormation) + "</color>");
+        if (!currObjectFormation.Equals(lastObjFormation) || visitedCount < 1)//1st time visited
+            ChangeObjectFormation(currObjectFormation, overlappingFormation);
         visitedCount++;
     }
     private bool ShownOnlyBeenVisitedOrFormationBeenSet(bool _isEnable)
     {
-        if (!isVisited || currWallFormation == neighbours.totalFormationValue)//initial set is same as totalFormation
+        if (!isVisited || currObjectFormation == neighbours.totalFormationValue)//initial set is same as totalFormation
             _isEnable = false;
         return _isEnable;
     }

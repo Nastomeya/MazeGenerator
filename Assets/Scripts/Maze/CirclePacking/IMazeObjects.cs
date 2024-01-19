@@ -16,7 +16,7 @@ public interface IMazeObjects
     public int id { get; }
     public Transform transform { get; }
     public void SetID(int _newID);
-    public void SetWallHolderEnable(bool _isEnable);
-    public void SetWallsEnable(int _wallFormation);
+    public void SetHolderEnable(bool _isEnable);
+    public void SetEnable(int _objectFormation);
     public IEnumerator ClearAllObjs();
 }

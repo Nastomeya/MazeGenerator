@@ -34,6 +34,10 @@ public class SingleTileInDebugMode : MonoBehaviour
     public void SetWallDataFromPrefabs()
     {
         allWalls = new List<IMazeObjects>();
+
+        Debug.Log("SetWallDataFromPrefabs " + allWallPrefabs.Count);
+
+
         for (int i = 0; i < allWallPrefabs.Count; i++)
         {
             var currWall = allWallPrefabs[i].GetComponent<IMazeObjects>();
@@ -63,8 +67,8 @@ public class SingleTileInDebugMode : MonoBehaviour
             var currWallFormation = neighbours.GetWallFormation();
             int _wallFormation = (!_isEnable) ? 0 : currWallFormation;
 
-            tileWithWallsPrefab.MazeObjects[_wallIndex].SetWallHolderEnable(_isEnable);
-            tileWithWallsPrefab.MazeObjects[_wallIndex].SetWallsEnable(_wallFormation);
+            tileWithWallsPrefab.MazeObjects[_wallIndex].SetHolderEnable(_isEnable);
+            tileWithWallsPrefab.MazeObjects[_wallIndex].SetEnable(_wallFormation);
         }
     }
     private void EnableTheWall(int _wallIndex)
@@ -74,7 +78,7 @@ public class SingleTileInDebugMode : MonoBehaviour
             int currWallFormation = neighbours.GetWallFormation();
             var _isEnable = tileWithWallsPrefab.MazeObjects[_wallIndex].transform.gameObject.activeSelf;
             if (_isEnable)
-                tileWithWallsPrefab.MazeObjects[_wallIndex].SetWallsEnable(currWallFormation);
+                tileWithWallsPrefab.MazeObjects[_wallIndex].SetEnable(currWallFormation);
         }
     }
     private void EnableTheWalls()

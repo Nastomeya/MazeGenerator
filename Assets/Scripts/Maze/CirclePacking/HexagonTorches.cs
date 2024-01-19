@@ -8,13 +8,12 @@ public class HexagonTorches : WallBase, IMazeObjects
     [SerializeField] private Transform top, topRight, botRight, bottom, botLeft, topLeft;
     [SerializeField] private ObjectsSelectorSetting setting;
 
-    private Dictionary<int, TorchData> torches;
+    private Dictionary<int, TorchData> torches = new();
     private List<int> avaliableIndexes;
     private TorchData lastTorch;
     private bool ToBeEnable = false;
     private void Awake()
     {
-        torches = new Dictionary<int, TorchData>();
         avaliableIndexes = new List<int>();
         lastTorch = new TorchData(null, 0);
         ToBeEnable = setting.IsEnable();
@@ -29,10 +28,10 @@ public class HexagonTorches : WallBase, IMazeObjects
     public override IEnumerator ClearAllObjs()
     {
         lastTorch = new TorchData(null, 0);
-        SetWallsEnable(0);
+        SetEnable(0);
         yield return null;
     }
-    public void SetWallsEnable(int _overlappingFormaption)
+    public void SetEnable(int _overlappingFormaption)
     {
         if (_overlappingFormaption < 1)
         {

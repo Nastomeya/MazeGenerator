@@ -9,11 +9,11 @@ public class HexagonWall : WallBase, IMazeObjects
     public override IEnumerator ClearAllObjs()
     {
         ResetPrillars();
-        SetWallsEnable();
+        SetEnable();
         yield return null;
 
     }
-    public void SetWallsEnable(int _wallFormation = 0)
+    public void SetEnable(int _wallFormation = 0)
     {
         var isEnable = _wallFormation == 0 ? false : true;
 

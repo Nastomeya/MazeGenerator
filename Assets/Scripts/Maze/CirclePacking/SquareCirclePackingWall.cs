@@ -6,7 +6,7 @@ public class SquareCirclePackingWall : CirclePackingBaseForWall, IMazeObjects
     private readonly SquareFormation topBottomPair = SquareFormation.top | SquareFormation.bottom;
     private readonly SquareFormation rightLeftPair = SquareFormation.right | SquareFormation.left;
 
-    public override void SetWallsEnable(int _wallFormation)
+    public override void SetEnable(int _wallFormation)
     {
         var _isEnable = _wallFormation == 0 ? false : true;
         if (validObjects != null)

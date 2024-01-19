@@ -10,7 +10,7 @@ public abstract class TileBase : MonoBehaviour
     internal bool isVisited = false;
 
     protected MazeBase maze;
-    protected int nextWallFormationID;
+    protected int nextObjFormationID;
 
     private StoneFloor stoneFloor;
 
@@ -24,8 +24,8 @@ public abstract class TileBase : MonoBehaviour
     }
     internal int GetNeighbourIndex(StraightPathController straightPathController)//STEP 1
     {
-        nextWallFormationID = neighbours.GetRandomWall(straightPathController);//loop inside
-        int nextIndex = neighbours.GetNeighbourIndex(nextWallFormationID);
+        nextObjFormationID = neighbours.GetRandomWall(straightPathController);//loop inside
+        int nextIndex = neighbours.GetNeighbourIndex(nextObjFormationID);
         return nextIndex;
     }
     internal void SetCurrentTileVisited(int trackMarkCounter = -1)

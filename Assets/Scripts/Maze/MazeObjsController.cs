@@ -9,20 +9,20 @@ public class MazeObjsController : TileBase
         MazeObjects = new List<IMazeObjects>();
         CreateObjects(_objs);
     }
-    protected IMazeObjects FindWallWithID(int _id)
+    protected IMazeObjects FindMazeObjectWithID(int _id)
     {
-        IMazeObjects newFoundWall = MazeObjects.Find(x => x.id == _id);
-        return newFoundWall;
+        IMazeObjects newObjFound = MazeObjects.Find(x => x.id == _id);
+        return newObjFound;
     }
-    protected void CreateObjects(List<IMazeObjects> enabledWallList)
+    protected void CreateObjects(List<IMazeObjects> enabledMazeObjectList)
     {
-        for (int i = 0; i < enabledWallList.Count; i++)
+        for (int i = 0; i < enabledMazeObjectList.Count; i++)
         {
-            var wallHasFound = FindWallWithID(enabledWallList[i].id);
-            if (wallHasFound == null)
-                AddNewMazeObjectType(enabledWallList[i]);
+            var mazeObjHasBeenFound = FindMazeObjectWithID(enabledMazeObjectList[i].id);
+            if (mazeObjHasBeenFound == null)
+                AddNewMazeObjectType(enabledMazeObjectList[i]);
             else
-                wallHasFound.SetWallHolderEnable(maze.MazeObjectSetting.ObjectDatas[enabledWallList[i].id].ActiveSelf);
+                mazeObjHasBeenFound.SetHolderEnable(maze.MazeObjectSetting.ObjectDatas[enabledMazeObjectList[i].id].ActiveSelf);
         }
     }
     protected void AddNewMazeObjectType(IMazeObjects _newObjects)
@@ -34,23 +34,20 @@ public class MazeObjsController : TileBase
     {
         var newObjectsTrans = Instantiate(_newMazeobjs.transform);
         newObjectsTrans.SetParent(transform);
-
         var newObjects = newObjectsTrans.GetComponent<IMazeObjects>();
-        //if (newObjects.id == _newMazeobjs.id)
-        //    Debug.Log("if you see this, remove SetID() in the following line : " + newObjects.id, context: transform);
-        ////newObjects.SetID(_newMazeobjs.id);
         StartCoroutine(newObjects.ClearAllObjs());
         return newObjects;
     }
-    protected void ChangeWallFormation(int _wallFormation, int _overlappingFormaption)
+    protected void ChangeObjectFormation(int _objectFormation, int _overlappingFormation)
     {
         for (int i = 0; i < MazeObjects.Count; i++)
         {
-            if (MazeObjects[i].transform.gameObject.activeSelf)
-                if (MazeObjects[i].IsOverlappingMode)
-                    MazeObjects[i].SetWallsEnable(_overlappingFormaption);
-                else
-                    MazeObjects[i].SetWallsEnable(_wallFormation);
+            if (!MazeObjects[i].transform.gameObject.activeSelf)
+                continue;
+            var objFormation = MazeObjects[i].IsOverlappingMode ? _overlappingFormation : _objectFormation;
+
+
+            MazeObjects[i].SetEnable(objFormation);
         }
     }
 }

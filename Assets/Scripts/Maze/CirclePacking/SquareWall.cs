@@ -7,10 +7,10 @@ public class SquareWall : WallBase, IMazeObjects
     public override IEnumerator ClearAllObjs()
     {
         ResetPrillars();
-        SetWallsEnable(0);
+        SetEnable(0);
         yield return null;
     }
-    public void SetWallsEnable(int _wallFormation)
+    public void SetEnable(int _wallFormation)
     {
         var isEnable = _wallFormation == 0 ? false : true;
 

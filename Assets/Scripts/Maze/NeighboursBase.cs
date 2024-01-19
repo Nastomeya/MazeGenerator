@@ -22,14 +22,14 @@ public abstract class NeighboursBase
     internal abstract void WallIncrement();
     internal abstract int ByWhichNeighbour(Transform curr, Transform next);
     internal abstract int GetNeighbourIndex(int _nextWallFormation);
-    internal abstract int OverlappingWallsReduction(int currWallFormation);
-    internal abstract int GetNextRemovalWallValue(int _removeWallFormationValue);
+    internal abstract int OverlappingObjectsReduction(int currWallFormation);
+    internal abstract int GetNextRemovalObjectValue(int _removeWallFormationValue);
     internal abstract int GetWallFormation();
     internal abstract void SetWallFormation(int _wallFormation);
     internal abstract int[] GetElements();
     protected int GetTotalFormationValue<T>(T _wallFormation) => Bitwise.GetSumOfEnumValues(_wallFormation);
     internal int GetAvaliableWalls() => avaliableWalls.Count - 1;
-    internal void RemoveCurrWall() => avaliableWalls.RemoveAt(wallIndex);
+    internal void RemoveCurrMazeObject() => avaliableWalls.RemoveAt(wallIndex);
     internal int GetRandomWall(StraightPathController backTrackingData)
     {
         int turns = avaliableWalls.Count - 1;
@@ -45,7 +45,7 @@ public abstract class NeighboursBase
     }
     protected int CheckFormationExistence(int nextIndex, int _currWallFormation, int removalWallFormation, int nextWallFormation)
     {
-        var neighbourHadIt = Bitwise.HasOneOfTheElement(tiles[nextIndex].currWallFormation, nextWallFormation);
+        var neighbourHadIt = Bitwise.HasOneOfTheElement(tiles[nextIndex].currObjectFormation, nextWallFormation);
 
         if (neighbourHadIt)
             _currWallFormation = Bitwise.Remove(_currWallFormation, removalWallFormation);

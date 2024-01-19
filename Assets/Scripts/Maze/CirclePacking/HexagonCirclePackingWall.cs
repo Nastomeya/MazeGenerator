@@ -9,7 +9,7 @@ public class HexagonCirclePackingWall : CirclePackingBaseForWall, IMazeObjects
     private readonly HexagonFormation botRightTopLeftPair = HexagonFormation.botRight | HexagonFormation.topLeft;
     private readonly List<int> bitwiseElements = new List<int>();
 
-    public override void SetWallsEnable(int _wallFormation)
+    public override void SetEnable(int _wallFormation)
     {
         var _isEnable = _wallFormation == 0 ? false : true;
         if (validObjects != null)

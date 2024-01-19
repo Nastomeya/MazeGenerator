@@ -21,7 +21,7 @@ public class NormalMaze : MazeBase
                 if (!tiles[nextIndex].isVisited)
                 {
                     stack.Push(currentTile);//STEP 2
-                    var formationId = currentTile.UpdateRemovalWallFormation(tiles[nextIndex]);//STEP 3
+                    var formationId = currentTile.UpdateRemovalObjectFormation(tiles[nextIndex]);//STEP 3
                     straightPathController.IdenticalRandomCheck(formationId);
                     currentTile = tiles[nextIndex];//STEP 4
                     break;
@@ -30,7 +30,7 @@ public class NormalMaze : MazeBase
                     nextIndex = -1;
             }
             if (nextIndex < 0)
-                currentTile.RemoveCurrWallFromList();
+                currentTile.RemoveCurrObjectFromList();
         }
 
         keepTracking = false;
@@ -45,7 +45,7 @@ public class NormalMaze : MazeBase
         else if (stack.Count > 0)
         {
             var nextTile = stack.Pop();
-            currentTile.BacktrackRemovalWallFormation(nextTile);
+            currentTile.BacktrackRemovalObjFormation(nextTile);
             currentTile = nextTile;
 
             if (trackedTileNumber > totalTileNum)//Stop tracking if it is the last tile.

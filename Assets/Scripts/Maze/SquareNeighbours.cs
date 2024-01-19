@@ -52,7 +52,7 @@ public class SquareNeighbours : NeighboursBase
 
         return nextIndex;
     }
-    internal override int OverlappingWallsReduction(int currWallFormation)
+    internal override int OverlappingObjectsReduction(int currWallFormation)
     {
         int topIndex = GetTopIndex();
         int rightIndex = GetRightIndex();
@@ -70,7 +70,7 @@ public class SquareNeighbours : NeighboursBase
 
         return currWallFormation;
     }
-    internal override int GetNextRemovalWallValue(int _removeWallFormationValue)
+    internal override int GetNextRemovalObjectValue(int _removeWallFormationValue)
     {
         int topBottomPairValue = (int)(SquareFormation.top | SquareFormation.bottom);
         int rightLeftPairValue = (int)(SquareFormation.right | SquareFormation.left);
