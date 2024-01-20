@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 
 [CustomEditor(typeof(BaseMaze))]
-public abstract class MazeBaseEditor : Editor
+public abstract class BaseMazeEditor : Editor
 {
     protected BaseMaze maze;
     private List<MazeObjsSetData> objectRawDatas;
@@ -22,19 +22,7 @@ public abstract class MazeBaseEditor : Editor
             return objectRawDatas;
         }
     }
-    //private List<Transform> allWallPrefabs;
-    //private string fileNamePath;
     protected abstract void OneTileByOneButtons();
-
-    //protected void Init()
-    //{
-    //    //if (!IsMazeSettingValid())
-    //    //    return;
-
-    //    //fileNamePath = maze.GetFileNameAndPath();
-    //    //maze.SetWallDataFromPrefabs();
-    //    //objectRawDatas = maze.MazeObjectSetting.ObjectDatas;
-    //}
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
@@ -77,38 +65,6 @@ public abstract class MazeBaseEditor : Editor
             objectRawDatas[i].SetActive(_isEnable);
         }
     }
-    //private void SaveButton()
-    //{
-    //    bool isSaveButton = GUILayout.Button("Save", GUILayout.Height(50));
-    //    if (isSaveButton)
-    //    {
-    //        var saveDataIsNeeded = false;
-    //        var oldWallTypes = maze.MazeObjectSetting.ObjectDatas;//shallow copy
-    //        //var oldWallTypes = maze.LoadData();//shallow copy
-    //        int i = 0;
-
-    //        foreach (var currData in objectRawDatas)
-    //        {
-    //            var hasFound = oldWallTypes.TryGetValue(currData.Key, out bool oldValue);
-    //            if (hasFound)
-    //            {
-    //                bool isDifferent = oldValue != currData.Value;
-    //                if (isDifferent)//found something new
-    //                {
-    //                    maze.TirggerToChangeWallTypes(currData.Key, currData.Value);
-    //                    saveDataIsNeeded = true;
-
-    //                    i++;
-    //                }
-    //            }
-    //        }
-    //        if (saveDataIsNeeded)
-    //        {
-    //            Utils.SaveDicToFile(objectRawDatas, fileNamePath);
-    //            maze.UpdateWallTypes(objectRawDatas);
-    //        }
-    //    }
-    //}
     protected void RearrangmentButtons()
     {
         if (GUILayout.Button("Display Index Num", GUILayout.Height(50)))

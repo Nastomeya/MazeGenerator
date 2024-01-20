@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [CustomEditor(typeof(SquareMaze))]
-public class SquareMazeEditor : MazeBaseEditor
+public class SquareMazeEditor : BaseMazeEditor
 {
     protected void Awake()
     {

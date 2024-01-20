@@ -29,6 +29,8 @@ public abstract class WallsDetector : MonoBehaviour
     {
         for (int i = 0; i < allRenderers.Count; i++)
         {
+            if (allRenderers[i] == null)
+                continue;
             allRenderers[i].enabled = _isEnable;
         }
     }

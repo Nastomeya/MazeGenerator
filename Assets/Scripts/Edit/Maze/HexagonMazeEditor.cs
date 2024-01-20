@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [CustomEditor(typeof(HexagonMaze))]
-public class HexagonMazeEditor : MazeBaseEditor
+public class HexagonMazeEditor : BaseMazeEditor
 {
     protected void Awake()
     {

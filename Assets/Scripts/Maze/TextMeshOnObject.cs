@@ -19,6 +19,11 @@ public class TextMeshOnObject : MonoBehaviour
     }
     internal void SetTextOnOff(bool _isOnOff)
     {
-        textMesh?.gameObject?.SetActive(_isOnOff);
+        if (textMesh == null)
+            return;
+        if (textMesh.gameObject == null)
+            return;
+
+        textMesh.gameObject.SetActive(_isOnOff);
     }
 }
