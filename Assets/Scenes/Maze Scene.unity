@@ -128,17 +128,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1004937729739789184, guid: 37e94cc3283ab084d8e9fe09ddeca62d, type: 3}
   m_PrefabInstance: {fileID: 423484277}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &129443856 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9105364657820504284, guid: e2a9e1369b698aa4ab704cd254c2ccdc, type: 3}
-  m_PrefabInstance: {fileID: 1434931107}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af5d674141e7e0543ae6fbf3385aa95a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &129443857 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3832677070674092112, guid: e2a9e1369b698aa4ab704cd254c2ccdc, type: 3}
@@ -176,8 +165,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 4
   height: 4
-  mazeObjectSetting: {fileID: 11400000, guid: 2209f54e86091924ea907aa9297936ce, type: 2}
   tileWithWallsPrefab: {fileID: 6968859332848823870, guid: 4d16d698d18b4ef46939f8fd8ccb3952, type: 3}
+  mazeObjectSetting: {fileID: 11400000, guid: 2209f54e86091924ea907aa9297936ce, type: 2}
   mark: {fileID: 89498881}
 --- !u!4 &343456132
 Transform:
@@ -238,12 +227,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992900635930329438caf08fade89b6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allWallPrefabs:
+  allMazeObjPrefabs:
   - {fileID: 6874908056291876395, guid: 22e4af12c00c33f499c120553eb50f79, type: 3}
   - {fileID: 3008582213250369310, guid: ea59cff602a06e34d98e2f00fb534135, type: 3}
   - {fileID: 5062167660794152110, guid: 3fd7605a36fbcb44693768199d971b8e, type: 3}
   tileShapes: 0
-  tileWithWallsPrefab: {fileID: 129443856}
+  tileWithMazeObjectSetsPrefab: {fileID: 1852871535}
 --- !u!4 &350766263
 Transform:
   m_ObjectHideFlags: 0
@@ -841,13 +830,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992900635930329438caf08fade89b6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allWallPrefabs:
+  allMazeObjPrefabs:
   - {fileID: 6874908056291876395, guid: 57519a0afe628f342887ab7788ca0fb5, type: 3}
   - {fileID: 9068584126950742277, guid: e511677fafe0f7642ae33fcbf664c72a, type: 3}
-  - {fileID: 5062167660794152110, guid: 0de5a76ef374b494d97c31e981e7ae8e, type: 3}
   - {fileID: 5062167660794152110, guid: d1eeef8cb5f974448a752cd01dde7bf7, type: 3}
+  - {fileID: 5062167660794152110, guid: 0de5a76ef374b494d97c31e981e7ae8e, type: 3}
   tileShapes: 1
-  tileWithWallsPrefab: {fileID: 1194176370}
+  tileWithMazeObjectSetsPrefab: {fileID: 1194176370}
 --- !u!4 &1047726424
 Transform:
   m_ObjectHideFlags: 0
@@ -1204,10 +1193,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de7a8ecb22ce80347b185c6bd9df8e4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 8
-  height: 8
-  mazeObjectSetting: {fileID: 11400000, guid: 1f69b69870d1b2e47bf03f38d9d2b98c, type: 2}
+  width: 4
+  height: 4
   tileWithWallsPrefab: {fileID: 6968859332848823870, guid: a58e98f59ecff6a46afee69950dc3b02, type: 3}
+  mazeObjectSetting: {fileID: 11400000, guid: 1f69b69870d1b2e47bf03f38d9d2b98c, type: 2}
   mark: {fileID: 8626794103573436460}
 --- !u!4 &1667427704
 Transform:
@@ -1248,11 +1237,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 20158769, guid: 563090f60584352479528a6fa6083201, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 993076510, guid: 563090f60584352479528a6fa6083201, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1022063884, guid: 563090f60584352479528a6fa6083201, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1341,7 +1330,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4265797192292771250, guid: 563090f60584352479528a6fa6083201, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 563090f60584352479528a6fa6083201, type: 3}
 --- !u!1 &1766373434
 GameObject:
@@ -1480,6 +1472,17 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1852871535 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9105364657820504284, guid: e2a9e1369b698aa4ab704cd254c2ccdc, type: 3}
+  m_PrefabInstance: {fileID: 1434931107}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af5d674141e7e0543ae6fbf3385aa95a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1901863570
 GameObject:
   m_ObjectHideFlags: 0

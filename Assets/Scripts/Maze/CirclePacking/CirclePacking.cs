@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CirclePacking : CirclePackingBaseForWall
+public class CirclePacking : BaseCirclePacking
 {
     [SerializeField] private Vector2 boundarySize;
 

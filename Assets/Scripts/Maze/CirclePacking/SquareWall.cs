@@ -1,23 +1,29 @@
 using System.Collections;
 using UnityEngine;
-public class SquareWall : WallBase, IMazeObjects
+public class SquareWall : BaseWall, IMazeObjects
 {
-    public bool IsOverlappingMode { get { return false; } }
     [SerializeField] private Transform top, right, bottom, left;
     public override IEnumerator ClearAllObjs()
     {
         ResetPrillars();
-        SetEnable(0);
+        SetMazeFormation(0);
         yield return null;
     }
-    public void SetEnable(int _wallFormation)
+    private bool isEnable = true;
+    public void SetEnble(bool _isEnable)
     {
-        var isEnable = _wallFormation == 0 ? false : true;
+        isEnable = _isEnable;
+    }
 
-        top.gameObject.SetActive(((int)SquareFormation.top & _wallFormation) > 0);
-        right.gameObject.SetActive(((int)SquareFormation.right & _wallFormation) > 0);
-        bottom.gameObject.SetActive(((int)SquareFormation.bottom & _wallFormation) > 0);
-        left.gameObject.SetActive(((int)SquareFormation.left & _wallFormation) > 0);
-        SetPrillarsActive(isEnable);
+    public void SetMazeFormation(int _objFormation)
+    {
+        if (!isEnable)
+            return;
+
+        top.gameObject.SetActive(((int)SquareFormation.top & _objFormation) > 0);
+        right.gameObject.SetActive(((int)SquareFormation.right & _objFormation) > 0);
+        bottom.gameObject.SetActive(((int)SquareFormation.bottom & _objFormation) > 0);
+        left.gameObject.SetActive(((int)SquareFormation.left & _objFormation) > 0);
+        SetPrillarsActive(_objFormation != 0);
     }
 }

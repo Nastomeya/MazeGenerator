@@ -5,17 +5,17 @@ public abstract class TileBase : MonoBehaviour
     [SerializeField] internal TrackText trackText;
     internal int Turns { get { return neighbours.GetAvaliableWalls(); } }
 
-    internal NeighboursBase neighbours;
+    internal BaseNeighbours neighbours;
     internal int index;
     internal bool isVisited = false;
 
-    protected MazeBase maze;
+    protected BaseMaze maze;
     protected int nextObjFormationID;
 
     private StoneFloor stoneFloor;
 
-    internal void SetMaze(MazeBase _maze) => maze = _maze;
-    internal void Init(int i, NeighboursBase _neighbours)//internal void Init(int _width, int _totalTileNum, List<TileWithWalls> _tiles, int i)
+    internal void SetMaze(BaseMaze _maze) => maze = _maze;
+    internal void Init(int i, BaseNeighbours _neighbours)//internal void Init(int _width, int _totalTileNum, List<TileWithWalls> _tiles, int i)
     {
         stoneFloor = trackText.GetComponent<StoneFloor>();
         index = i;

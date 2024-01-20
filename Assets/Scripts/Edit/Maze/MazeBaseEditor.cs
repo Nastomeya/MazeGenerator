@@ -3,10 +3,10 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-[CustomEditor(typeof(MazeBase))]
+[CustomEditor(typeof(BaseMaze))]
 public abstract class MazeBaseEditor : Editor
 {
-    protected MazeBase maze;
+    protected BaseMaze maze;
     private List<MazeObjsSetData> objectRawDatas;
     protected List<MazeObjsSetData> ObjectRawDatas
     {

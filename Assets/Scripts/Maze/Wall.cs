@@ -4,22 +4,18 @@ using UnityEngine;
 
 public class Wall : MonoBehaviour, IMazeElement
 {
-    internal Queue<Action> PillirJobs;
-    private void Awake()
-    {
-        PillirJobs = new Queue<Action>();
-    }
+    internal List<Action> DoJobsWhenDisable = new();
+
     private void OnDisable()
     {
-        if (PillirJobs == null)
+        if (DoJobsWhenDisable == null)
             return;
 
-        foreach (var doJob in PillirJobs)
+        foreach (var doJob in DoJobsWhenDisable)
         {
             doJob();
         }
-        if (PillirJobs.Count > 0)
-            PillirJobs.Dequeue();
-        //PillirJobs.Clear();
+
+        DoJobsWhenDisable.Clear();
     }
 }

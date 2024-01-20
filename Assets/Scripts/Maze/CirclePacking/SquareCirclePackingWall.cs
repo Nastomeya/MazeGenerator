@@ -1,27 +1,36 @@
 ﻿using DataExtensions;
 using UnityEngine;
 
-public class SquareCirclePackingWall : CirclePackingBaseForWall, IMazeObjects
+public class SquareCirclePackingWall : BaseCirclePacking, IMazeObjects
 {
     private readonly SquareFormation topBottomPair = SquareFormation.top | SquareFormation.bottom;
     private readonly SquareFormation rightLeftPair = SquareFormation.right | SquareFormation.left;
 
-    public override void SetEnable(int _wallFormation)
+    private bool isEnable = true;
+    public void SetEnble(bool _isEnable)
     {
-        var _isEnable = _wallFormation == 0 ? false : true;
-        if (validObjects != null)
+        //Reveal The Objects Or Not
+        var allValidObjects = validObjects.GetEnumerator();
+        while (allValidObjects.MoveNext())
         {
-            if (_isEnable)
-            {
-                SetEachWallEnable(_wallFormation);
-                return;
-            }
-
-            //Reveal The Walls Or Not
-            var allValidObjects = validObjects.GetEnumerator();
-            while (allValidObjects.MoveNext())
-                allValidObjects.Current.gameObject.SetActive(_isEnable);
+            allValidObjects.Current.gameObject.SetActive(_isEnable);
         }
+        isEnable = _isEnable;
+    }
+    public override void SetMazeFormation(int _objFormation)
+    {
+        if (validObjects == null)
+            return;
+        if (!isEnable)
+            return;
+
+        if (_objFormation != 0)
+        {
+            SetEachElementEnable(_objFormation);
+            return;
+        }
+
+        SetEnble(_objFormation != 0);
     }
     protected override void SetNumberOfObject(int _wallFormation)
     {

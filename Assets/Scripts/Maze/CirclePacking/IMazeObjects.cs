@@ -12,11 +12,10 @@ using UnityEngine;
 [SerializeField]
 public interface IMazeObjects
 {
-    public bool IsOverlappingMode { get; }//remove this later
-    public int id { get; }
+    public int ID { get; }
     public Transform transform { get; }
     public void SetID(int _newID);
-    public void SetHolderEnable(bool _isEnable);
-    public void SetEnable(int _objectFormation);
+    public void SetEnble(bool _isEnable);
+    public void SetMazeFormation(int _objectFormation);
     public IEnumerator ClearAllObjs();
 }

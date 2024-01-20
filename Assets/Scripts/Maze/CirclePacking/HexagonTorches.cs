@@ -2,21 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HexagonTorches : WallBase, IMazeObjects
+public class HexagonTorches : BaseMazeObject, IMazeObjects, IOverlapable
 {
-    public bool IsOverlappingMode { get { return true; } }
     [SerializeField] private Transform top, topRight, botRight, bottom, botLeft, topLeft;
     [SerializeField] private ObjectsSelectorSetting setting;
 
     private Dictionary<int, TorchData> torches = new();
     private List<int> avaliableIndexes;
     private TorchData lastTorch;
-    private bool ToBeEnable = false;
     private void Awake()
     {
         avaliableIndexes = new List<int>();
         lastTorch = new TorchData(null, 0);
-        ToBeEnable = setting.IsEnable();
 
         AddNewTorchData(0, new TorchData(top, (int)HexagonFormation.top));
         AddNewTorchData(1, new TorchData(topRight, (int)HexagonFormation.topRight));
@@ -25,48 +22,58 @@ public class HexagonTorches : WallBase, IMazeObjects
         AddNewTorchData(4, new TorchData(botLeft, (int)HexagonFormation.botLeft));
         AddNewTorchData(5, new TorchData(topLeft, (int)HexagonFormation.topLeft));
     }
+    private bool isEnable = true;
+    public void SetEnble(bool _isEnable)
+    {
+        isEnable = _isEnable;
+    }
+
     public override IEnumerator ClearAllObjs()
     {
         lastTorch = new TorchData(null, 0);
-        SetEnable(0);
+        SetMazeFormation(0);
         yield return null;
     }
-    public void SetEnable(int _overlappingFormaption)
+    public void SetMazeFormation(int _overlappingFormation)
     {
-        if (_overlappingFormaption < 1)
+        if (_overlappingFormation < 1)
         {
             for (int i = 0; i < torches.Count; i++)
-                torches[i].transform.gameObject.SetActive(false);
-        }
-        else
-        {
-            avaliableIndexes.Clear();
-
-            if (!ToBeEnable)
-                return;
-
-            //only even id to show
-            if (((int)HexagonFormation.top & _overlappingFormaption) > 0) avaliableIndexes.Add(0);
-            if (((int)HexagonFormation.topRight & _overlappingFormaption) > 0) avaliableIndexes.Add(1);
-            if (((int)HexagonFormation.botRight & _overlappingFormaption) > 0) avaliableIndexes.Add(2);
-            if (((int)HexagonFormation.bottom & _overlappingFormaption) > 0) avaliableIndexes.Add(3);
-            if (((int)HexagonFormation.botLeft & _overlappingFormaption) > 0) avaliableIndexes.Add(4);
-            if (((int)HexagonFormation.topLeft & _overlappingFormaption) > 0) avaliableIndexes.Add(5);
-
-            if (avaliableIndexes.Count < 1)
-                return;
-
-            if ((lastTorch.transform != null && (lastTorch.position & _overlappingFormaption) == 0) || lastTorch.transform == null)
             {
-                var randomIndex = Utils.RandomRange(0, avaliableIndexes.Count);
-                var selectedIndex = avaliableIndexes[randomIndex];
-
-                if (lastTorch.transform != null)
-                    lastTorch.transform.gameObject.SetActive(false);
-
-                torches[selectedIndex].transform.gameObject.SetActive(true);
-                lastTorch = torches[selectedIndex];
+                torches[i].transform.gameObject.SetActive(false);
             }
+            return;
+        }
+
+        if (!isEnable)
+            return;
+
+        avaliableIndexes.Clear();
+
+        if (lastTorch.transform != null)
+            lastTorch.transform.gameObject.SetActive(false);
+
+        if (!setting.IsEnable())
+            return;
+
+        //only even id to show
+        if (((int)HexagonFormation.top & _overlappingFormation) > 0) avaliableIndexes.Add(0);
+        if (((int)HexagonFormation.topRight & _overlappingFormation) > 0) avaliableIndexes.Add(1);
+        if (((int)HexagonFormation.botRight & _overlappingFormation) > 0) avaliableIndexes.Add(2);
+        if (((int)HexagonFormation.bottom & _overlappingFormation) > 0) avaliableIndexes.Add(3);
+        if (((int)HexagonFormation.botLeft & _overlappingFormation) > 0) avaliableIndexes.Add(4);
+        if (((int)HexagonFormation.topLeft & _overlappingFormation) > 0) avaliableIndexes.Add(5);
+
+        if (avaliableIndexes.Count < 1)
+            return;
+        
+        if ((lastTorch.transform != null && (lastTorch.position & _overlappingFormation) == 0) || lastTorch.transform == null)
+        {
+            var randomIndex = Utils.RandomRange(0, avaliableIndexes.Count);
+            var selectedIndex = avaliableIndexes[randomIndex];
+
+            torches[selectedIndex].transform.gameObject.SetActive(true);
+            lastTorch = torches[selectedIndex];
         }
     }
 

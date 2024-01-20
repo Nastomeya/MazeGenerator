@@ -3,7 +3,7 @@ using MathCalculation;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HexagonNeighbours : NeighboursBase
+public class HexagonNeighbours : BaseNeighbours
 {
     private HexagonFormation wallFormation;
     internal HexagonNeighbours(int _index, int _width, int _numOfTotalTile, List<TileWithMazeObjectSets> _tiles) : base(_index, _width, _numOfTotalTile, _tiles)
@@ -11,12 +11,12 @@ public class HexagonNeighbours : NeighboursBase
         wallFormation = new HexagonFormation();
         totalFormationValue = GetTotalFormationValue(wallFormation);
     }
-    internal override int GetWallFormation() => (int)wallFormation;
-    internal override void SetWallFormation(int _wallFormation) => wallFormation = (HexagonFormation)_wallFormation;
+    internal override int GetMazeFormation() => (int)wallFormation;
+    internal override void SetMazeFormation(int _wallFormation) => wallFormation = (HexagonFormation)_wallFormation;
 
     internal override void InitFormation() => wallFormation = HexagonFormation.top;
     internal override int[] GetElements() => Bitwise.GetElements(wallFormation);
-    internal override void WallIncrement()
+    internal override void Increment()
     {
         wallFormation = (HexagonFormation)((int)(wallFormation + 1) % totalFormationValue);
         if (wallFormation == 0)

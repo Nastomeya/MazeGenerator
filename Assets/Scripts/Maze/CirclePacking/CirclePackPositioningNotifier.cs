@@ -6,13 +6,13 @@ using UnityEngine;
 public class CirclePackPositioningNotifier : MonoBehaviour
 {
     internal Action<List<UnitPositionOnWall>> OnTileAvaliable = delegate { };
-    private CirclePackingBaseForWall circlePacking;
+    private BaseCirclePacking circlePacking;
     private List<UnitPositionOnWall> currAvaliablePostions;
     internal List<UnitPositionOnWall> GetPositions() => currAvaliablePostions;
 
     private void Awake()
     {
-        circlePacking = GetComponent<CirclePackingBaseForWall>();
+        circlePacking = GetComponent<BaseCirclePacking>();
         currAvaliablePostions = new List<UnitPositionOnWall>();
     }
     private void OnTriggerEnter(Collider other)

@@ -397,9 +397,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8391774552740870833}
   - component: {fileID: 8859741097551634870}
-  - component: {fileID: 2871702300000700189}
   - component: {fileID: 5358307276443550208}
   - component: {fileID: -4553799288060537475}
+  - component: {fileID: 1271179346500079226}
   m_Layer: 0
   m_Name: MCastle_MasonryPillar_01_Hex
   m_TagString: Untagged
@@ -452,18 +452,6 @@ LODGroup:
     - renderer: {fileID: 8925635954679306399}
     - renderer: {fileID: 3347618371591723596}
   m_Enabled: 1
---- !u!114 &2871702300000700189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9222613956257728662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22264c699bdd49341a852e7683549560, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!136 &5358307276443550208
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -514,3 +502,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &1271179346500079226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9222613956257728662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1fe61bbb4b46f548b974ffa44bee5c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

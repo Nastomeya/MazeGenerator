@@ -30,8 +30,11 @@ public class TileWithMazeObjectSets : MazeObjsController
         var needToBeShown = ShownOnlyBeenVisitedOrFormationBeenSet(_isEnable);
 
         int _objFormation = (!needToBeShown) ? 0 : currObjectFormation;
-        MazeObjects[objectSetIndex].SetHolderEnable(needToBeShown);
-        MazeObjects[objectSetIndex].SetEnable(_objFormation);
+
+        if(MazeObjects[objectSetIndex] is BaseWall wall)
+            wall.ActivateFunction(needToBeShown);
+
+        MazeObjects[objectSetIndex].SetMazeFormation(_objFormation);
     }
     internal void RemoveCurrObjectFromList() => neighbours.RemoveCurrMazeObject();
     internal void BacktrackRemovalObjFormation(TileWithMazeObjectSets nextTile)

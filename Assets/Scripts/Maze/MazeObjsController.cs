@@ -11,18 +11,22 @@ public class MazeObjsController : TileBase
     }
     protected IMazeObjects FindMazeObjectWithID(int _id)
     {
-        IMazeObjects newObjFound = MazeObjects.Find(x => x.id == _id);
+        IMazeObjects newObjFound = MazeObjects.Find(x => x.ID == _id);
         return newObjFound;
     }
     protected void CreateObjects(List<IMazeObjects> enabledMazeObjectList)
     {
         for (int i = 0; i < enabledMazeObjectList.Count; i++)
         {
-            var mazeObjHasBeenFound = FindMazeObjectWithID(enabledMazeObjectList[i].id);
+            var mazeObjHasBeenFound = FindMazeObjectWithID(enabledMazeObjectList[i].ID);
             if (mazeObjHasBeenFound == null)
+            {
                 AddNewMazeObjectType(enabledMazeObjectList[i]);
-            else
-                mazeObjHasBeenFound.SetHolderEnable(maze.MazeObjectSetting.ObjectDatas[enabledMazeObjectList[i].id].ActiveSelf);
+                continue;
+            }
+
+            if (mazeObjHasBeenFound is BaseWall wall)
+                wall.ActivateFunction(maze.MazeObjectSetting.ObjectDatas[enabledMazeObjectList[i].ID].ActiveSelf);
         }
     }
     protected void AddNewMazeObjectType(IMazeObjects _newObjects)
@@ -44,10 +48,9 @@ public class MazeObjsController : TileBase
         {
             if (!MazeObjects[i].transform.gameObject.activeSelf)
                 continue;
-            var objFormation = MazeObjects[i].IsOverlappingMode ? _overlappingFormation : _objectFormation;
 
-
-            MazeObjects[i].SetEnable(objFormation);
+            var objFormation = MazeObjects[i] is IOverlapable ? _overlappingFormation : _objectFormation;
+            MazeObjects[i].SetMazeFormation(objFormation);
         }
     }
 }

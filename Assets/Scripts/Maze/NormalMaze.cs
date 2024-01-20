@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class NormalMaze : MazeBase
+public class NormalMaze : BaseMaze
 {
     //public override string GetFileNameAndPath()
     //{

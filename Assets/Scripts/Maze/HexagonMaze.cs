@@ -1,7 +1,7 @@
 ﻿using MathCalculation;
 using UnityEngine;
 
-public class HexagonMaze : MazeBase
+public class HexagonMaze : BaseMaze
 {
     /// <summary>Please check the scale size of original prefab, which should be 0.34f. But it's now 0.68f, so the ratio should be 2</summary>    
     private readonly int tileSizeRatio = 2;//1

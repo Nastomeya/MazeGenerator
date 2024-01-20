@@ -1,49 +1,57 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WallsDetector : MonoBehaviour
+public abstract class WallsDetector : MonoBehaviour
 {
     private List<Renderer> allRenderers;
+    protected abstract int WallMaxCount { get; }
+    private static int currWallCount = 0;
     private void Awake()
     {
         ResetWalls();
-        StartCoroutine(SetEnable(false));
+        SetEnable(false);
     }
     private void OnTriggerEnter(Collider other)
     {
         var wall = other.gameObject.GetComponent<Wall>();
-        StartCoroutine(TriggerPillirs(wall));
+        if (wall == null)
+            return;
+
+        if (currWallCount > WallMaxCount)
+            currWallCount = WallMaxCount;
+        else
+            currWallCount++;
+
+        SetEnable(true);
+        AssignJobsForWall(wall);
     }
-    private IEnumerator SetEnable(bool _isEnable)
+    private void SetEnable(bool _isEnable)
     {
         for (int i = 0; i < allRenderers.Count; i++)
         {
-            yield return new WaitForEndOfFrame();
             allRenderers[i].enabled = _isEnable;
         }
     }
-
-    private IEnumerator TriggerPillirs(Wall _wall)
+    private void AssignJobsForWall(Wall _wall)
     {
-        if (_wall == null)
-            yield break;
-        if (_wall.PillirJobs == null)
-            yield break;
-
-        _wall.PillirJobs.Enqueue
+        _wall.DoJobsWhenDisable.Add
         (
-            () =>
-            {
-                if (gameObject.activeSelf)
-                    SetEnable(false);//StartCoroutine(SetEnable(false));
-            }
+            () => SetDisable(ref currWallCount)
         );
-        yield return new WaitForEndOfFrame();
-        StartCoroutine(SetEnable(true));
     }
+    private void SetDisable(ref int _currWallCount)
+    {
+        _currWallCount--;
+        if (_currWallCount > 0)
+            return;
+
+        _currWallCount = 0;
+        SetEnable(false);
+    }
+
     internal void ResetWalls()
     {
         allRenderers = new List<Renderer>(GetComponentsInChildren<Renderer>(true));
+        currWallCount = 0;
     }
 }

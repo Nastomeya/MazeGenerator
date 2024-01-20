@@ -4,90 +4,115 @@ using UnityEngine;
 [RequireComponent(typeof(RevealObjectController))]
 public class SingleTileInDebugMode : MonoBehaviour
 {
-    [SerializeField] internal List<Transform> allWallPrefabs;//Don't change it back to readonly
+    [SerializeField] internal List<Transform> allMazeObjPrefabs;//Don't change it back to readonly
     [SerializeField] private TileShapes tileShapes;
-    [SerializeField] private TileWithMazeObjectSets tileWithWallsPrefab;//Don't change it back to readonly
+    [SerializeField] private TileWithMazeObjectSets tileWithMazeObjectSetsPrefab;//Don't change it back to readonly
 
-    private List<IMazeObjects> allWalls;
-    private NeighboursBase neighbours;
+    private List<IMazeObjects> allObjects;
+    public List<IMazeObjects> MazeObjects => allObjects;
+
+    private BaseNeighbours neighbours;
 
     private void Awake()
     {
-        SetWallDataFromPrefabs();
-        tileWithWallsPrefab.InitObjectsIdentities(allWalls);
+        InitMazeDataFromPrefabs();
+        tileWithMazeObjectSetsPrefab.InitObjectsIdentities(allObjects);
     }
-    private void Start() => tileWithWallsPrefab.trackText.Init();
+    private void Start() => tileWithMazeObjectSetsPrefab.trackText.Init();
 
-    public int GetWallFormation() => neighbours.GetWallFormation();
+    public int GetMazeFormation() => neighbours.GetMazeFormation();
     public void InitTile()
     {
-        if (tileShapes == TileShapes.Square)
-            neighbours = new SquareNeighbours(0, 0, 0, null);
+        neighbours = tileShapes == TileShapes.Square ? new SquareNeighbours(0, 0, 0, null) : new HexagonNeighbours(0, 0, 0, null);
+
+        if (neighbours == null)
+            return;
+
+        neighbours.InitFormation();
+        EnableTheMazeObjs();
+    }
+    private void InitMazeDataFromPrefabs()
+    {
+        allObjects = new List<IMazeObjects>();
+
+        Debug.Log("InitMazeDataFromPrefabs " + allMazeObjPrefabs.Count);
+
+
+        for (int i = 0; i < allMazeObjPrefabs.Count; i++)
+        {
+            var currObject = allMazeObjPrefabs[i].GetComponent<IMazeObjects>();
+            currObject.SetID(i);
+            allObjects.Add(currObject);
+        }
+    }
+
+    public void ChangeMazeFormation(int _currFormation = 0)
+    {
+        var isObjectExist = IsTheMazeObjPrefabExist();
+        if (!isObjectExist)
+            return;
+
+        if (_currFormation > 0)
+            neighbours.SetMazeFormation(_currFormation);
         else
-            neighbours = new HexagonNeighbours(0, 0, 0, null);
-        if (neighbours != null)
+            neighbours.Increment();
+        EnableTheMazeObjs();
+    }
+    public void EnableTheMazeObject(int _objIndex, bool _isEnable)
+    {
+        if (!IsTheMazeObjPrefabExist(_objIndex))
+            return;
+
+        var currMazeFormation = neighbours.GetMazeFormation();
+        int _mazeFormation = (!_isEnable) ? 0 : currMazeFormation;
+
+        if (tileWithMazeObjectSetsPrefab.MazeObjects[_objIndex] is BaseWall wall)
+            wall.ActivateFunction(_isEnable);
+        tileWithMazeObjectSetsPrefab.MazeObjects[_objIndex].SetEnble(_isEnable);
+        tileWithMazeObjectSetsPrefab.MazeObjects[_objIndex].SetMazeFormation(_mazeFormation);
+    }
+    private void EnableTheMazeObject(int _objIndex)
+    {
+        if (!IsTheMazeObjPrefabExist(_objIndex))
+            return;
+
+        int currMazeFormation = neighbours.GetMazeFormation();
+        var _isEnable = tileWithMazeObjectSetsPrefab.MazeObjects[_objIndex].transform.gameObject.activeSelf;
+        if (_isEnable)
+            tileWithMazeObjectSetsPrefab.MazeObjects[_objIndex].SetMazeFormation(currMazeFormation);
+    }
+    private void EnableTheMazeObjs()
+    {
+        if (tileWithMazeObjectSetsPrefab.MazeObjects == null)
+            return;
+
+        for (int i = 0; i < tileWithMazeObjectSetsPrefab.MazeObjects.Count; i++)
         {
-            neighbours.InitFormation();
-            EnableTheWalls();
+            EnableTheMazeObject(i);
         }
     }
-    public void SetWallDataFromPrefabs()
+    private bool IsTheMazeObjPrefabExist(int _index)
     {
-        allWalls = new List<IMazeObjects>();
+        if (!IsTheMazeObjPrefabExist())
+            return false;
+        if (_index < 0)
+            return false;
+        if (_index > (tileWithMazeObjectSetsPrefab.MazeObjects.Count - 1))
+            return false;
+        if (tileWithMazeObjectSetsPrefab.MazeObjects[_index] == null)
+            return false;
 
-        Debug.Log("SetWallDataFromPrefabs " + allWallPrefabs.Count);
-
-
-        for (int i = 0; i < allWallPrefabs.Count; i++)
-        {
-            var currWall = allWallPrefabs[i].GetComponent<IMazeObjects>();
-            currWall.SetID(i);
-            allWalls.Add(currWall);
-        }
+        return true;
     }
-    public List<IMazeObjects> GetWallTypes() => allWalls;
-
-    public void ChangeWallFormation(int _currFormation = 0)
+    private bool IsTheMazeObjPrefabExist()
     {
-        var isWallExist = CheckTileExistence();
-        Debug.Log("isWallExist  " + isWallExist);
-        if (isWallExist)
-        {
-            if (_currFormation > 0)
-                neighbours.SetWallFormation(_currFormation);
-            else
-                neighbours.WallIncrement();
-            EnableTheWalls();
-        }
-    }
-    public void EnableTheWall(int _wallIndex, bool _isEnable)
-    {
-        if (CheckTileExistence())
-        {
-            var currWallFormation = neighbours.GetWallFormation();
-            int _wallFormation = (!_isEnable) ? 0 : currWallFormation;
+        if (tileWithMazeObjectSetsPrefab.MazeObjects == null)
+            return false;
+        if (tileWithMazeObjectSetsPrefab.MazeObjects.Count < 1)
+            return false;
 
-            tileWithWallsPrefab.MazeObjects[_wallIndex].SetHolderEnable(_isEnable);
-            tileWithWallsPrefab.MazeObjects[_wallIndex].SetEnable(_wallFormation);
-        }
+        return true;
     }
-    private void EnableTheWall(int _wallIndex)
-    {
-        if (CheckTileExistence())
-        {
-            int currWallFormation = neighbours.GetWallFormation();
-            var _isEnable = tileWithWallsPrefab.MazeObjects[_wallIndex].transform.gameObject.activeSelf;
-            if (_isEnable)
-                tileWithWallsPrefab.MazeObjects[_wallIndex].SetEnable(currWallFormation);
-        }
-    }
-    private void EnableTheWalls()
-    {
-        if (tileWithWallsPrefab.MazeObjects != null)
-            for (int i = 0; i < tileWithWallsPrefab.MazeObjects.Count; i++)
-                EnableTheWall(i);
-    }
-    private bool CheckTileExistence() => tileWithWallsPrefab.MazeObjects != null && tileWithWallsPrefab.MazeObjects.Count > 0;
 }
 public enum TileShapes
 {

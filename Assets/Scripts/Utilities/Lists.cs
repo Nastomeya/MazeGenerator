@@ -20,7 +20,7 @@ namespace DataExtensions
         }
         public static int FindIndex(List<IMazeObjects> allDataInList, IMazeObjects data)
         {
-            int index = allDataInList.FindIndex(x => x.id == data.id);
+            int index = allDataInList.FindIndex(x => x.ID == data.ID);
             //for (int i = 0; i < allDataInList.Count; i++)
             //{
             //    UnityEngine.Debug.Log("<color=red>   id:  " + allDataInList[i].id + "  </color>     !!!  "+ data.id);

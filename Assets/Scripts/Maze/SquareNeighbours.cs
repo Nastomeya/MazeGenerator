@@ -3,7 +3,7 @@ using MathCalculation;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SquareNeighbours : NeighboursBase
+public class SquareNeighbours : BaseNeighbours
 {
     private SquareFormation wallFormation;
     internal SquareNeighbours(int _index, int _width, int _numOfTotalTile, List<TileWithMazeObjectSets> _tiles) : base(_index, _width, _numOfTotalTile, _tiles)
@@ -11,12 +11,12 @@ public class SquareNeighbours : NeighboursBase
         wallFormation = new SquareFormation();
         totalFormationValue = GetTotalFormationValue(wallFormation);
     }
-    internal override int GetWallFormation() => (int)wallFormation;
-    internal override void SetWallFormation(int _wallFormation) => wallFormation = (SquareFormation)_wallFormation;
+    internal override int GetMazeFormation() => (int)wallFormation;
+    internal override void SetMazeFormation(int _wallFormation) => wallFormation = (SquareFormation)_wallFormation;
 
     internal override void InitFormation() => wallFormation = SquareFormation.top;
     internal override int[] GetElements() => Bitwise.GetElements(wallFormation);
-    internal override void WallIncrement()
+    internal override void Increment()
     {
         wallFormation = (SquareFormation)((int)(wallFormation + 1) % totalFormationValue);//wallFormation++;//
         if (wallFormation == 0)

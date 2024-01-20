@@ -9,12 +9,12 @@ public class SingleTileInDebugModeEditor : Editor
     private bool[] enableButtons;
     private List<IMazeObjects> wallTypes;
     private SingleTileInDebugMode singleTileInDebugMode;
-    private string wallFormation;
+    private string objectFormation;
     private void Awake()
     {
         singleTileInDebugMode = (SingleTileInDebugMode)target;
         singleTileInDebugMode.InitTile();
-        wallTypes = singleTileInDebugMode.GetWallTypes();
+        wallTypes = singleTileInDebugMode.MazeObjects;
 
         if (wallTypes != null && enableButtons == null)
         {
@@ -22,7 +22,7 @@ public class SingleTileInDebugModeEditor : Editor
             for (int i = 0; i < enableButtons.Length; i++)
                 enableButtons[i] = false;
 
-            wallFormation = singleTileInDebugMode.GetWallFormation().ToString();
+            objectFormation = singleTileInDebugMode.GetMazeFormation().ToString();
         }
     }
     public override void OnInspectorGUI()
@@ -63,36 +63,34 @@ public class SingleTileInDebugModeEditor : Editor
 
         ///////////////////////////////////////////////////////////
         GUI.backgroundColor = Color.green;
-        wallFormation = EditorGUILayout.TextField("Manually Change: ", wallFormation);
+        objectFormation = EditorGUILayout.TextField("Manually Change: ", objectFormation);
         Action changeWallJob = () =>
         {
-            singleTileInDebugMode.ChangeWallFormation(int.Parse(wallFormation));
+            singleTileInDebugMode.ChangeMazeFormation(int.Parse(objectFormation));
         };
         GenerateButton("Enter To Change", changeWallJob);
     }
     private void ChangeToNextWall()
     {
-        Debug.Log("Enter To Change " + wallFormation);
-
-        singleTileInDebugMode.ChangeWallFormation();
-        wallFormation = singleTileInDebugMode.GetWallFormation().ToString();
+        singleTileInDebugMode.ChangeMazeFormation();
+        objectFormation = singleTileInDebugMode.GetMazeFormation().ToString();
     }
     private void ProceedingHideAndShowButton(int index, GUIStyle style, bool isHidden)
     {
         string buttonName;
-        bool isWallShown;
+        bool isObjetShown;
 
         if (isHidden)
         {
             GUI.enabled = !enableButtons[index];
             buttonName = "Hide";
-            isWallShown = false;
+            isObjetShown = false;
         }
         else
         {
             GUI.enabled = enableButtons[index];
             buttonName = "Show";
-            isWallShown = true;
+            isObjetShown = true;
         }
 
         if (GUI.enabled)
@@ -108,7 +106,7 @@ public class SingleTileInDebugModeEditor : Editor
 
         Action doJob = () =>
         {
-            singleTileInDebugMode.EnableTheWall(index, isWallShown);
+            singleTileInDebugMode.EnableTheMazeObject(index, isObjetShown);
             enableButtons[index] = isHidden;
         };
         GenerateButton(buttonName, doJob, style);

@@ -1,21 +1,25 @@
 using System.Collections;
 using UnityEngine;
 
-public class HexagonWall : WallBase, IMazeObjects
+public class HexagonWall : BaseWall, IMazeObjects
 {
-    public bool IsOverlappingMode { get { return false; } }
-
     [SerializeField] private Transform top, topRight, botRight, bottom, botLeft, topLeft;
     public override IEnumerator ClearAllObjs()
     {
         ResetPrillars();
-        SetEnable();
+        SetMazeFormation();
         yield return null;
 
     }
-    public void SetEnable(int _wallFormation = 0)
+    private bool isEnable = true;
+    public void SetEnble(bool _isEnable)
     {
-        var isEnable = _wallFormation == 0 ? false : true;
+        isEnable = _isEnable;
+    }
+    public void SetMazeFormation(int _wallFormation = 0)
+    {
+        if (!isEnable)
+            return;
 
         top.gameObject.SetActive(((int)HexagonFormation.top & _wallFormation) > 0);
         topRight.gameObject.SetActive(((int)HexagonFormation.topRight & _wallFormation) > 0);
@@ -24,6 +28,6 @@ public class HexagonWall : WallBase, IMazeObjects
         botLeft.gameObject.SetActive(((int)HexagonFormation.botLeft & _wallFormation) > 0);
         topLeft.gameObject.SetActive(((int)HexagonFormation.topLeft & _wallFormation) > 0);
 
-        SetPrillarsActive(isEnable);
+        SetPrillarsActive(_wallFormation != 0);
     }
 }
