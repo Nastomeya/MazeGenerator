@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class TileBase : MonoBehaviour
+public abstract class BaseTile : MonoBehaviour
 {
     [SerializeField] internal TrackText trackText;
     internal int Turns { get { return neighbours.GetAvaliableWalls(); } }

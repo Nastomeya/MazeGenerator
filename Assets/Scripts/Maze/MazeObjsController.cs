@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
-public class MazeObjsController : TileBase
+public class MazeObjsController : BaseTile
 {
     internal List<IMazeObjects> MazeObjects { get; private set; }
     internal void InitObjectsIdentities(List<IMazeObjects> _objs)

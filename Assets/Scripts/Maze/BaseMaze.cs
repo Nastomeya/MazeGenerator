@@ -9,13 +9,8 @@ public abstract class BaseMaze : MonoBehaviour
     [SerializeField] private MazeObjectSettings mazeObjectSetting;
     [SerializeField] private Transform mark;
 
-    internal MazeObjectSettings MazeObjectSetting
-    {
-        get
-        {
-            return mazeObjectSetting;
-        }
-    }
+    internal MazeObjectSettings MazeObjectSetting => mazeObjectSetting;
+
     private bool isNotFinished, loopThrough = false;
 
     protected List<TileWithMazeObjectSets> tiles;
@@ -25,7 +20,6 @@ public abstract class BaseMaze : MonoBehaviour
     protected StraightPathController straightPathController;
     protected bool keepTracking;
     protected bool isShownInIndex = false;
-
     protected Vector2 offset;
     protected BaseNeighbours currNeighbours;
 
@@ -33,7 +27,7 @@ public abstract class BaseMaze : MonoBehaviour
     internal void InitialMaze()
     {
         SetWallDataFromPrefabs();
-        ResetAll();
+        DestoryTiles();
         InitTiles();
         SetupFristTile();
         BacktrackPath();
@@ -44,13 +38,13 @@ public abstract class BaseMaze : MonoBehaviour
     public void OnNextTile() => isNotFinished = false;
     public void OnLoopThrough() => loopThrough = true;
     public bool GetLoopThrough() => !loopThrough;
-    public void ResetTiles()
-    {
-        InitTiles();
-        SetupFristTile();
-        BacktrackPath();
-    }    
-    private void ResetAll()
+    //public void ResetTiles()
+    //{
+    //    InitTiles();
+    //    SetupFristTile();
+    //    BacktrackPath();
+    //}    
+    private void DestoryTiles()//should be using the pool technique instead.
     {
         if (tiles == null || tiles.Count == 0)
             return;
@@ -151,14 +145,14 @@ public abstract class BaseMaze : MonoBehaviour
     private void SetMarkPosition(Vector3 targetPosition) => mark.transform.position = targetPosition.With(y: mark.transform.position.y);
     protected void BacktrackPath() => StartCoroutine(BacktrackingPath());//while loop
 
-    public void TirggerToChangeWallTypes(int _id, bool _isEnable)
-    {
-        if (tiles != null)
-        {
-            for (int i = 0; i < tiles.Count; i++)
-                tiles[i].EanbleMazeObjectSetIfExist(_id, _isEnable);
-        }
-    }
+    //public void TirggerToChangeWallTypes(int _id, bool _isEnable)
+    //{
+    //    if (tiles != null)
+    //    {
+    //        for (int i = 0; i < tiles.Count; i++)
+    //            tiles[i].EanbleMazeObjectSetIfExist(_id, _isEnable);
+    //    }
+    //}
     protected void SetVisited(TileWithMazeObjectSets _tile)
     {
         if (!_tile.isVisited)
@@ -178,7 +172,7 @@ public abstract class BaseMaze : MonoBehaviour
         SetupFristTile();
         BacktrackPath();
     }
-      private void SetupFristTile()
+    private void SetupFristTile()
     {
         var initialIndex = Utils.RandomRange(0, totalTileNum);
         currentTile = tiles[initialIndex];
