@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class SquareMaze : BaseMaze
 {
-    //public override string GetFileNameAndPath() => GetFilePath() + "/squareMazeWallData.txt";
     protected override void CreateANewTile(ref int index, int y, int x)
     {
         var newTile = Instantiate(tileWithWallsPrefab);

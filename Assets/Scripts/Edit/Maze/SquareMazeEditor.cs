@@ -6,6 +6,9 @@ public class SquareMazeEditor : BaseMazeEditor
 {
     protected void Awake()
     {
+        if (!Application.isPlaying)
+            return;
+
         maze = (SquareMaze)target;
         ObjectRawDatas.ToString();
     }
