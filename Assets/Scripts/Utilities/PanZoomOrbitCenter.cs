@@ -7,7 +7,7 @@ public class PanZoomOrbitCenter : MonoBehaviour
     [SerializeField] private float rotationSpeed = 250.0f;//500.0f;
     [SerializeField] private float zoomScale = 5.0f;
     [SerializeField] private float zoomMin = 0.5f;
-    [SerializeField] private float zoomMax = 100.0f;//16f;
+    [SerializeField] private float zoomMax = 16f;//100.0f;//
 
     private Camera currCamera;
     private Vector3 mouseWorldPosStart;

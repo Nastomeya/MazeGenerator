@@ -27,6 +27,7 @@ public abstract class BaseMaze : MonoBehaviour
     internal void InitialMaze()
     {
         SetWallDataFromPrefabs();
+        OnButtonToResetTiles();
         DestoryTiles();
         InitTiles();
         SetupFristTile();
@@ -38,12 +39,7 @@ public abstract class BaseMaze : MonoBehaviour
     public void OnNextTile() => isNotFinished = false;
     public void OnLoopThrough() => loopThrough = true;
     public bool GetLoopThrough() => !loopThrough;
-    //public void ResetTiles()
-    //{
-    //    InitTiles();
-    //    SetupFristTile();
-    //    BacktrackPath();
-    //}    
+
     private void DestoryTiles()//should be using the pool technique instead.
     {
         if (tiles == null || tiles.Count == 0)
@@ -84,7 +80,9 @@ public abstract class BaseMaze : MonoBehaviour
         for (int y = 0; y < height; y++)
         {
             for (int x = 0; x < width; x++)
+            {
                 CreateANewTile(ref index, y, x);
+            }
         }
     }
 
@@ -145,14 +143,6 @@ public abstract class BaseMaze : MonoBehaviour
     private void SetMarkPosition(Vector3 targetPosition) => mark.transform.position = targetPosition.With(y: mark.transform.position.y);
     protected void BacktrackPath() => StartCoroutine(BacktrackingPath());//while loop
 
-    //public void TirggerToChangeWallTypes(int _id, bool _isEnable)
-    //{
-    //    if (tiles != null)
-    //    {
-    //        for (int i = 0; i < tiles.Count; i++)
-    //            tiles[i].EanbleMazeObjectSetIfExist(_id, _isEnable);
-    //    }
-    //}
     protected void SetVisited(TileWithMazeObjectSets _tile)
     {
         if (!_tile.isVisited)
@@ -184,7 +174,12 @@ public abstract class BaseMaze : MonoBehaviour
     }
     private void OnButtonToResetTiles()
     {
+        if (tiles == null)
+            return;
+
         for (int i = 0; i < tiles.Count; i++)
+        {
             tiles[i].ResetTile(isShownInIndex);
+        }
     }
 }

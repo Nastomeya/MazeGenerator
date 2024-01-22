@@ -5,10 +5,6 @@ using UnityEngine;
 public abstract class BaseCirclePacking : BaseMazeObject
 {
     [SerializeField] internal List<ObjectBase> objectPrefabs;
-#if UNITY_EDITOR
-    [SerializeField] private List<string> objectNames;//remove it later!
-#endif
-
     [SerializeField] protected CirclePackingSetting setting;
 
     internal Quaternion objectRotation;
@@ -19,32 +15,25 @@ public abstract class BaseCirclePacking : BaseMazeObject
     protected virtual void Awake()
     {
         validObjects = new HashSet<ObjectBase>();
-#if UNITY_EDITOR
-        objectNames = new List<string>();
-#endif
         objectRotation = Quaternion.identity;
     }
-    internal HashSet<ObjectBase> GetPackingObjects() => validObjects;//remove it later!!
     public override IEnumerator ClearAllObjs()
     {
-        if (validObjects != null)
-        {
-            var allValidObjects = validObjects.GetEnumerator();
+        if (validObjects == null)
+            yield break;
 
-            while (allValidObjects.MoveNext())
-            {
-                allValidObjects.Current.transform.SetPositionAndRotation(Vector3.zero.With(y: allValidObjects.Current.transform.position.y), Quaternion.identity);
-                allValidObjects.Current.UnsubscribedToOnDisplayOnOff();
-                allValidObjects.Current.ReturnToPool();
-                allValidObjects.Current.gameObject.SetActive(false);
-            }
-            objectCount = 0;
-            validObjects.Clear();
-#if UNITY_EDITOR
-            objectNames.Clear();
-#endif
-            yield return new WaitUntil(() => validObjects.Count == 0);
+        var allValidObjects = validObjects.GetEnumerator();
+        while (allValidObjects.MoveNext())
+        {
+            allValidObjects.Current.transform.SetPositionAndRotation(Vector3.zero.With(y: allValidObjects.Current.transform.position.y), Quaternion.identity);
+            allValidObjects.Current.UnsubscribedToOnDisplayOnOff();
+            allValidObjects.Current.ReturnToPool();
+            allValidObjects.Current.gameObject.SetActive(false);
         }
+
+        objectCount = 0;
+        validObjects.Clear();
+        yield return new WaitUntil(() => validObjects.Count == 0);
     }
     protected abstract void SetNumberOfObject(int _objFormation);
     protected abstract Vector3 GetRandomPosition(int _objFormation);
@@ -54,7 +43,7 @@ public abstract class BaseCirclePacking : BaseMazeObject
             return;
 
         var allValidObjects = validObjects.GetEnumerator();
-        
+
         while (allValidObjects.MoveNext())
         {
             allValidObjects.Current.gameObject.SetActive(_objFormation != 0);
@@ -69,20 +58,20 @@ public abstract class BaseCirclePacking : BaseMazeObject
 
         SetNumberOfObject(_objFormation);
 
-        if (validObjects != null)
+        if (validObjects == null)
+            return;
+
+        int i = 0;
+        while (validObjects.Count < currentNumOfObject)
         {
-            int i = 0;
-            while (validObjects.Count < currentNumOfObject)
-            {
-                Vector3 dummyRandomPosition = GetRandomPosition(_objFormation);
-                float dummyRandomSize = setting.GetRandomSize();
+            Vector3 dummyRandomPosition = GetRandomPosition(_objFormation);
+            float dummyRandomSize = setting.GetRandomSize();
 
-                bool isOverLapping = OverLappingCheck(dummyRandomPosition, dummyRandomSize);
-                if (!isOverLapping) ProduceObject(dummyRandomPosition, dummyRandomSize);
+            bool isOverLapping = OverLappingCheck(dummyRandomPosition, dummyRandomSize);
+            if (!isOverLapping) ProduceObject(dummyRandomPosition, dummyRandomSize);
 
-                if (OutOfLoopLimitedProtection(i, 250)) break;//5000
-                i++;
-            }
+            if (OutOfLoopLimitedProtection(i, 250)) break;//5000
+            i++;
         }
     }
     private bool OverLappingCheck(Vector3 dummyRandomPosition, float dummyRandomSize)
@@ -115,11 +104,7 @@ public abstract class BaseCirclePacking : BaseMazeObject
         newObject.SubscribedToOnDisplayOnOff();
         newObject.SetSize(dummyRandomSize);
         newObject.SetNumberOnObject(objectCount++);
-
         validObjects.Add(newObject);
-#if UNITY_EDITOR
-        objectNames.Add(newObject.name);//remove it later
-#endif
     }
     private bool OutOfLoopLimitedProtection(int count, int limited)
     {

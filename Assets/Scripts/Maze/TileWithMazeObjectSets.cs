@@ -15,14 +15,11 @@ public class TileWithMazeObjectSets : MazeObjsController
         {
             if (!_isEnable)
                 return;
-            else
-            {
-                objHasBeenFound = maze.GetMazeObjectSetlFromSetting(_id);//if not found, get it from all;                
-                AddNewMazeObjectType(objHasBeenFound);
+            objHasBeenFound = maze.GetMazeObjectSetlFromSetting(_id);//if not found, get it from all;                
+            AddNewMazeObjectType(objHasBeenFound);
 
-                objectSetIndex = Lists.FindIndex(MazeObjects, objHasBeenFound);
-                MazeObjects[objectSetIndex].transform.localPosition = Vector3.zero;
-            }
+            objectSetIndex = Lists.FindIndex(MazeObjects, objHasBeenFound);
+            MazeObjects[objectSetIndex].transform.localPosition = Vector3.zero;
         }
         else
             objectSetIndex = Lists.FindIndex(MazeObjects, objHasBeenFound);
@@ -31,7 +28,7 @@ public class TileWithMazeObjectSets : MazeObjsController
 
         int _objFormation = (!needToBeShown) ? 0 : currObjectFormation;
 
-        if(MazeObjects[objectSetIndex] is BaseWall wall)
+        if (MazeObjects[objectSetIndex] is BaseWall wall)
             wall.ActivateFunction(needToBeShown);
 
         MazeObjects[objectSetIndex].SetMazeFormation(_objFormation);
@@ -56,6 +53,7 @@ public class TileWithMazeObjectSets : MazeObjsController
         overlappingFormation = neighbours.totalFormationValue;
         removedObjFormation = 0;
         visitedCount = 0;
+
         foreach (var objectType in MazeObjects)
         {
             if (objectType.transform.gameObject.activeSelf)
@@ -65,7 +63,6 @@ public class TileWithMazeObjectSets : MazeObjsController
     }
     private void UpdateObjectFormation(TileWithMazeObjectSets next)//safe at moment
     {
-        //Debug.Log("--------------------------------------------------------------- <color=yellow>Start <b>v</b>  " + index + "</color>");
         //next
         if (!next.isVisited)
         {
@@ -82,10 +79,8 @@ public class TileWithMazeObjectSets : MazeObjsController
         {
             currObjectFormation = Bitwise.Remove(currObjectFormation, removedObjFormation);
             overlappingFormation = Bitwise.Remove(overlappingFormation, removedObjFormation);
-            //Debug.Log(" Has Not Been Visited:  <color=orange> ********************************************************************</color>");
         }
 
-        //Debug.Log(visitedCount + " <color=yellow>lastObjectFormation:  " + lastObjFormation + "</color>  currObjectFormation: " + currObjectFormation + "   <color=orange>   " + Bitwise.GetCombinationNames(new HexagonFormation(), currObjectFormation) + "</color>    overlappingFormaption: " + overlappingFormation + " <color=green>" + Bitwise.GetCombinationNames(new HexagonFormation(), overlappingFormation) + "</color>");
         if (!currObjectFormation.Equals(lastObjFormation) || visitedCount < 1)//1st time visited
             ChangeObjectFormation(currObjectFormation, overlappingFormation);
         visitedCount++;
