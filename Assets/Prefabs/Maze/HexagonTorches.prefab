@@ -50,7 +50,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88aec31557df8404a887123e0c870bf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallsDetectors: []
   top: {fileID: 8130276449483681202}
   topRight: {fileID: 4023089244198840012}
   botRight: {fileID: 5679166176647989885}
