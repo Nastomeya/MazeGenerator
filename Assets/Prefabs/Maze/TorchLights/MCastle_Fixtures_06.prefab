@@ -377,7 +377,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2853148684183901911, guid: 5bfe25b078342a849b3bd85079b62b76, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.3
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2853148684183901911, guid: 5bfe25b078342a849b3bd85079b62b76, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
@@ -401,7 +401,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5586222633751686060, guid: 5bfe25b078342a849b3bd85079b62b76, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.2
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 5586222633751686060, guid: 5bfe25b078342a849b3bd85079b62b76, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
@@ -409,7 +409,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5956901981276501348, guid: 5bfe25b078342a849b3bd85079b62b76, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 0.3
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5956901981276501348, guid: 5bfe25b078342a849b3bd85079b62b76, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
@@ -495,7 +495,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7125814238317731081, guid: dcd077eb6d58f3848847b51e44f542bd, type: 3}
       propertyPath: m_Intensity
-      value: 2
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 7125814238317731081, guid: dcd077eb6d58f3848847b51e44f542bd, type: 3}
       propertyPath: m_Lightmapping
