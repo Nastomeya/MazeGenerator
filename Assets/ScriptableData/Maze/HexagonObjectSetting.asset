@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectDatas:
   - mazeObjTrans: {fileID: 6874908056291876395, guid: 57519a0afe628f342887ab7788ca0fb5, type: 3}
-    activeSelf: 0
-  - mazeObjTrans: {fileID: 9068584126950742277, guid: e511677fafe0f7642ae33fcbf664c72a, type: 3}
-    activeSelf: 0
+    activeSelf: 1
+  - mazeObjTrans: {fileID: 9068584126950742277, guid: b24413e9976f882419e26c57e21310ce, type: 3}
+    activeSelf: 1
   - mazeObjTrans: {fileID: 5062167660794152110, guid: d1eeef8cb5f974448a752cd01dde7bf7, type: 3}
-    activeSelf: 0
+    activeSelf: 1
   - mazeObjTrans: {fileID: 5062167660794152110, guid: 0de5a76ef374b494d97c31e981e7ae8e, type: 3}
     activeSelf: 0

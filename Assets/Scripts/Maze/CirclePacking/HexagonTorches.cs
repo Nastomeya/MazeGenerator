@@ -1,7 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>It has six identical torche prefabs at different angles of the hexagon which has less efficiency. 
+/// <br/>Using a single torch (<see cref="HexagonTorch"/>)  change different angles according to the maze wall facing.</summary>
+[Obsolete]
 public class HexagonTorches : BaseMazeObject, IMazeObjects, IOverlapable
 {
     [SerializeField] private Transform top, topRight, botRight, bottom, botLeft, topLeft;
@@ -66,8 +70,8 @@ public class HexagonTorches : BaseMazeObject, IMazeObjects, IOverlapable
 
         if (avaliableIndexes.Count < 1)
             return;
-        
-        if ((lastTorch.transform != null && (lastTorch.position & _overlappingFormation) == 0) || lastTorch.transform == null)
+
+        if ((lastTorch.transform != null && (lastTorch.Position & _overlappingFormation) == 0) || lastTorch.transform == null)
         {
             var randomIndex = Utils.RandomRange(0, avaliableIndexes.Count);
             var selectedIndex = avaliableIndexes[randomIndex];
@@ -78,14 +82,4 @@ public class HexagonTorches : BaseMazeObject, IMazeObjects, IOverlapable
     }
 
     private void AddNewTorchData(int _index, TorchData _torchData) => torches.Add(_index, _torchData);
-    public struct TorchData
-    {
-        public TorchData(Transform _transform, int _position)
-        {
-            transform = _transform;
-            position = _position;
-        }
-        public Transform transform;
-        public int position;
-    }
 }
