@@ -35,9 +35,6 @@ public class SingleTileInDebugMode : MonoBehaviour
     {
         allObjects = new List<IMazeObjects>();
 
-        Debug.Log("InitMazeDataFromPrefabs " + allMazeObjPrefabs.Count);
-
-
         for (int i = 0; i < allMazeObjPrefabs.Count; i++)
         {
             var currObject = allMazeObjPrefabs[i].GetComponent<IMazeObjects>();

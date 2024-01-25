@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>It has six identical torche prefabs at different angles of the hexagon which has less efficiency. 
 /// <br/>Using a single torch (<see cref="HexagonTorch"/>)  change different angles according to the maze wall facing.</summary>
 [Obsolete]
-public class HexagonTorches : BaseMazeObject, IMazeObjects, IOverlapable
+public class HexagonTorches : BaseMazeObject, IMazeObjects, IOverlapableFormation
 {
     [SerializeField] private Transform top, topRight, botRight, bottom, botLeft, topLeft;
     [SerializeField] private ObjectsSelectorSetting setting;

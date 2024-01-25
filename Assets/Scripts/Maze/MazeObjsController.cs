@@ -48,7 +48,7 @@ public class MazeObjsController : BaseTile
             if (!MazeObjects[i].transform.gameObject.activeSelf)
                 continue;
 
-            var objFormation = MazeObjects[i] is IOverlapable ? _overlappingFormation : _objectFormation;
+            var objFormation = MazeObjects[i] is IOverlapableFormation ? _overlappingFormation : _objectFormation;
             MazeObjects[i].SetMazeFormation(objFormation);
         }
     }

@@ -19,5 +19,7 @@ MonoBehaviour:
     activeSelf: 1
   - mazeObjTrans: {fileID: 5062167660794152110, guid: d1eeef8cb5f974448a752cd01dde7bf7, type: 3}
     activeSelf: 1
+  - mazeObjTrans: {fileID: 3911295951558729615, guid: 51b35432f31ed6d45b1c3cf79a7cc597, type: 3}
+    activeSelf: 1
   - mazeObjTrans: {fileID: 5062167660794152110, guid: 0de5a76ef374b494d97c31e981e7ae8e, type: 3}
     activeSelf: 0

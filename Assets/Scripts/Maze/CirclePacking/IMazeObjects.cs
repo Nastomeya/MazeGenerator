@@ -16,6 +16,6 @@ public interface IMazeObjects
     public Transform transform { get; }
     public void SetID(int _newID);
     public void SetEnble(bool _isEnable);
-    public void SetMazeFormation(int _objectFormation);
+    public void SetMazeFormation(int _overlappingFormation);
     public IEnumerator ClearAllObjs();
 }

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MathCalculation;
-public class HexagonTorch : BaseMazeObject, IMazeObjects, IOverlapable
+public class HexagonTorch : BaseMazeObject, IMazeObjects, IOverlapableFormation
 {
-    [SerializeField] private Transform torchPrefab;
+    [SerializeField] private Transform torchesPrefab;
     [SerializeField] private ObjectsSelectorSetting setting;
 
     private Dictionary<int, MazeObjectData> torchDatas = new();
@@ -23,7 +23,7 @@ public class HexagonTorch : BaseMazeObject, IMazeObjects, IOverlapable
         AddNewTorchData(4, new MazeObjectData(240f, (int)HexagonFormation.botLeft));
         AddNewTorchData(5, new MazeObjectData(300f, (int)HexagonFormation.topLeft));
 
-        radius = Vector3.Distance(torchPrefab.transform.localPosition, Vector3.zero);
+        radius = Vector3.Distance(torchesPrefab.transform.localPosition, Vector3.zero);
     }
     private bool isEnable = true;
     public void SetEnble(bool _isEnable) => isEnable = _isEnable;
@@ -38,7 +38,7 @@ public class HexagonTorch : BaseMazeObject, IMazeObjects, IOverlapable
     {
         if (_overlappingFormation < 1)
         {
-            torchPrefab.transform.gameObject.SetActive(false);
+            torchesPrefab.transform.gameObject.SetActive(false);
             return;
         }
 
@@ -48,7 +48,7 @@ public class HexagonTorch : BaseMazeObject, IMazeObjects, IOverlapable
         avaliableIndexes.Clear();
 
         if (lastTorchData != null)
-            torchPrefab.gameObject.SetActive(false);
+            torchesPrefab.gameObject.SetActive(false);
 
         if (!setting.IsEnable())
             return;
@@ -69,9 +69,9 @@ public class HexagonTorch : BaseMazeObject, IMazeObjects, IOverlapable
             var randomIndex = Utils.RandomRange(0, avaliableIndexes.Count);
             var selectedIndex = avaliableIndexes[randomIndex];
             var newPosition = AdvanceMath.PointInCircumference(radius, torchDatas[selectedIndex].Angle, Vector2.zero);
-            torchPrefab.transform.localPosition = new Vector3(newPosition.y, torchPrefab.localPosition.y, newPosition.x);
-            torchPrefab.gameObject.SetActive(true);
-            torchPrefab.transform.rotation = Quaternion.AngleAxis(torchDatas[selectedIndex].Angle, Vector3.up);
+            torchesPrefab.transform.localPosition = new Vector3(newPosition.y, torchesPrefab.localPosition.y, newPosition.x);
+            torchesPrefab.gameObject.SetActive(true);
+            torchesPrefab.transform.rotation = Quaternion.AngleAxis(torchDatas[selectedIndex].Angle, Vector3.up);
             lastTorchData = torchDatas[selectedIndex];
         }
     }

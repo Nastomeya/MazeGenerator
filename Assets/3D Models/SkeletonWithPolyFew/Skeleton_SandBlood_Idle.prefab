@@ -4966,6 +4966,7 @@ GameObject:
   - component: {fileID: 1279097779197165494}
   - component: {fileID: 1279097779206967774}
   - component: {fileID: 1279097779197552387}
+  - component: {fileID: 6989714714324985141}
   m_Layer: 0
   m_Name: Skeleton_SandBlood_Idle
   m_TagString: Untagged
@@ -5137,6 +5138,18 @@ LODGroup:
     - renderer: {fileID: 1279097779350180422}
     - renderer: {fileID: 1279097779232280498}
   m_Enabled: 1
+--- !u!114 &6989714714324985141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1279097779197453206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a22804c7cfac95d4697690a29d79f6d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1279097779197453208
 GameObject:
   m_ObjectHideFlags: 0

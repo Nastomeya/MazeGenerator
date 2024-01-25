@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Torch: MonoBehaviour, IMazeElement
+public class Torch : MonoBehaviour, IMazeElement
 {
 
 }
