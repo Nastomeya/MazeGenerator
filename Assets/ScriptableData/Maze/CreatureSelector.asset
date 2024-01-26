@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ad71ca30261634cbe84b0d0a226c2e, type: 3}
   m_Name: CreatureSelector
   m_EditorClassIdentifier: 
-  frequentlyUsedTimes: 5
-  appearedRatePerTile: 2
+  frequentlyUsedTimes: 3
+  appearedRatePerTile: 6
