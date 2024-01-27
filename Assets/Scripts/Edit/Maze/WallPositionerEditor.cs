@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+using UnityEngine;
 using UnityEditor;
 
 [CustomEditor(typeof(WallPositioner))]
@@ -22,3 +23,4 @@ public class WallPositionerEditor : Editor
         //    wallPositioner.GenerateAllWalls();
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+using UnityEngine;
 using UnityEditor;
 
 [CustomEditor(typeof(RevealObjectController))]
@@ -19,4 +20,4 @@ public class RevealObjectControllerEditor : Editor
             revealObjectController.ShowMarkOnOff();
     }
 }
-
+#endif

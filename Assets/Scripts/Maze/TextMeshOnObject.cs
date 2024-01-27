@@ -4,18 +4,9 @@ using TMPro;
 public class TextMeshOnObject : MonoBehaviour
 {
     [SerializeField] internal TextMeshPro textMesh;
-    private void Start()
+    protected virtual void Start()
     {
-        SetTextOnOff(true);
-    }
-    internal void Init()
-    {
-        RevealObjectController.Instance.OnTextDisplayOnOff -= SetTextOnOff;
-        RevealObjectController.Instance.OnTextDisplayOnOff += SetTextOnOff;
-    }
-    internal void End()
-    {
-        RevealObjectController.Instance.OnTextDisplayOnOff -= SetTextOnOff;
+        SetTextOnOff(false);
     }
     internal void SetTextOnOff(bool _isOnOff)
     {

@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+using UnityEditor;
 using System.Reflection;
 using System;
 using UnityEngine;
@@ -28,3 +29,4 @@ public class CleanConsoleInEditor
     }
     #endregion
 }
+#endif

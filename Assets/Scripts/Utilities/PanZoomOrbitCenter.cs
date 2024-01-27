@@ -10,12 +10,14 @@ public class PanZoomOrbitCenter : MonoBehaviour
     [SerializeField] private float zoomMax = 16f;//100.0f;//
 
     private Camera currCamera;
-    private Vector3 mouseWorldPosStart;
+    private Vector3 panClickedPosStart, orbitClickedPosStart;
     private float verticalInput, horizontalInput;
 
     private bool IsMiddleMouseBtnDown => Input.GetMouseButtonDown(2);
     private bool IsMiddleMouseButton => Input.GetMouseButton(2);
     private bool IsRightMouseButton => Input.GetMouseButton(1);
+    private bool IsRightMouseBtnDown => Input.GetMouseButtonDown(1);
+
     private float MouseXAxis => Input.GetAxis("Mouse X");
     private float MouseYAxis => Input.GetAxis("Mouse Y");
     private float MouseScroll => Input.GetAxis("Mouse ScrollWheel");
@@ -31,6 +33,8 @@ public class PanZoomOrbitCenter : MonoBehaviour
         Pan();
         Zoom();
     }
+
+
     private void CamOrbit()
     {
         if (!IsRightMouseButton)
@@ -42,20 +46,35 @@ public class PanZoomOrbitCenter : MonoBehaviour
         verticalInput = MouseYAxis * rotationSpeed * Time.deltaTime;
         horizontalInput = MouseXAxis * rotationSpeed * Time.deltaTime;
 
-        transform.Rotate(Vector3.right, -verticalInput);
-        transform.Rotate(Vector3.up, horizontalInput, Space.World);
+        if (IsRightMouseBtnDown)
+        {
+            var ray = currCamera.ScreenPointToRay(Input.mousePosition);
+
+            if (!Physics.Raycast(ray, out RaycastHit hit))
+                return;
+            // Check if the clicked object has a collider
+            if (hit.collider == null)
+                return;
+
+            orbitClickedPosStart = hit.point;
+        }
+
+        // Set the clicked object as the new target
+        transform.RotateAround(orbitClickedPosStart, Vector3.up, horizontalInput);
+        transform.RotateAround(orbitClickedPosStart, transform.right, -verticalInput);
     }
+
     private void Pan()
     {
         if (!IsMiddleMouseButton)
             return;
 
         if (IsMiddleMouseBtnDown) //Check for Pan
-            mouseWorldPosStart = currCamera.ScreenToWorldPoint(Input.mousePosition);
+            panClickedPosStart = currCamera.ScreenToWorldPoint(Input.mousePosition);
 
         if (MouseYAxis != 0 || MouseXAxis != 0)
         {
-            Vector3 mouseWorldPosDiff = mouseWorldPosStart - currCamera.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mouseWorldPosDiff = panClickedPosStart - currCamera.ScreenToWorldPoint(Input.mousePosition);
             currCamera.transform.position += mouseWorldPosDiff;
         }
     }
@@ -64,9 +83,9 @@ public class PanZoomOrbitCenter : MonoBehaviour
         if (MouseScroll == 0)
             return;
 
-        mouseWorldPosStart = currCamera.ScreenToWorldPoint(Input.mousePosition);
+        panClickedPosStart = currCamera.ScreenToWorldPoint(Input.mousePosition);
         currCamera.orthographicSize = Mathf.Clamp(currCamera.orthographicSize - MouseScroll * zoomScale, zoomMin, zoomMax);
-        Vector3 mouseWorldPosDiff = mouseWorldPosStart - currCamera.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mouseWorldPosDiff = panClickedPosStart - currCamera.ScreenToWorldPoint(Input.mousePosition);
         currCamera.transform.position += mouseWorldPosDiff;
     }
 }

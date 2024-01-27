@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
@@ -47,7 +48,7 @@ public class SingleTileInDebugModeEditor : Editor
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            var style = new GUIStyle(GUI.skin.button);            
+            var style = new GUIStyle(GUI.skin.button);
             ProceedingHideAndShowButton(i, style, true);
             ProceedingHideAndShowButton(i, style, false);
             GUILayout.EndHorizontal();
@@ -131,3 +132,4 @@ public class SingleTileInDebugModeEditor : Editor
         EditorGUI.DrawRect(r, color);
     }
 }
+#endif
