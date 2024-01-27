@@ -33,18 +33,10 @@ public class PanZoomOrbitCenter : MonoBehaviour
         Pan();
         Zoom();
     }
-
-
     private void CamOrbit()
     {
         if (!IsRightMouseButton)
             return;
-
-        if (MouseXAxis == 0 && MouseYAxis == 0)
-            return;
-
-        verticalInput = MouseYAxis * rotationSpeed * Time.deltaTime;
-        horizontalInput = MouseXAxis * rotationSpeed * Time.deltaTime;
 
         if (IsRightMouseBtnDown)
         {
@@ -58,12 +50,13 @@ public class PanZoomOrbitCenter : MonoBehaviour
 
             orbitClickedPosStart = hit.point;
         }
+        verticalInput = MouseYAxis * rotationSpeed * Time.deltaTime;
+        horizontalInput = MouseXAxis * rotationSpeed * Time.deltaTime;
 
         // Set the clicked object as the new target
         transform.RotateAround(orbitClickedPosStart, Vector3.up, horizontalInput);
         transform.RotateAround(orbitClickedPosStart, transform.right, -verticalInput);
     }
-
     private void Pan()
     {
         if (!IsMiddleMouseButton)
