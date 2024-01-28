@@ -14,7 +14,7 @@ public class SliderValueDisplay : MonoBehaviour
     {
         slider.onValueChanged.RemoveListener(UpdateDisplayValue);
     }
-    private void UpdateDisplayValue(float _newValue)
+    internal void UpdateDisplayValue(float _newValue)
     {
         valueText.text = Mathf.RoundToInt(_newValue).ToString();
     }

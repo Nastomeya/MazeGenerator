@@ -27,6 +27,12 @@ public class MazeManager : MonoBehaviour
         mazeWidthSlider.value = maze.Width;
         mazeHeightSlider.value = maze.Height;
 
+        var widthSliderDisplay = mazeWidthSlider.GetComponent<SliderValueDisplay>();
+        var heightSliderDisplay = mazeHeightSlider.GetComponent<SliderValueDisplay>();
+
+        widthSliderDisplay.UpdateDisplayValue(maze.Width);
+        heightSliderDisplay.UpdateDisplayValue(maze.Height);
+
         createEntireMazeBtn.onClick.AddListener(GenerateTheEntireMaze);
         createNextTileBtn.onClick.AddListener(GenerateOneAtATime);
     }
