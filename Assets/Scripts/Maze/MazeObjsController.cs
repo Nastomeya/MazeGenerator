@@ -14,7 +14,7 @@ public class MazeObjsController : BaseTile
         return newObjFound;
     }
     protected void CreateObjects(List<IMazeObjects> enabledMazeObjectList)
-    {
+    {        
         for (int i = 0; i < enabledMazeObjectList.Count; i++)
         {
             var mazeObjHasBeenFound = FindMazeObjectWithID(enabledMazeObjectList[i].ID);

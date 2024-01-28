@@ -20,9 +20,12 @@ public class MazeManager : MonoBehaviour
             UpdateMazeSize();
 
         mazeWidthSlider.maxValue = 10;
-        mazeWidthSlider.minValue = 1;
+        mazeWidthSlider.minValue = 2;
         mazeHeightSlider.maxValue = 10;
         mazeHeightSlider.minValue = 1;
+
+        mazeWidthSlider.value = maze.Width;
+        mazeHeightSlider.value = maze.Height;
 
         createEntireMazeBtn.onClick.AddListener(GenerateTheEntireMaze);
         createNextTileBtn.onClick.AddListener(GenerateOneAtATime);
