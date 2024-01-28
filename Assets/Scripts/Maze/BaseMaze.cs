@@ -10,6 +10,11 @@ public abstract class BaseMaze : MonoBehaviour
     [SerializeField] private Transform mark;
     internal int Width => width;
     internal int Height => height;
+    internal void SetMazeSize(int _width, int _height)
+    {
+        width = _width;
+        height = _height;
+    }
     internal MazeObjectSettings MazeObjectSetting => mazeObjectSetting;
 
     private bool isNotFinished, loopThrough = false;

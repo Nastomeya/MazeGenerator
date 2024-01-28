@@ -29,7 +29,7 @@ public class PanZoomOrbitCenter : MonoBehaviour
 #if UNITY_EDITOR
         rotationSpeed = 100f;
 #elif UNITY_WEBGL
-        rotationSpeed = 70f;
+        rotationSpeed = 55f;
 #endif
     }
 

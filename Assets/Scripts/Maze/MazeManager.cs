@@ -5,15 +5,24 @@ public class MazeManager : MonoBehaviour
 {
     [SerializeField] private Button createEntireMazeBtn;
     [SerializeField] private Button createNextTileBtn;
+    [SerializeField] private Slider mazeWidthSlider;
+    [SerializeField] private Slider mazeHeightSlider;
     private BaseMaze maze;
     private int lastWidth, lastHeight;
-    private bool HasMazeSizeBeenChanged => (lastWidth != maze.Width) || (lastHeight != maze.Height);
 
+    private bool HasMazeSizeBeenChanged => (lastWidth != CurrentWidth) || (lastHeight != CurrentHeight);
+    private int CurrentWidth => Mathf.RoundToInt(mazeWidthSlider.value);
+    private int CurrentHeight => Mathf.RoundToInt(mazeHeightSlider.value);
     private void Awake()
     {
         maze = GetComponent<BaseMaze>();
         if (maze != null && HasMazeSizeBeenChanged)
             UpdateMazeSize();
+
+        mazeWidthSlider.maxValue = 10;
+        mazeWidthSlider.minValue = 1;
+        mazeHeightSlider.maxValue = 10;
+        mazeHeightSlider.minValue = 1;
 
         createEntireMazeBtn.onClick.AddListener(GenerateTheEntireMaze);
         createNextTileBtn.onClick.AddListener(GenerateOneAtATime);
@@ -45,7 +54,8 @@ public class MazeManager : MonoBehaviour
     }
     private void UpdateMazeSize()
     {
-        lastWidth = maze.Width;
-        lastHeight = maze.Height;
+        lastWidth = CurrentWidth;
+        lastHeight = CurrentHeight;
+        maze.SetMazeSize(CurrentWidth, CurrentHeight);
     }
 }

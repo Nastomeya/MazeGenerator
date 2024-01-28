@@ -2134,6 +2134,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   createEntireMazeBtn: {fileID: 491233611}
   createNextTileBtn: {fileID: 34423752}
+  mazeWidthSlider: {fileID: 1875926037}
+  mazeHeightSlider: {fileID: 1092238606}
 --- !u!1001 &1682841433
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2542,8 +2544,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1092238605}
   - {fileID: 1875926036}
+  - {fileID: 1092238605}
   m_Father: {fileID: 1697069545}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
