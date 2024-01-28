@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 public class PanZoomOrbitCenter : MonoBehaviour
 {
-    [SerializeField] private float rotationSpeed = 250.0f;//500.0f;
+    private float rotationSpeed = 250.0f;//500.0f;
     [SerializeField] private float zoomScale = 5.0f;
     [SerializeField] private float zoomMin = 0.5f;
     [SerializeField] private float zoomMax = 16f;//100.0f;//
@@ -22,7 +22,16 @@ public class PanZoomOrbitCenter : MonoBehaviour
     private float MouseYAxis => Input.GetAxis("Mouse Y");
     private float MouseScroll => Input.GetAxis("Mouse ScrollWheel");
 
-    private void Awake() => currCamera = GetComponentInChildren<Camera>();
+    private void Awake()
+    {
+        currCamera = GetComponentInChildren<Camera>();
+
+#if UNITY_EDITOR
+        rotationSpeed = 100f;
+#elif UNITY_WEBGL
+        rotationSpeed = 70f;
+#endif
+    }
 
     private void LateUpdate()
     {

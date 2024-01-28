@@ -4,14 +4,16 @@ using UnityEngine;
 [RequireComponent(typeof(RevealObjectController))]
 public abstract class BaseMaze : MonoBehaviour
 {
-    [SerializeField] protected int width, height;
+    [SerializeField] private int width, height;
     [SerializeField] protected TileWithMazeObjectSets tileWithWallsPrefab;
     [SerializeField] private MazeObjectSettings mazeObjectSetting;
     [SerializeField] private Transform mark;
-
+    internal int Width => width;
+    internal int Height => height;
     internal MazeObjectSettings MazeObjectSetting => mazeObjectSetting;
 
     private bool isNotFinished, loopThrough = false;
+    internal bool IsFinished => !isNotFinished;
 
     protected List<TileWithMazeObjectSets> tiles;
     protected Stack<TileWithMazeObjectSets> stack;
@@ -69,17 +71,17 @@ public abstract class BaseMaze : MonoBehaviour
     {
         tiles = new List<TileWithMazeObjectSets>();
         stack = new Stack<TileWithMazeObjectSets>();
-        totalTileNum = width * height - 1;
-        offset = new Vector2((width - 1f) / 2f, (height - 1f) / 2f);
+        totalTileNum = Width * Height - 1;
+        offset = new Vector2((Width - 1f) / 2f, (Height - 1f) / 2f);
 
         CreateNewTiles();
     }
     protected void CreateNewTiles()
     {
         int index = 0;
-        for (int y = 0; y < height; y++)
+        for (int y = 0; y < Height; y++)
         {
-            for (int x = 0; x < width; x++)
+            for (int x = 0; x < Width; x++)
             {
                 CreateANewTile(ref index, y, x);
             }

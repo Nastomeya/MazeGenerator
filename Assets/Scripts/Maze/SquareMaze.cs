@@ -8,7 +8,7 @@ public class SquareMaze : BaseMaze
         newTile.name += "_" + index;
         newTile.SetMaze(this);
 
-        currNeighbours = new SquareNeighbours(index, width, totalTileNum, tiles);
+        currNeighbours = new SquareNeighbours(index, Width, totalTileNum, tiles);
         newTile.InitObjectsIdentities(MazeObjectSetting.ToListOfMazeObjects());
         newTile.Init(index, currNeighbours);
 

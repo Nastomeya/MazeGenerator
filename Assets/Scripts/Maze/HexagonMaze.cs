@@ -12,7 +12,7 @@ public class HexagonMaze : BaseMaze
         newTile.name += "_" + index;
         newTile.SetMaze(this);
 
-        currNeighbours = new HexagonNeighbours(index, width, totalTileNum, tiles);
+        currNeighbours = new HexagonNeighbours(index, Width, totalTileNum, tiles);
         newTile.InitObjectsIdentities(MazeObjectSetting.ToListOfMazeObjects());
         newTile.Init(index, currNeighbours);
 
@@ -29,7 +29,7 @@ public class HexagonMaze : BaseMaze
     {
         float rowAlignment = 0.216f;
         float yPosi = y - offset.y;
-        var invertedValue = BasicMath.Convert2USequenceValue(y, height);
+        var invertedValue = BasicMath.Convert2USequenceValue(y, Height);
         yPosi -= (invertedValue * 0.13f);
 
         if (IsIndexAnOddNum(index))//it's an odd index
@@ -43,11 +43,11 @@ public class HexagonMaze : BaseMaze
     private float GetXPosition(int x)
     {
         float xPosi = x - offset.x;
-        var invertedValue = BasicMath.Convert2USequenceValue(x, width);
+        var invertedValue = BasicMath.Convert2USequenceValue(x, Width);
         xPosi -= (invertedValue * 0.243f);
 
         xPosi *= tileSizeRatio;
         return xPosi;
     }
-    private bool IsIndexAnOddNum(int _index) => (_index % width % 2) == 1;
+    private bool IsIndexAnOddNum(int _index) => (_index % Width % 2) == 1;
 }
