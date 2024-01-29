@@ -587,15 +587,15 @@ Canvas:
   m_GameObject: {fileID: 238581665}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_RenderMode: 1
+  m_Camera: {fileID: 1990502071}
+  m_PlaneDistance: -30
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -2799,8 +2799,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de7a8ecb22ce80347b185c6bd9df8e4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 5
-  height: 6
+  width: 3
+  height: 2
   tileWithWallsPrefab: {fileID: 6968859332848823870, guid: a58e98f59ecff6a46afee69950dc3b02, type: 3}
   mazeObjectSetting: {fileID: 11400000, guid: 1f69b69870d1b2e47bf03f38d9d2b98c, type: 2}
   mark: {fileID: 8626794103573436460}
@@ -3809,6 +3809,11 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!20 &1990502071 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 6684359900789608724, guid: 0e30a44d70746b148844be2b511aa1a8, type: 3}
+  m_PrefabInstance: {fileID: 614276421}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2073204146
 GameObject:
   m_ObjectHideFlags: 0
