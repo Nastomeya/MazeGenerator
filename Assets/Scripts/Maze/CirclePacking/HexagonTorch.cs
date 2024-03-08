@@ -26,7 +26,11 @@ public class HexagonTorch : BaseMazeObject, IMazeObjects, IOverlapableFormation
         radius = Vector3.Distance(torchesPrefab.transform.localPosition, Vector3.zero);
     }
     private bool isEnable = true;
-    public void SetEnble(bool _isEnable) => isEnable = _isEnable;
+    public void SetEnble(bool _isEnable)
+    {
+        isEnable = _isEnable;
+        //torchesPrefab.transform.gameObject.SetActive(isEnable);
+    }
 
     public override IEnumerator ClearAllObjs()
     {
