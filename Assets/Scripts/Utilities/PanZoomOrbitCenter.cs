@@ -47,14 +47,15 @@ public class PanZoomOrbitCenter : MonoBehaviour
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
-        if (Input.mousePresent)//not working in andriod browser
+        if (Input.touchCount > 0)
+            PinchZoomAndTouchPan();
+
+        else if (Input.mousePresent)
         {
             MouseCamOrbit();
             MousePan();
             MouseScrollZoom();
         }
-        else if (Input.touchSupported)
-            PinchZoomAndTouchPan();
     }
 
     private void MouseCamOrbit()
