@@ -13,11 +13,12 @@ public class MouseZoomHandler : BaseInputHandler, IMouseHandler
     public void HandleInput()
     {
         if (MouseScroll == 0)
+        {
+            lastInputWorldPoint = currCamera.ScreenToWorldPoint(Input.mousePosition);
             return;
+        }
 
         currCamera.orthographicSize = Mathf.Clamp(currCamera.orthographicSize - MouseScroll * zoomScale, zoomMin, zoomMax);
-        lastInputWorldPoint = currCamera.ScreenToWorldPoint(Input.mousePosition);
-
         MoveCamera(lastInputWorldPoint, Input.mousePosition);
     }
 }
