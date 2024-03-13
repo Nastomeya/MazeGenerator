@@ -1449,6 +1449,11 @@ MonoBehaviour:
   times: 0
   tileShapes: 0
   isGenerateAll: 1
+--- !u!1 &566858910 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7226193065314375643, guid: 0e30a44d70746b148844be2b511aa1a8, type: 3}
+  m_PrefabInstance: {fileID: 614276421}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &611578905
 GameObject:
   m_ObjectHideFlags: 0
@@ -1510,6 +1515,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4192990214748646512, guid: 0e30a44d70746b148844be2b511aa1a8, type: 3}
+      propertyPath: currCamera
+      value: 
+      objectReference: {fileID: 1990502071}
+    - target: {fileID: 4192990214748646512, guid: 0e30a44d70746b148844be2b511aa1a8, type: 3}
       propertyPath: touchInfoText
       value: 
       objectReference: {fileID: 865084101}
@@ -1564,13 +1573,73 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7226193065314375643, guid: 0e30a44d70746b148844be2b511aa1a8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 614276427}
+    - targetCorrespondingSourceObject: {fileID: 7226193065314375643, guid: 0e30a44d70746b148844be2b511aa1a8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 614276426}
+    - targetCorrespondingSourceObject: {fileID: 7226193065314375643, guid: 0e30a44d70746b148844be2b511aa1a8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 614276425}
+    - targetCorrespondingSourceObject: {fileID: 7226193065314375643, guid: 0e30a44d70746b148844be2b511aa1a8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 614276424}
   m_SourcePrefab: {fileID: 100100000, guid: 0e30a44d70746b148844be2b511aa1a8, type: 3}
 --- !u!4 &614276422 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5609754255731335047, guid: 0e30a44d70746b148844be2b511aa1a8, type: 3}
   m_PrefabInstance: {fileID: 614276421}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &614276424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566858910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13defbde03d382543a0da695fb5aebd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &614276425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566858910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ad093f5e7a4a434e8b9f61b7cb5532e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &614276426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566858910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee81c6b6d81ba164e9815889b575b56c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &614276427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566858910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86188de8a234b7744bc35bdab49216a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &631459607
 GameObject:
   m_ObjectHideFlags: 0
@@ -2053,7 +2122,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -550.0002}
+  m_AnchoredPosition: {x: 0, y: -550.0001}
   m_SizeDelta: {x: 0, y: -1100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1123337877
@@ -3478,7 +3547,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -579.99994}
+  m_AnchoredPosition: {x: 0, y: -579.9999}
   m_SizeDelta: {x: -0.000016838312, y: -1160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1828276768

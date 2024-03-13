@@ -147,6 +147,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5609754255731335047}
   - component: {fileID: 4192990214748646512}
+  - component: {fileID: 387922747233373967}
+  - component: {fileID: 6268716580407095078}
+  - component: {fileID: 6367936272890446782}
+  - component: {fileID: 580481464024366056}
   m_Layer: 0
   m_Name: PanZoomOrbitCenter
   m_TagString: Untagged
@@ -182,8 +186,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cda06a2716eb9f1479d8e4b4983e3df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomScale: 5
-  zoomMin: 0.5
-  zoomMax: 16
-  touchZoomSpeed: 0.1
   touchInfoText: {fileID: 0}
+  currCamera: {fileID: 6684359900789608724}
+--- !u!114 &387922747233373967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7226193065314375643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86188de8a234b7744bc35bdab49216a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6268716580407095078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7226193065314375643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee81c6b6d81ba164e9815889b575b56c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6367936272890446782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7226193065314375643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ad093f5e7a4a434e8b9f61b7cb5532e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &580481464024366056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7226193065314375643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13defbde03d382543a0da695fb5aebd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
