@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 
-public class MouseOrbitHandler : BaseInputHandler, IMouseHandler
+public class MouseOrbitCameraHandler : BaseInputHandler, IMouseHandler
 {
-    private Vector3 orbitClickedPosStart;
-    private float verticalInput, horizontalInput;
     private bool IsRightMouseButton => Input.GetMouseButton(1);
     private bool IsRightMouseBtnDown => Input.GetMouseButtonDown(1);
     private float MouseXAxis => Input.GetAxis("Mouse X");
     private float MouseYAxis => Input.GetAxis("Mouse Y");
-    private float rotationSpeed;
+
+    private Ray ray;
+    private Vector3 orbitClickedPosStart;
+    private float verticalInput, horizontalInput, rotationSpeed;
 
     private void Awake()
     {
@@ -26,7 +27,7 @@ public class MouseOrbitHandler : BaseInputHandler, IMouseHandler
 
         if (IsRightMouseBtnDown)
         {
-            var ray = currCamera.ScreenPointToRay(Input.mousePosition);
+            ray = currCamera.ScreenPointToRay(Input.mousePosition);
 
             if (!Physics.Raycast(ray, out RaycastHit hit))
                 return;
@@ -37,8 +38,8 @@ public class MouseOrbitHandler : BaseInputHandler, IMouseHandler
             orbitClickedPosStart = hit.point;
         }
 
-        verticalInput = MouseYAxis * rotationSpeed * Time.deltaTime;
         horizontalInput = MouseXAxis * rotationSpeed * Time.deltaTime;
+        verticalInput = MouseYAxis * rotationSpeed * Time.deltaTime;
 
         // Set the clicked object as the new target
         transform.RotateAround(orbitClickedPosStart, Vector3.up, horizontalInput);

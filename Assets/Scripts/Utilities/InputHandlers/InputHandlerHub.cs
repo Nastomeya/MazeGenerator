@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 /// <br/>Reference: <see href="https://www.youtube.com/watch?v=5LEVj3PLufE"/>/// </summary>
 public class InputHandlerHub : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI touchInfoText;//remove this later
+    public TextMeshProUGUI touchInfoText;//remove this later
     [SerializeField] private Camera currCamera;
 
     private List<IMouseHandler> MouseHandlers;
@@ -33,8 +33,12 @@ public class InputHandlerHub : MonoBehaviour
     {
         if (EventSystem.current.IsPointerOverGameObject())
             return;
+
         if (Input.touchCount > 0)
         {
+            if (TouchHandlers == null)
+                return;
+
             for (int i = 0; i < TouchHandlers.Count; i++)
             {
                 TouchHandlers[i].HandleInput();
@@ -42,6 +46,9 @@ public class InputHandlerHub : MonoBehaviour
         }
         else if (Input.mousePresent)
         {
+            if (MouseHandlers == null)
+                return;
+
             for (int i = 0; i < MouseHandlers.Count; i++)
             {
                 MouseHandlers[i].HandleInput();
