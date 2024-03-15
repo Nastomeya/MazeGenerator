@@ -1,6 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
-using TMPro;
+//using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -9,7 +8,7 @@ using UnityEngine.EventSystems;
 /// <br/>Reference: <see href="https://www.youtube.com/watch?v=5LEVj3PLufE"/>/// </summary>
 public class InputHandlerHub : MonoBehaviour
 {
-    public TextMeshProUGUI touchInfoText;//remove this later
+    //public TextMeshProUGUI touchInfoText;//remove this later
     [SerializeField] private Camera currCamera;
 
     private List<IMouseHandler> MouseHandlers;
