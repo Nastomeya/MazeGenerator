@@ -1,45 +1,65 @@
 ﻿using UnityEngine;
+
 /// <summary>This includes both pinch to zoom-in/out and touch panning feature</summary>
-public class TouchPinchHandler : BaseInputHandler, ITouchHandler
+public class TouchPinchHandler : BaseTouchHandler, ITouchHandler
 {
     private Vector2 lastTouch1Pos, lastTouch2Pos, lastCentreTouchPos, currCentreTouchPos;
     private Vector3 lastInputWorldPoint;
-    private Touch touchOne, touchTwo;
-    private float zoomAmount, pinchAmount, newOrthographicSize, lastTouchesDistance, currentTouchesDistance;
-    private const float pinchSpeed = 0.1f;
-    private const float zoomMin = 0.5f;
-    private const float zoomMax = 16f;
+    private Touch currTouchOne, currTouchTwo;
+    private float currZoomAmount, lastTouchesDistance, currTouchesDistance;
+    private const float pinchSpeed = 0.5f, zoomMin = 0.5f, zoomMax = 16f;
+    protected override float MovementThreshold { get; } = 3.5f;
 
     public void HandleInput()
     {
         if (Input.touchCount != 2)
             return;
 
-        touchOne = Input.GetTouch(0);
-        touchTwo = Input.GetTouch(1);
+        currTouchOne = Input.GetTouch(0);
+        currTouchTwo = Input.GetTouch(1);
 
-        if ((touchOne.phase == TouchPhase.Stationary && touchTwo.phase == TouchPhase.Stationary) || touchOne.phase == TouchPhase.Began || touchTwo.phase == TouchPhase.Began)
+        // Calculate the magnitudes of deltaPosition vectors for each touch
+        var touch1Phase = GetHumanTouchPhase(currTouchOne);
+        var touch2Phase = GetHumanTouchPhase(currTouchTwo);
+
+
+        if (currTouchOne.phase == TouchPhase.Began || currTouchTwo.phase == TouchPhase.Began)
         {
-            lastTouch1Pos = touchOne.position;
-            lastTouch2Pos = touchTwo.position;
+            lastTouch1Pos = currTouchOne.position;
+            lastTouch2Pos = currTouchTwo.position;
+
             lastCentreTouchPos = GetPinchCentrePoint(lastTouch1Pos, lastTouch2Pos);
             lastInputWorldPoint = currCamera.ScreenToWorldPoint(lastCentreTouchPos);
         }
-        else if (touchOne.phase == TouchPhase.Moved || touchTwo.phase == TouchPhase.Moved)
+        else if (touch1Phase == TouchPhase.Moved || touch2Phase == TouchPhase.Moved)
         {
-            lastTouchesDistance = Vector2.Distance(lastTouch1Pos, lastTouch2Pos);
-            currentTouchesDistance = Vector2.Distance(touchOne.position, touchTwo.position);
-            pinchAmount = lastTouchesDistance - currentTouchesDistance;
+            var currDeltaPinchAmount = GetDeltaPinchAmount();
+            currZoomAmount = currDeltaPinchAmount * pinchSpeed * Time.deltaTime;
 
-            zoomAmount = pinchAmount * pinchSpeed;
-            newOrthographicSize = currCamera.orthographicSize + zoomAmount;
-            newOrthographicSize = Mathf.Clamp(newOrthographicSize, zoomMin, zoomMax);
-            currCamera.orthographicSize = Mathf.Lerp(currCamera.orthographicSize, newOrthographicSize, Time.deltaTime);
+            currCamera.orthographicSize = Mathf.Clamp(currCamera.orthographicSize + currZoomAmount, zoomMin, zoomMax);
 
-            currCentreTouchPos = GetPinchCentrePoint(touchOne.position, touchTwo.position);
+            currCentreTouchPos = GetPinchCentrePoint(currTouchOne.position, currTouchTwo.position);
             MoveCamera(lastInputWorldPoint, currCentreTouchPos);
         }
     }
 
-    private Vector2 GetPinchCentrePoint(Vector2 _pointOne, Vector2 _pointTwo) => (_pointOne + _pointTwo) / 2f;
+    private float GetDeltaPinchAmount()
+    {
+        var touchOneMoveAmount = currTouchOne.deltaPosition.magnitude;
+        var touchTwoMoveAmount = currTouchTwo.deltaPosition.magnitude;
+        var touchMoveAmount = touchOneMoveAmount > touchTwoMoveAmount ? touchOneMoveAmount : touchTwoMoveAmount;
+        var isInwarding = IsPinchInwarding();
+
+        return touchMoveAmount * (isInwarding ? 1 : -1);
+    }
+    private bool IsPinchInwarding()
+    {
+        currTouchesDistance = (currTouchOne.position - currTouchTwo.position).magnitude;
+        lastTouchesDistance = (lastTouch1Pos - lastTouch2Pos).magnitude;
+
+        lastTouch1Pos = currTouchOne.position;
+        lastTouch2Pos = currTouchTwo.position;
+
+        return lastTouchesDistance > currTouchesDistance;
+    }
 }

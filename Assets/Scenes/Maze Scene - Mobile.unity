@@ -1505,6 +1505,10 @@ PrefabInstance:
       propertyPath: m_RenderPostProcessing
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 580481464024366056, guid: 0e30a44d70746b148844be2b511aa1a8, type: 3}
+      propertyPath: touchInfoText
+      value: 
+      objectReference: {fileID: 865084101}
     - target: {fileID: 3041012154937354168, guid: 0e30a44d70746b148844be2b511aa1a8, type: 3}
       propertyPath: m_text
       value: 
@@ -1575,6 +1579,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5609754255731335047, guid: 0e30a44d70746b148844be2b511aa1a8, type: 3}
   m_PrefabInstance: {fileID: 614276421}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &614276429 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4192990214748646512, guid: 0e30a44d70746b148844be2b511aa1a8, type: 3}
+  m_PrefabInstance: {fileID: 614276421}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cda06a2716eb9f1479d8e4b4983e3df6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &631459607
 GameObject:
   m_ObjectHideFlags: 0
@@ -2615,6 +2630,7 @@ GameObject:
   - component: {fileID: 1510501666}
   - component: {fileID: 1510501669}
   - component: {fileID: 1510501667}
+  - component: {fileID: 1510501670}
   m_Layer: 5
   m_Name: Hints
   m_TagString: Untagged
@@ -2661,8 +2677,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u2022 Rotate by right-clicking.\n\u2022 Zoom in/out with the mouse scroll.\n\u2022
-    Hold the middle mouse button to pan the scene."
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
@@ -2697,7 +2712,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 1
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -2725,7 +2740,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 1482.4987, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2739,6 +2754,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1510501665}
   m_CullTransparentMesh: 1
+--- !u!114 &1510501670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510501665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 647d3b6b1e991374fbd8f9ab276034cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputHandlerHub: {fileID: 614276429}
 --- !u!1 &1524558213
 GameObject:
   m_ObjectHideFlags: 0

@@ -150,7 +150,6 @@ GameObject:
   - component: {fileID: 387922747233373967}
   - component: {fileID: 6268716580407095078}
   - component: {fileID: 6367936272890446782}
-  - component: {fileID: 8302283590194556045}
   - component: {fileID: 580481464024366056}
   m_Layer: 0
   m_Name: PanZoomOrbitCenter
@@ -187,7 +186,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cda06a2716eb9f1479d8e4b4983e3df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  touchInfoText: {fileID: 0}
   currCamera: {fileID: 6684359900789608724}
 --- !u!114 &387922747233373967
 MonoBehaviour:
@@ -223,18 +221,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ad093f5e7a4a434e8b9f61b7cb5532e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8302283590194556045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7226193065314375643}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e857455e70d80444b66e009fbca6b33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &580481464024366056
