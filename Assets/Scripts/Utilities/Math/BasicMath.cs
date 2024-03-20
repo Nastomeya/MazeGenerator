@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 namespace MathCalculation
 {
@@ -92,6 +93,29 @@ namespace MathCalculation
                     result += 1;
             }
             return result;
+        }
+        public static Vector3 GetDirection(Vector3 _point1, Vector3 _point2)
+        {
+            return (_point1 - _point2).normalized;
+        }
+        public static Vector2 GetDirection(Vector2 _point1, Vector2 _point2)
+        {
+            return (_point1 - _point2).normalized;
+        }
+
+        public static Vector3? lastPos;
+        public async static UniTask<float> GetVelocity(Vector3 _currPos)//can be used one object in a scene at a time
+        {
+            if (lastPos == null)
+            {
+                lastPos = _currPos;
+                await UniTask.WaitForFixedUpdate();
+            }
+
+            var movingSpeed = Mathf.RoundToInt(Vector3.Distance(_currPos, (Vector3)lastPos) / Time.fixedDeltaTime);
+            await UniTask.WaitForFixedUpdate();
+            lastPos = _currPos;
+            return movingSpeed;
         }
     }
 }

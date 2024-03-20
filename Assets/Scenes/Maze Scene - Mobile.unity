@@ -1506,13 +1506,33 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 580481464024366056, guid: 0e30a44d70746b148844be2b511aa1a8, type: 3}
+      propertyPath: pinchSpeed
+      value: 0.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 580481464024366056, guid: 0e30a44d70746b148844be2b511aa1a8, type: 3}
+      propertyPath: isMethodOne
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 580481464024366056, guid: 0e30a44d70746b148844be2b511aa1a8, type: 3}
       propertyPath: touchInfoText
       value: 
       objectReference: {fileID: 865084101}
+    - target: {fileID: 580481464024366056, guid: 0e30a44d70746b148844be2b511aa1a8, type: 3}
+      propertyPath: movementThreshold
+      value: 4.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3041012154937354168, guid: 0e30a44d70746b148844be2b511aa1a8, type: 3}
       propertyPath: m_text
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3239449513380519222, guid: 0e30a44d70746b148844be2b511aa1a8, type: 3}
+      propertyPath: rotationSpeed
+      value: 15.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3239449513380519222, guid: 0e30a44d70746b148844be2b511aa1a8, type: 3}
+      propertyPath: touchInfoText
+      value: 
+      objectReference: {fileID: 865084101}
     - target: {fileID: 4192990214748646512, guid: 0e30a44d70746b148844be2b511aa1a8, type: 3}
       propertyPath: currCamera
       value: 
@@ -1816,7 +1836,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &865084100
 RectTransform:
   m_ObjectHideFlags: 0

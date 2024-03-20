@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 6268716580407095078}
   - component: {fileID: 6367936272890446782}
   - component: {fileID: 580481464024366056}
+  - component: {fileID: 3239449513380519222}
   m_Layer: 0
   m_Name: PanZoomOrbitCenter
   m_TagString: Untagged
@@ -235,3 +236,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13defbde03d382543a0da695fb5aebd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  touchInfoText: {fileID: 0}
+  movementThreshold: 0
+  isMethodOne: 0
+--- !u!114 &3239449513380519222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7226193065314375643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e857455e70d80444b66e009fbca6b33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  touchInfoText: {fileID: 0}
+  rotationSpeed: 17.5
+  movementThreshold: 3.5
