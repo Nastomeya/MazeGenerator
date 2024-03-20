@@ -237,8 +237,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   touchInfoText: {fileID: 0}
-  movementThreshold: 0
-  isMethodOne: 0
+  pinchSpeed: 0.86
+  zoomMin: 0.5
+  zoomMax: 16
+  movementThreshold: 4.2
+  isMethodOne: 1
 --- !u!114 &3239449513380519222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,5 +255,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   touchInfoText: {fileID: 0}
-  rotationSpeed: 17.5
+  rotationSpeed: 15.8
   movementThreshold: 3.5

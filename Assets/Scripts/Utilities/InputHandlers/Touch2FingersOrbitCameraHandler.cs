@@ -17,14 +17,13 @@ public class Touch2FingersOrbitCameraHandler : BaseTouchHandler, ITouchHandler
         touchInfoText.text = "Current Target:  " + target;
         if (Input.touchCount != 2)
             return;
+        var areOppositedDir = AreMovingInOppositeDirection(Input.GetTouch(0), Input.GetTouch(1));
+        if (areOppositedDir)
+            return;
 
         var currTouchData = GetTouchData();
         //if (currTouchData.Item1 == null)
-        //    return;
-
-        var areOppositedDir = AreMovingInOppositeDirection(currTouchOne, currTouchTwo);
-        if (areOppositedDir)
-            return;
+        //    return;        
 
         // Check for touch input
         if (currTouchData.Item2 == TouchPhase.Moved)
@@ -36,9 +35,9 @@ public class Touch2FingersOrbitCameraHandler : BaseTouchHandler, ITouchHandler
             transform.RotateAround(target, transform.right, deltaPosition.y * rotationSpeed * Time.deltaTime);
         }
 
-        else if (currTouchData.Item2 == TouchPhase.Began || currTouchData.Item2 == TouchPhase.Stationary)
+        else if (currTouchData.Item2 == TouchPhase.Began )//|| currTouchData.Item2 == TouchPhase.Stationary)
         {
-            ray = currCamera.ScreenPointToRay(lastStationaryTouch.deltaPosition);
+            ray = currCamera.ScreenPointToRay(lastStationaryTouch.position);
 
             if (!Physics.Raycast(ray, out RaycastHit hit))
                 return;
@@ -63,12 +62,12 @@ public class Touch2FingersOrbitCameraHandler : BaseTouchHandler, ITouchHandler
 
         if (touch1IsMoving && !touch2IsMoving)
         {
-            lastStationaryTouch = currTouchTwo;
+            //lastStationaryTouch = currTouchTwo;
             return (currTouchOne, TouchPhase.Moved);
         }
         else if (touch2IsMoving && !touch1IsMoving)
         {
-            lastStationaryTouch = currTouchOne;
+            //lastStationaryTouch = currTouchOne;
             return (currTouchTwo, TouchPhase.Moved);
         }
 
@@ -84,30 +83,30 @@ public class Touch2FingersOrbitCameraHandler : BaseTouchHandler, ITouchHandler
                 lastStationaryTouch = currTouchOne;
                 return (null, TouchPhase.Began);
             }
-            if (touch1State == TouchPhase.Began && touch2State == TouchPhase.Moved)
-            {
-                lastStationaryTouch = currTouchOne;
-                return (null, TouchPhase.Began);
-            }
-            else if (touch2State == TouchPhase.Began && touch1State == TouchPhase.Moved)
-            {
-                lastStationaryTouch = currTouchTwo;
-                return (null, TouchPhase.Began);
-            }
+            //if (touch1State == TouchPhase.Began && touch2State == TouchPhase.Moved)
+            //{
+            //    lastStationaryTouch = currTouchOne;
+            //    return (null, TouchPhase.Began);
+            //}
+            //else if (touch2State == TouchPhase.Began && touch1State == TouchPhase.Moved)
+            //{
+            //    lastStationaryTouch = currTouchTwo;
+            //    return (null, TouchPhase.Began);
+            //}
         }
-        else if (touch1State == TouchPhase.Stationary || touch2State == TouchPhase.Stationary)
-        {
-            if (touch1State == TouchPhase.Stationary && touch2State == TouchPhase.Moved)
-            {
-                lastStationaryTouch = currTouchOne;
-                return (null, TouchPhase.Stationary);
-            }
-            else if (touch2State == TouchPhase.Began && touch1State == TouchPhase.Moved)
-            {
-                lastStationaryTouch = currTouchTwo;
-                return (null, TouchPhase.Stationary);
-            }
-        }
+        //else if (touch1State == TouchPhase.Stationary || touch2State == TouchPhase.Stationary)
+        //{
+        //    if (touch1State == TouchPhase.Stationary && touch2State == TouchPhase.Moved)
+        //    {
+        //        lastStationaryTouch = currTouchOne;
+        //        return (null, TouchPhase.Stationary);
+        //    }
+        //    else if (touch2State == TouchPhase.Began && touch1State == TouchPhase.Moved)
+        //    {
+        //        lastStationaryTouch = currTouchTwo;
+        //        return (null, TouchPhase.Stationary);
+        //    }
+        //}
         return (null, TouchPhase.Stationary);
     }
 }
