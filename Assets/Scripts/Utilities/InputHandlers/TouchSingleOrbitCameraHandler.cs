@@ -2,10 +2,10 @@
 
 public class TouchSingleOrbitCameraHandler : BaseInputHandler, ITouchHandler
 {
+    [SerializeField] private float rotationSpeed = 20f;
     private Vector3 target;
     private Vector2 lastTouchPosition, currentTouchPosition, deltaPosition;
     private Ray ray;
-    [SerializeField] private float rotationSpeed = 20f;
 
     public void HandleInput()
     {

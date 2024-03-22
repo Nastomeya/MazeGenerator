@@ -1,18 +1,17 @@
-﻿using TMPro;
+﻿//using TMPro;
 using UnityEngine;
 
 /// <summary>This includes both pinch to zoom-in/out and touch panning feature</summary>
 public class TouchPinchHandler : BaseTouchHandler, ITouchHandler
 {
-    public TextMeshProUGUI touchInfoText;//remove this later
+    //public TextMeshProUGUI touchInfoText;//remove this later
 
     private Vector2 lastCentreTouchPos, currCentreTouchPos;
     private Vector3 lastInputWorldPoint;
     private float currZoomAmount;
-    [SerializeField] private float pinchSpeed = 0.5f, zoomMin = 0.5f, zoomMax = 16f;
-    [SerializeField] private float movementThreshold;// 4.2f;
-    [SerializeField] private bool isMethodOne;
-    protected override float MovementThreshold => movementThreshold;
+    private const float pinchSpeed = 0.9f;
+    private const float zoomMin = 0.5f;
+    private const float zoomMax = 16f;
 
     public void HandleInput()
     {
@@ -43,17 +42,20 @@ public class TouchPinchHandler : BaseTouchHandler, ITouchHandler
 
     private float GetDeltaPinchAmount()
     {
+        var areOppositedDir = AreMovingInOppositeDirection(Input.GetTouch(0), Input.GetTouch(1));
+        if (!areOppositedDir)
+            return 0;
+
         var touchOneMoveAmount = currTouchOne.deltaPosition.magnitude;
         var touchTwoMoveAmount = currTouchTwo.deltaPosition.magnitude;
         var touchMoveAmount = touchOneMoveAmount > touchTwoMoveAmount ? touchOneMoveAmount : touchTwoMoveAmount;
 
-        if (isMethodOne)
-        {
-            var inwardingIndex = GetPinchInwardingIndex(currTouchOne, currTouchTwo);
-            return touchMoveAmount * inwardingIndex;
-        }
+        //Pinch Method No.1
+        var inwardingIndex = GetPinchInwardingIndex(currTouchOne, currTouchTwo);
+        return touchMoveAmount * inwardingIndex;
 
-        var isInwarding = IsPinchInwarding();
-        return touchMoveAmount * (isInwarding ? 1 : -1);
+        //Pinch Method No.2
+        //var isInwarding = IsPinchInwarding();
+        //return touchMoveAmount * (isInwarding ? 1 : -1);
     }
 }

@@ -236,12 +236,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13defbde03d382543a0da695fb5aebd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  touchInfoText: {fileID: 0}
-  pinchSpeed: 0.86
-  zoomMin: 0.5
-  zoomMax: 16
-  movementThreshold: 4.2
-  isMethodOne: 1
 --- !u!114 &3239449513380519222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,6 +248,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e857455e70d80444b66e009fbca6b33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  touchInfoText: {fileID: 0}
-  rotationSpeed: 15.8
-  movementThreshold: 3.5

@@ -1,20 +1,17 @@
 ﻿//using MathCalculation;
 using UnityEngine;
-using TMPro;
+//using TMPro;
 public class Touch2FingersOrbitCameraHandler : BaseTouchHandler, ITouchHandler
 {
-    public TextMeshProUGUI touchInfoText;//remove this later
+    //public TextMeshProUGUI touchInfoText;//remove this later
+    private const float rotationSpeed = 14f;//Been adjusted 2024-03-22
     private Ray ray;
     private Vector3 target;
     private Touch currMovingTouch;
 
-    [SerializeField] private float rotationSpeed = 17.5f;//8f;
-    [SerializeField] private float movementThreshold;
-    protected override float MovementThreshold => movementThreshold;//3.5f;
-
     public void HandleInput()
     {
-        touchInfoText.text = "Current Target:  " + target;
+        //touchInfoText.text = "Current Target:  " + target;
         if (Input.touchCount != 2)
             return;
         var areOppositedDir = AreMovingInOppositeDirection(Input.GetTouch(0), Input.GetTouch(1));
@@ -22,9 +19,6 @@ public class Touch2FingersOrbitCameraHandler : BaseTouchHandler, ITouchHandler
             return;
 
         var currTouchData = GetTouchData();
-        //if (currTouchData.Item1 == null)
-        //    return;        
-
         // Check for touch input
         if (currTouchData.Item2 == TouchPhase.Moved)
         {
@@ -35,7 +29,7 @@ public class Touch2FingersOrbitCameraHandler : BaseTouchHandler, ITouchHandler
             transform.RotateAround(target, transform.right, deltaPosition.y * rotationSpeed * Time.deltaTime);
         }
 
-        else if (currTouchData.Item2 == TouchPhase.Began )//|| currTouchData.Item2 == TouchPhase.Stationary)
+        else if (currTouchData.Item2 == TouchPhase.Began)
         {
             ray = currCamera.ScreenPointToRay(lastStationaryTouch.position);
 
@@ -62,12 +56,12 @@ public class Touch2FingersOrbitCameraHandler : BaseTouchHandler, ITouchHandler
 
         if (touch1IsMoving && !touch2IsMoving)
         {
-            //lastStationaryTouch = currTouchTwo;
+            lastStationaryTouch = currTouchTwo;
             return (currTouchOne, TouchPhase.Moved);
         }
         else if (touch2IsMoving && !touch1IsMoving)
         {
-            //lastStationaryTouch = currTouchOne;
+            lastStationaryTouch = currTouchOne;
             return (currTouchTwo, TouchPhase.Moved);
         }
 
@@ -83,30 +77,7 @@ public class Touch2FingersOrbitCameraHandler : BaseTouchHandler, ITouchHandler
                 lastStationaryTouch = currTouchOne;
                 return (null, TouchPhase.Began);
             }
-            //if (touch1State == TouchPhase.Began && touch2State == TouchPhase.Moved)
-            //{
-            //    lastStationaryTouch = currTouchOne;
-            //    return (null, TouchPhase.Began);
-            //}
-            //else if (touch2State == TouchPhase.Began && touch1State == TouchPhase.Moved)
-            //{
-            //    lastStationaryTouch = currTouchTwo;
-            //    return (null, TouchPhase.Began);
-            //}
         }
-        //else if (touch1State == TouchPhase.Stationary || touch2State == TouchPhase.Stationary)
-        //{
-        //    if (touch1State == TouchPhase.Stationary && touch2State == TouchPhase.Moved)
-        //    {
-        //        lastStationaryTouch = currTouchOne;
-        //        return (null, TouchPhase.Stationary);
-        //    }
-        //    else if (touch2State == TouchPhase.Began && touch1State == TouchPhase.Moved)
-        //    {
-        //        lastStationaryTouch = currTouchTwo;
-        //        return (null, TouchPhase.Stationary);
-        //    }
-        //}
         return (null, TouchPhase.Stationary);
     }
 }

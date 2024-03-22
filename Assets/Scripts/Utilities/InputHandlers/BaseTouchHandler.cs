@@ -3,15 +3,17 @@ using UnityEngine;
 
 public abstract class BaseTouchHandler : BaseInputHandler
 {
+    protected const float movementThreshold = 3.6f;//Been adjusted 2024-03-22
+    private const float oppositeDirectionAlignmentThreshold = 0.85f;//Been adjusted 2024-03-22
+
     protected float lastTouchesDistance, currTouchesDistance;
     protected Touch currTouchOne, currTouchTwo;
     protected Vector2 lastTouch1Pos, lastTouch2Pos;
-    protected abstract float MovementThreshold { get; } //= 7.5f;
 
     protected TouchPhase GetHumanTouchPhase(Touch _targetTouch)
     {
         float deltaMagnitude = _targetTouch.deltaPosition.magnitude;
-        bool touchIsMoving = deltaMagnitude > MovementThreshold && _targetTouch.phase == TouchPhase.Moved;
+        bool touchIsMoving = deltaMagnitude > movementThreshold && _targetTouch.phase == TouchPhase.Moved;
         if (touchIsMoving && _targetTouch.phase == TouchPhase.Moved)
             return TouchPhase.Moved;
 
@@ -54,14 +56,9 @@ public abstract class BaseTouchHandler : BaseInputHandler
         var velocity = _touchTwo.deltaPosition - _touchOne.deltaPosition;
         var movingDir = Vector2.Dot(velocity, displacement);
 
-        var areOppositedDir = AreMovingInOppositeDirection(currTouchOne, currTouchTwo);
-        if (areOppositedDir)
-            return (int)Mathf.Sign(movingDir);
-        else
-            return 0;
+        return (int)Mathf.Sign(movingDir);
     }
 
-    private const float twoPointOppositeDirThreshold = 0.85f;
     protected bool AreMovingInOppositeDirection(Touch _touchOne, Touch _touchTwo)
     {
         // Update touch positions
@@ -79,6 +76,6 @@ public abstract class BaseTouchHandler : BaseInputHandler
         var touch1Dir = Vector2.Dot(motion1.normalized, relativePosition1.normalized);
         var touch2Dir = Vector2.Dot(motion2.normalized, relativePosition2.normalized);
 
-        return Mathf.Sign(touch1Dir) == Mathf.Sign(touch2Dir) && Mathf.Abs(touch1Dir) > twoPointOppositeDirThreshold && Mathf.Abs(touch2Dir) > twoPointOppositeDirThreshold;
+        return Mathf.Sign(touch1Dir) == Mathf.Sign(touch2Dir) && Mathf.Abs(touch1Dir) > oppositeDirectionAlignmentThreshold && Mathf.Abs(touch2Dir) > oppositeDirectionAlignmentThreshold;
     }
 }
