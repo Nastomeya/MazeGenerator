@@ -1,18 +1,15 @@
 using System;
 using System.Collections.Generic;
-//using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 /// <summary>Reference: <see href="https://www.youtube.com/watch?v=qEpmOqLHWcA"/> 
 /// <br/>Reference: <see href="https://www.youtube.com/watch?v=K_aAnBn5khA"/>
-/// <br/>Reference: <see href="https://www.youtube.com/watch?v=5LEVj3PLufE"/>/// </summary>
+/// <br/>Reference: <see href="https://www.youtube.com/watch?v=5LEVj3PLufE"/> </summary>
 public class InputHandlerHub : MonoBehaviour
 {
-    //public TextMeshProUGUI touchInfoText;//remove this later
-    [SerializeField] private Camera currCamera;
-    private bool clickNotifyOnce = false, touchNotifyOnce = false;
     internal event Action<InputState> InputModeNotifier = delegate { };
+    [SerializeField] private Camera currCamera;
+    private bool clickNotifyOnce = false, touchNotifyOnce = false, mouseInputActivity = false;
     private List<IMouseHandler> MouseHandlers;
     private List<ITouchHandler> TouchHandlers;
 
@@ -33,41 +30,50 @@ public class InputHandlerHub : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (DetectingTouchInput())
             return;
-
-        if (Input.touchCount > 0)
-        {
-            TouchMode();
-            return;
-        }
-
-        MouseClicksMode();
+        else
+            MouseClicksMode();
     }
-    private void TouchMode()
+    private bool DetectingTouchInput()
     {
+        if (TouchHandlers == null)
+            return false;
+
+        if (Input.touchCount == 0)
+            return false;
+
         if (!touchNotifyOnce)
         {
             InputModeNotifier?.Invoke(InputState.TouchPress);
             touchNotifyOnce = true;
+            clickNotifyOnce = false;
         }
-        if (TouchHandlers == null)
-            return;
+
+        if (!touchNotifyOnce)
+            return false;
 
         for (int i = 0; i < TouchHandlers.Count; i++)
         {
             TouchHandlers[i].HandleInput();
         }
+        return true;
     }
     private void MouseClicksMode()
     {
-        if ((Input.GetAxis("Mouse ScrollWheel") != 0 || Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2)) && !clickNotifyOnce)
+        if (MouseHandlers == null)
+            return;
+
+        mouseInputActivity = Input.GetAxis("Mouse ScrollWheel") != 0 || Input.GetMouseButton(0) || Input.GetMouseButton(1) || Input.GetMouseButton(2);
+
+        if (mouseInputActivity && !clickNotifyOnce)
         {
             InputModeNotifier?.Invoke(InputState.MouseClick);
             clickNotifyOnce = true;
+            touchNotifyOnce = false;
         }
 
-        if (MouseHandlers == null)
+        if (!clickNotifyOnce)
             return;
 
         for (int i = 0; i < MouseHandlers.Count; i++)
