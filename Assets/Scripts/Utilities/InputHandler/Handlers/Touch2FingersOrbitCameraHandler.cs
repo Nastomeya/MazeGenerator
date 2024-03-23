@@ -1,9 +1,6 @@
-﻿//using MathCalculation;
-using UnityEngine;
-//using TMPro;
+﻿using UnityEngine;
 public class Touch2FingersOrbitCameraHandler : BaseTouchHandler, ITouchHandler
 {
-    //public TextMeshProUGUI touchInfoText;//remove this later
     private const float rotationSpeed = 14f;//Been adjusted 2024-03-22
     private Ray ray;
     private Vector3 target;
@@ -11,7 +8,6 @@ public class Touch2FingersOrbitCameraHandler : BaseTouchHandler, ITouchHandler
 
     public void HandleInput()
     {
-        //touchInfoText.text = "Current Target:  " + target;
         if (Input.touchCount != 2)
             return;
         var areOppositedDir = AreMovingInOppositeDirection(Input.GetTouch(0), Input.GetTouch(1));

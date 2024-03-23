@@ -1,11 +1,8 @@
-﻿//using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>This includes both pinch to zoom-in/out and touch panning feature</summary>
 public class TouchPinchHandler : BaseTouchHandler, ITouchHandler
 {
-    //public TextMeshProUGUI touchInfoText;//remove this later
-
     private Vector2 lastCentreTouchPos, currCentreTouchPos;
     private Vector3 lastInputWorldPoint;
     private float currZoomAmount;

@@ -1,5 +1,4 @@
-﻿using MathCalculation;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class BaseTouchHandler : BaseInputHandler
 {
@@ -29,8 +28,8 @@ public abstract class BaseTouchHandler : BaseInputHandler
     }
     protected bool IsPinchCrossing()
     {
-        var t1Direction = BasicMath.GetDirection(currTouchOne.position, lastTouch1Pos);
-        var t2Direction = BasicMath.GetDirection(currTouchTwo.position, lastTouch2Pos);
+        var t1Direction = GetDirection(currTouchOne.position, lastTouch1Pos);
+        var t2Direction = GetDirection(currTouchTwo.position, lastTouch2Pos);
 
         if (t1Direction == Vector2.zero || t2Direction == Vector2.zero)
             return false;
@@ -78,4 +77,5 @@ public abstract class BaseTouchHandler : BaseInputHandler
 
         return Mathf.Sign(touch1Dir) == Mathf.Sign(touch2Dir) && Mathf.Abs(touch1Dir) > oppositeDirectionAlignmentThreshold && Mathf.Abs(touch2Dir) > oppositeDirectionAlignmentThreshold;
     }
+    protected Vector2 GetDirection(Vector2 _point1, Vector2 _point2) => (_point1 - _point2).normalized;
 }
