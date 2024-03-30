@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8649926900030422642}
   - component: {fileID: 6684359900789608724}
-  - component: {fileID: 324022977516830212}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: Untagged
@@ -84,50 +83,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &324022977516830212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 854772735814931357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RenderShadows: 1
-  m_RequiresDepthTextureOption: 2
-  m_RequiresOpaqueTextureOption: 2
-  m_CameraType: 0
-  m_Cameras: []
-  m_RendererIndex: -1
-  m_VolumeLayerMask:
-    serializedVersion: 2
-    m_Bits: 1
-  m_VolumeTrigger: {fileID: 0}
-  m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
-  m_AntialiasingQuality: 2
-  m_StopNaN: 0
-  m_Dithering: 0
-  m_ClearDepth: 1
-  m_AllowXRRendering: 1
-  m_AllowHDROutput: 1
-  m_UseScreenCoordOverride: 0
-  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
-  m_RequiresDepthTexture: 0
-  m_RequiresColorTexture: 0
-  m_Version: 2
-  m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
 --- !u!1 &7226193065314375643
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,11 +93,13 @@ GameObject:
   m_Component:
   - component: {fileID: 5609754255731335047}
   - component: {fileID: 4192990214748646512}
-  - component: {fileID: 387922747233373967}
-  - component: {fileID: 6268716580407095078}
-  - component: {fileID: 6367936272890446782}
-  - component: {fileID: 580481464024366056}
-  - component: {fileID: 3239449513380519222}
+  - component: {fileID: 4610381462142973827}
+  - component: {fileID: 1947873388950838412}
+  - component: {fileID: 156379904459002520}
+  - component: {fileID: 7064752820223203465}
+  - component: {fileID: 1585033954064054388}
+  - component: {fileID: 1602794440042866871}
+  - component: {fileID: 2167013639641218561}
   m_Layer: 0
   m_Name: PanZoomOrbitCenter
   m_TagString: Untagged
@@ -175,11 +132,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7226193065314375643}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cda06a2716eb9f1479d8e4b4983e3df6, type: 3}
+  m_Script: {fileID: 11500000, guid: b6b6fc3f102fb6947a13900b996103c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currCamera: {fileID: 6684359900789608724}
---- !u!114 &387922747233373967
+--- !u!114 &4610381462142973827
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -188,10 +145,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7226193065314375643}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86188de8a234b7744bc35bdab49216a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 81e5ccc65073969408d1012fb78e302b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6268716580407095078
+  orbitHorizontalOnly: 0
+--- !u!114 &1947873388950838412
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -200,10 +158,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7226193065314375643}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee81c6b6d81ba164e9815889b575b56c, type: 3}
+  m_Script: {fileID: 11500000, guid: e4027294a0f0ecb4fabf66d7b2b1aa4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6367936272890446782
+--- !u!114 &156379904459002520
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -212,10 +170,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7226193065314375643}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ad093f5e7a4a434e8b9f61b7cb5532e, type: 3}
+  m_Script: {fileID: 11500000, guid: 80c157623cc53274ab569c39b4910b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &580481464024366056
+--- !u!114 &7064752820223203465
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -224,10 +182,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7226193065314375643}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13defbde03d382543a0da695fb5aebd7, type: 3}
+  m_Script: {fileID: 11500000, guid: c5a71bd4d7ae8f140864136c6192c846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3239449513380519222
+--- !u!114 &1585033954064054388
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -236,6 +194,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 7226193065314375643}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e857455e70d80444b66e009fbca6b33, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ff20b32a58e38a45ab8272fc67c09ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1602794440042866871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7226193065314375643}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b4e1421011c6848a0db6ddb487b0a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 20
+--- !u!114 &2167013639641218561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7226193065314375643}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd2c1d03f16d3f546b549f6930212a6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoRotationSpeed: 8
+  autoRotationDirection: 1

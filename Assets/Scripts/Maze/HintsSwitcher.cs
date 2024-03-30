@@ -1,18 +1,19 @@
 using TMPro;
 using UnityEngine;
+using JCTool;
 
 public class HintsSwitcher : MonoBehaviour
 {
-    [SerializeField] private InputHandlerHub inputHandlerHub;
+    [SerializeField] private SceneViewHub sceneViewHub;
     private TextMeshProUGUI hintsTextMesh;
     private void Awake()
     {
-        inputHandlerHub.InputModeNotifier += OnUpdateHints;
+        sceneViewHub.InputModeNotifier += OnUpdateHints;
         hintsTextMesh = GetComponent<TextMeshProUGUI>();
     }
     private void OnDestroy()
     {
-        inputHandlerHub.InputModeNotifier -= OnUpdateHints;
+        sceneViewHub.InputModeNotifier -= OnUpdateHints;
     }
     private void OnUpdateHints(InputState _inputState)
     {

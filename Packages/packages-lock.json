@@ -7,6 +7,13 @@
       "dependencies": {},
       "hash": "809d23edae0df58fd0f61b4b6f67855c59d1b2fb"
     },
+    "com.jctool.inputhandler": {
+      "version": "https://github.com/Nastomeya/InputHandler.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "0497c53068569839a2fd8b0fa9a56e2b6a5acadc"
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
