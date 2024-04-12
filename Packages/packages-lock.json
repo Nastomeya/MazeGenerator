@@ -7,12 +7,30 @@
       "dependencies": {},
       "hash": "809d23edae0df58fd0f61b4b6f67855c59d1b2fb"
     },
+    "com.jctool.debugextensions": {
+      "version": "https://github.com/Nastomeya/DebugExtensions.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.jctool.easysingleton": "0.0.1"
+      },
+      "hash": "dd92cd040161925d35fab1a83c83618c3c7be825"
+    },
+    "com.jctool.easysingleton": {
+      "version": "https://github.com/Nastomeya/EasySingleton.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "5d5b4ad80029747f23f03539ddf480cfa44944a0"
+    },
     "com.jctool.inputhandler": {
       "version": "https://github.com/Nastomeya/InputHandler.git",
       "depth": 0,
       "source": "git",
-      "dependencies": {},
-      "hash": "0497c53068569839a2fd8b0fa9a56e2b6a5acadc"
+      "dependencies": {
+        "com.jctool.debugextensions": "0.1.0"
+      },
+      "hash": "af5889a417509441f7eb138c4263b04d2e8fe018"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",

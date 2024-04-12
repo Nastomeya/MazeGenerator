@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+    "com.jctool.debugextensions": "https://github.com/Nastomeya/DebugExtensions.git",
+    "com.jctool.easysingleton": "https://github.com/Nastomeya/EasySingleton.git",
     "com.jctool.inputhandler": "https://github.com/Nastomeya/InputHandler.git",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.ai.navigation": "1.1.5",

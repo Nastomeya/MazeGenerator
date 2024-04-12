@@ -1,6 +1,7 @@
+using JCTool.InputHandler;
 using TMPro;
 using UnityEngine;
-using JCTool;
+
 
 public class HintsSwitcher : MonoBehaviour
 {
