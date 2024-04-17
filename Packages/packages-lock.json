@@ -14,7 +14,7 @@
       "dependencies": {
         "com.jctool.easysingleton": "0.0.1"
       },
-      "hash": "dd92cd040161925d35fab1a83c83618c3c7be825"
+      "hash": "e285168963ff0befe490a41b3038279caa1512c9"
     },
     "com.jctool.easysingleton": {
       "version": "https://github.com/Nastomeya/EasySingleton.git",
@@ -28,9 +28,10 @@
       "depth": 0,
       "source": "git",
       "dependencies": {
-        "com.jctool.debugextensions": "0.1.0"
+        "com.jctool.debugextensions": "0.1.0",
+        "com.jctool.easysingleton": "0.0.1"
       },
-      "hash": "af5889a417509441f7eb138c4263b04d2e8fe018"
+      "hash": "6b5586ec879aa19fcb36925b0517620302a822bf"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
