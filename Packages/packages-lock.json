@@ -23,7 +23,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "af1571a5953eff33ab88b5022d741adc051555e5"
+      "hash": "4e00fdb1bcf6a8f28d41a5cdf601b51db46084f5"
     },
     "com.jctool.extensions": {
       "version": "https://github.com/Nastomeya/Extensions.git",
@@ -40,7 +40,7 @@
         "com.jctool.debugextensions": "0.1.0",
         "com.jctool.easysingleton": "0.0.1"
       },
-      "hash": "3e7a52207d1560c6b8159fa133bc3e97d4465d51"
+      "hash": "d8d0ef4ecb1277d247a917798aac2b95b7077881"
     },
     "com.jctool.names": {
       "version": "https://github.com/Nastomeya/Names.git",
