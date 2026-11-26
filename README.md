@@ -104,3 +104,7 @@ Assets/
 ## Credits
 
 - **Developer**: Joseph Chiang ([Nastomeya](https://github.com/Nastomeya))
+
+## License
+
+All rights reserved. This repository is made public for portfolio and technical evaluation purposes only; see [LICENSE](LICENSE) for details. Third-party packages and assets retain their respective licenses.
