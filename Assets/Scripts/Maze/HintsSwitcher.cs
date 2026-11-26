@@ -1,4 +1,4 @@
-using JCTool.InputHandler;
+ï»¿using JCTool.InputHandler;
 using TMPro;
 using UnityEngine;
 
@@ -19,8 +19,8 @@ public class HintsSwitcher : MonoBehaviour
     private void OnUpdateHints(InputState _inputState)
     {
         if (_inputState is InputState.MouseClick)
-            hintsTextMesh.text = "• Rotate by right-clicking.\n• Zoom in/out with the mouse scroll.\n• Hold the middle mouse button to pan the scene.";
+            hintsTextMesh.text = "â€¢ Rotate by right-clicking.\nâ€¢ Zoom in/out with the mouse scroll.\nâ€¢ Hold the middle mouse button to pan the scene.";
         else if (_inputState is InputState.TouchPress)
-            hintsTextMesh.text = "• Rotate using two fingers, swiping with one finger at a time.\n• Zoom in/out by pinching with two fingers.\n• Move two fingers together to pan the scene.";
+            hintsTextMesh.text = "â€¢ Rotate using two fingers, swiping with one finger at a time.\n?Zoom in/out by pinching with two fingers.\nâ€¢ Move two fingers together to pan the scene.";
     }
 }

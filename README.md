@@ -2,6 +2,8 @@
 
 A procedural 3D dungeon maze generator built in **Unity (2022.3.62f2 / URP)** using a **Recursive Backtracking** algorithm with support for both **Square** and **Hexagonal** tile grids, bitwise wall/object formation management, circle-packed props, and interactive step-by-step or full-maze generation.
 
+![Maze Generator Preview](Assets/Textures/MazeGeneratorScreenshot.png)
+
 ## Features
 
 - **Dual Grid Topologies**
@@ -18,8 +20,9 @@ A procedural 3D dungeon maze generator built in **Unity (2022.3.62f2 / URP)** us
   - `BaseCirclePacking`, `SquareCirclePackingWall`, and `HexagonCirclePackingObject` scatter non-overlapping props (such as rocks) along active wall regions using `CirclePackingSetting` and an object pool (`JasonPoolSystem.Pool`).
   - `HexagonTorch` and `HexagonCreatureSet` place torches and creatures along active wall segments using `ObjectsSelectorSetting`.
   - `StoneFloor` adds subtle random floor rotation variation (`FloorRotation`), while `WallsDetector` / `PillarPositioner` manage corner pillars.
-- **Touch & Camera Controls**
-  - Orbit, pan, and pinch-to-zoom camera controls powered by `com.jctool.inputhandler`, with `HintsSwitcher` adapting on-screen control hints to the active input mode.
+- **Mobile & Desktop Controls**
+  - Includes a mobile-ready scene (`Maze Scene - Mobile.unity`) with interactive size sliders (`2–10` width, `1–10` height), step/full-generation buttons, and `com.jctool.inputhandler` integration.
+  - Desktop camera controls: **Right-click** to rotate, **Mouse scroll** to zoom in/out, and **Middle-mouse hold** to pan the scene.
 - **Unity Editor Tooling**
   - **Custom Maze Inspectors (`SquareMazeEditor`, `HexagonMazeEditor`)**: Toggle individual `IMazeObjects` layers, switch between **Display Index Num** and **Display Squence**, and step through **Next Tile**, **Loop Through All Tiles**, or **Reset** in Play Mode.
   - **Single-Tile Debugger (`SingleTileInDebugMode` / `SingleTileInDebugModeEditor`)**: Test individual tile object sets and cycle through or manually input bitwise formation values.
@@ -54,7 +57,7 @@ Defined in [`Packages/manifest.json`](Packages/manifest.json):
    - Open the project folder in Unity Hub using Unity **`2022.3.62f2`**.
    - Unity will automatically resolve the Git-based UPM dependencies in `Packages/manifest.json`.
 3. **Open a Scene**
-   - [`Assets/Scenes/Maze Scene - Mobile.unity`](Assets/Scenes/Maze%20Scene%20-%20Mobile.unity) *(enabled in Build Settings)* — includes the runtime UI with **Width** (`2–10`) and **Height** (`1–10`) sliders, **Create Next Single Tile**, **Create Entire Maze**, and touch/mouse camera controls.
+   - [`Assets/Scenes/Maze Scene - Mobile.unity`](Assets/Scenes/Maze%20Scene%20-%20Mobile.unity) *(enabled in Build Settings)* — includes the runtime UI with **Width** (`2–10`) and **Height** (`1–10`) sliders, **Create Next Single Tile**, and **Create Entire Maze** buttons.
    - [`Assets/Scenes/Maze Scene.unity`](Assets/Scenes/Maze%20Scene.unity) — editor/desktop scene.
 4. **Press Play**
    - Adjust the **Width** and **Height** sliders and click **Create Next Single Tile** to watch the recursive backtracker carve the maze step by step, or **Create Entire Maze** to complete it immediately.
